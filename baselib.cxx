@@ -19,4 +19,5 @@ bool get_element_name(ELEMENT_INDEX element,char * name)
     if(element>=count)
         return false;
     strcpy(name,ElementTable[element]);
+    return true;
 }

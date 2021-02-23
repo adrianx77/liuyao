@@ -43,6 +43,7 @@ bool get_gua_name(GUA_INDEX gua,char * name)
             return true;
         }
     }
+    return false;
 }
 
 void dump_gua( const PUREGUA * gua){
