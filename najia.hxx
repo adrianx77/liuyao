@@ -27,7 +27,8 @@
 #define  BRANCH_HAI      "亥"
 
 typedef enum {
-    STEMINDEX_JIA,
+    STEMINDEX_INVALID = -1,
+    STEMINDEX_JIA = 0,
     STEMINDEX_YI,
     STEMINDEX_BING,
     STEMINDEX_DING,
@@ -40,7 +41,8 @@ typedef enum {
 }STEM_INDEX;
 
 typedef enum {
-    BRANCHINDEX_ZI,
+    BRANCHINDEX_INVALIDE = -1,
+    BRANCHINDEX_ZI = 0,
     BRANCHINDEX_CHOU,
     BRANCHINDEX_YIN,
     BRANCHINDEX_MAO,

@@ -1,6 +1,6 @@
 #ifndef __BASE_DEFINE_H_XX_
 #define __BASE_DEFINE_H_XX_
-
+#include "element.hxx"
 #define  ELEMENT_JIN     "金"
 #define  ELEMENT_SHUI    "水"
 #define  ELEMENT_MU      "木"

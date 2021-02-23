@@ -2,6 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include "najia.hxx"
+#include "element.hxx"
+
 const char * StemTable[] ={
     STEM_JIA,
     STEM_YI,
@@ -130,6 +132,19 @@ const char * StemBranchTable [][6] = {
 
 
 
+typedef struct 
+{
+    BRANCH_INDEX self;
+    ELEMENT_INDEX element;          //五行
+    BRANCH_INDEX  impact;           //冲
+    BRANCH_INDEX  sixcombine;       //六合
+    BRANCH_INDEX  tricombine[2];    //三合
+    BRANCH_INDEX  forward;          //进
+    BRANCH_INDEX  backward;         //退
+}BRANCHINFO;
+
+
+
 bool get_stem_name(STEM_INDEX stem,char * name)
 {
     if(stem<0)
@@ -239,4 +254,8 @@ bool get_xunkong_name(XUNKONG xk,char * name)
         return false;
     strcat(name,xkName1);
     return true;
+}
+
+bool get_stem_element(){
+
 }
