@@ -29,7 +29,8 @@ int main(int argc, char *argv[])
                 char e1[10],e2[10];
                 get_element_name((ELEMENT_INDEX)i,e1);
                 get_element_name((ELEMENT_INDEX)j,e2);
-                printf("%s %s %s\n",e1,re,e2);
+                printf(re,e1,e2);
+                printf("\n");
             }
         }
     }

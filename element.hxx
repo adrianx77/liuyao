@@ -7,11 +7,11 @@
 #define  ELEMENT_HUO     "火"
 #define  ELEMENT_TU      "土"
 
-#define RELATION_SAME       "同"
-#define RELATION_RESTRICT   "克"
-#define RELATION_RESTRICTED "被克"
-#define RELATION_GENERATE   "生"
-#define RELATION_GENERATED  "被生"
+#define RELATION_SAME       "【%s】≡≡【%s】"
+#define RELATION_RESTRICT   "【%s】->【%s】"
+#define RELATION_RESTRICTED "【%s】<-【%s】"
+#define RELATION_GENERATE   "【%s】=>【%s】"
+#define RELATION_GENERATED  "【%s】<=【%s】"
 #define RELATION_INVALID    "错误"
 typedef enum {
     ELEMENTINDEX_JIN,
