@@ -34,3 +34,4 @@ build
 
 *.xcuserstate
 .DS_Store
+.vscode/

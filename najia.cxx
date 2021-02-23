@@ -183,10 +183,39 @@ STEM_INDEX get_next_stem(STEM_INDEX stem)
     return (STEM_INDEX)s;  
 }
 
+
+BRANCH_INDEX get_prev_branch(BRANCH_INDEX branch)
+{
+    int b = branch;
+    b--;
+    if(b <0)        
+        b = BRANCHINDEX_HAI;
+    return (BRANCH_INDEX)b;
+}
+
+STEM_INDEX get_prev_stem(STEM_INDEX stem)
+{
+    int s = stem;
+    s--;
+    if(s<0)
+        s = STEMINDEX_GUI;
+    return (STEM_INDEX)s;  
+}
+
+
+
 STEAMBRANCH get_next_stembranch(STEAMBRANCH sb)
 {
     sb.Stem = get_next_stem(sb.Stem);
     sb.Branch = get_next_branch(sb.Branch);
+    return sb;
+}
+
+
+STEAMBRANCH get_prev_stembranch(STEAMBRANCH sb)
+{
+    sb.Stem = get_prev_stem(sb.Stem);
+    sb.Branch = get_prev_branch(sb.Branch);
     return sb;
 }
 

@@ -1,6 +1,6 @@
 #ifndef _LIUYAO_DEF_HXX_
 #define _LIUYAO_DEF_HXX_
-#include "basedef.hxx"
+#include "element.hxx"
 
 #define GUANAME_QIAN   "乾"
 #define GUANAME_DUI    "兑"
@@ -32,7 +32,8 @@ typedef enum{
     RELATIVEINDEX_XIONGDI,
     RELATIVEINDEX_FUMU,
     RELATIVEINDEX_GUANGUI,
-    RELATIVEINDEX_
+    RELATIVEINDEX_QICAI,
+    
 }RELATIVE_INDEX;
 
 
