@@ -1,7 +1,6 @@
 #ifndef _NAJIA_H_XX_
 #define _NAJIA_H_XX_
 
-
 #define  GAN_JIA    "甲"
 #define  GAN_YI     "乙"
 #define  GAN_BING   "丙"
@@ -25,55 +24,70 @@
 #define  ZHI_YOU      "酉"
 #define  ZHI_XU       "戌"
 #define  ZHI_HAI      "亥"
+
+
 namespace Zhouyi{
-typedef enum {
-    STEMINDEX_INVALID = -1,
-    STEMINDEX_JIA = 0,
-    STEMINDEX_YI,
-    STEMINDEX_BING,
-    STEMINDEX_DING,
-    STEMINDEX_WU,
-    STEMINDEX_JI,  
-    STEMINDEX_GEN, 
-    STEMINDEX_XIN, 
-    STEMINDEX_REN, 
-    STEMINDEX_GUI 
-}GAN_INDEX;
+    typedef enum {
+        GANID_INVALID = -1,
+        GANID_JIA = 0,
+        GANID_YI,
+        GANID_BING,
+        GANID_DING,
+        GANID_WU,
+        GANID_JI,
+        GANID_GEN,
+        GANID_XIN,
+        GANID_REN,
+        GANID_GUI
+    }GAN_ID;
 
-typedef enum {
-    BRANCHINDEX_INVALIDE = -1,
-    BRANCHINDEX_ZI = 0,
-    BRANCHINDEX_CHOU,
-    BRANCHINDEX_YIN,
-    BRANCHINDEX_MAO,
-    BRANCHINDEX_CHEN,
-    BRANCHINDEX_SI,
-    BRANCHINDEX_WU,
-    BRANCHINDEX_WEI,
-    BRANCHINDEX_SHEN,
-    BRANCHINDEX_YOU,
-    BRANCHINDEX_XU,
-    BRANCHINDEX_HAI
-}ZHI_INDEX;
+    typedef enum {
+        ZHIID_INVALIDE = -1,
+        ZHIID_ZI = 0,
+        ZHIID_CHOU,
+        ZHIID_YIN,
+        ZHIID_MAO,
+        ZHIID_CHEN,
+        ZHIID_SI,
+        ZHIID_WU,
+        ZHIID_WEI,
+        ZHIID_SHEN,
+        ZHIID_YOU,
+        ZHIID_XU,
+        ZHIID_HAI
+    }ZHI_ID;
 
-typedef struct StemBranch
-{
-    GAN_INDEX Stem;
-    ZHI_INDEX Branch;
-}GANZHI;
+    class GanzhiZhuhe
+    {
+    public:
+        GAN_ID Stem;
+        ZHI_ID Branch;
+    };
 
-typedef struct XunKong
-{
-    ZHI_INDEX Branch[2];
-}XUNKONG;
+    class XunKong
+    {
+    public:
+        ZHI_ID Branch[2];
+    };
 
-class GanZhi{
-static bool get_gan_name(GAN_INDEX stem,char * name);
-static bool get_zhi_name(ZHI_INDEX branch,char * name);
-static bool get_ganzhi_name(GANZHI sb,char * sbName);
-static XUNKONG get_ganzhi_kong(GANZHI sb);
-static bool get_xunkong_name(XUNKONG xk,char * name);
-}
+
+    class GanZhi{
+
+    public:
+        static GAN_ID get_next_stem(GAN_ID stem);
+        static ZHI_ID get_next_branch(ZHI_ID branch);
+        static ZHI_ID get_prev_branch(ZHI_ID branch);
+        static GAN_ID get_prev_stem(GAN_ID stem);
+        static GanzhiZhuhe get_next_stembranch(GanzhiZhuhe sb);
+        static GanzhiZhuhe get_prev_stembranch(GanzhiZhuhe sb);
+        static XunKong get_ganzhi_kong(GanzhiZhuhe sb);
+        static bool get_xunkong_name(XunKong xk,char * name);
+        static bool get_gan_name(GAN_ID stem,char * name);
+        static bool get_zhi_name(ZHI_ID branch,char * name);
+        static bool get_ganzhi_name(GanzhiZhuhe sb,char * sbName);
+        static bool get_gan_element();
+        
+    };
 
 }
 #endif//_NAJIA_H_XX_

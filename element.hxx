@@ -1,6 +1,5 @@
 #ifndef __BASE_DEFINE_H_XX_
 #define __BASE_DEFINE_H_XX_
-#include "element.hxx"
 #define  ELEMENT_JIN     "金"
 #define  ELEMENT_SHUI    "水"
 #define  ELEMENT_MU      "木"
@@ -15,29 +14,27 @@
 #define RELATION_INVALID    "错误"
 
 namespace Zhouyi{
+    typedef enum {
+        WUXING_INVALID  = -1,
+        WUXING_JIN      = 0,    //金
+        WUXING_SHUI,            //水
+        WUXING_MU,              //木
+        WUXING_HUO,             //火
+        WUXING_TU               //土
+    }WUXING_ID;
 
-typedef enum {
-    WUXING_INVALID  = -1,
-    WUXING_JIN      = 0,
-    WUXING_SHUI,
-    WUXING_MU,
-    WUXING_HUO,
-    WUXING_TU
-}WUXING_ID;
-
-typedef enum{
-    WXSK_INVALID = -1. //错误
-    WXSK_RESTRICT = 0, //克
-    WXSK_RESTRICTED,   //被克
-    WXSK_SAME,         //同
-    WXSK_GENERATE,     //生
-    WXSK_GENERATED     //被生
-}WUXING_SHENGKE;
+    typedef enum{
+        WXSK_INVALID = -1, //错误
+        WXSK_RESTRICT = 0, //克
+        WXSK_RESTRICTED,   //被克
+        WXSK_SAME,         //同
+        WXSK_GENERATE,     //生
+        WXSK_GENERATED     //被生
+    }WUXING_SHENGKE;
 
     class BaseElement{
         public:
 
-        public:
         
 
         static bool get_name(WUXING_ID element,char * name);
@@ -47,9 +44,13 @@ typedef enum{
         static BaseElement * from(WUXING_ID element);
         BaseElement * clone();
         protected:
-        BaseElement(){}
-        static const char * Names[] = {ELEMENT_JIN,ELEMENT_SHUI,ELEMENT_MU,ELEMENT_HUO,ELEMENT_TU};
+        BaseElement();
+        
+        static const char * Names[];
         static BaseElement * _instance;
+        
+    private:
+        void Init();
     };
 
 }

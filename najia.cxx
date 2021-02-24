@@ -133,20 +133,20 @@ const char * StemBranchTable [][6] = {
 
 
 
-typedef struct 
+class ZhiXinXi
 {
-    ZHI_INDEX self;
-    WUXING_ID element;          //五行
-    ZHI_INDEX  impact;           //冲
-    ZHI_INDEX  sixcombine;       //六合
-    ZHI_INDEX  tricombine[2];    //三合
-    ZHI_INDEX  forward;          //进
-    ZHI_INDEX  backward;         //退
-}BRANCHINFO;
+public:
+    ZHI_ID   self;
+    WUXING_ID   element;          //五行
+    ZHI_ID  impact;           //冲
+    ZHI_ID  sixcombine;       //六合
+    ZHI_ID  tricombine[2];    //三合
+    ZHI_ID  forward;          //进
+    ZHI_ID  backward;         //退
+};
 
 
-
-bool get_gan_name(GAN_INDEX stem,char * name)
+bool GanZhi::get_gan_name(GAN_ID stem,char * name)
 {
     if(stem<0)
         return false;
@@ -155,7 +155,7 @@ bool get_gan_name(GAN_INDEX stem,char * name)
     strcpy(name,StemTable[stem]);
     return true;
 }
-bool get_zhi_name(ZHI_INDEX branch,char * name)
+bool GanZhi::get_zhi_name(ZHI_ID branch,char * name)
 {
     if(branch<0)
         return false;
@@ -164,7 +164,7 @@ bool get_zhi_name(ZHI_INDEX branch,char * name)
     strcpy(name,BranchTable[branch]);
     return true;    
 }
-bool get_ganzhi_name(GANZHI sb,char * sbName)
+bool GanZhi::get_ganzhi_name(GanzhiZhuhe sb,char * sbName)
 {
     if(sb.Stem<0 || sb.Stem<0)
         return false;    
@@ -181,46 +181,46 @@ bool get_ganzhi_name(GANZHI sb,char * sbName)
     return true;        
 }
 
-ZHI_INDEX get_next_branch(ZHI_INDEX branch)
+ZHI_ID GanZhi::get_next_branch(ZHI_ID branch)
 {
     int b = branch;
     b++;
-    if(b >BRANCHINDEX_HAI)        
+    if(b >ZHIID_HAI)
         b = 0;
-    return (ZHI_INDEX)b;
+    return (ZHI_ID)b;
 }
 
-GAN_INDEX get_next_stem(GAN_INDEX stem)
+GAN_ID GanZhi::get_next_stem(GAN_ID stem)
 {
     int s = stem;
     s++;
-    if(s>STEMINDEX_GUI)
+    if(s>GANID_GUI)
         s = 0;
-    return (GAN_INDEX)s;  
+    return (GAN_ID)s;  
 }
 
 
-ZHI_INDEX get_prev_branch(ZHI_INDEX branch)
+ZHI_ID GanZhi::get_prev_branch(ZHI_ID branch)
 {
     int b = branch;
     b--;
     if(b <0)        
-        b = BRANCHINDEX_HAI;
-    return (ZHI_INDEX)b;
+        b = ZHIID_HAI;
+    return (ZHI_ID)b;
 }
 
-GAN_INDEX get_prev_stem(GAN_INDEX stem)
+GAN_ID GanZhi::get_prev_stem(GAN_ID stem)
 {
     int s = stem;
     s--;
     if(s<0)
-        s = STEMINDEX_GUI;
-    return (GAN_INDEX)s;  
+        s = GANID_GUI;
+    return (GAN_ID)s;  
 }
 
 
 
-GANZHI get_next_stembranch(GANZHI sb)
+GanzhiZhuhe GanZhi::get_next_stembranch(GanzhiZhuhe sb)
 {
     sb.Stem = get_next_stem(sb.Stem);
     sb.Branch = get_next_branch(sb.Branch);
@@ -228,25 +228,25 @@ GANZHI get_next_stembranch(GANZHI sb)
 }
 
 
-GANZHI get_prev_stembranch(GANZHI sb)
+GanzhiZhuhe GanZhi::get_prev_stembranch(GanzhiZhuhe sb)
 {
     sb.Stem = get_prev_stem(sb.Stem);
     sb.Branch = get_prev_branch(sb.Branch);
     return sb;
 }
 
- XUNKONG get_ganzhi_kong(GANZHI sb)
+ XunKong GanZhi::get_ganzhi_kong(GanzhiZhuhe sb)
  {
      do{
         sb = get_next_stembranch(sb);
-     }while(sb.Stem!=STEMINDEX_GUI);
-    XUNKONG kong;
+     }while(sb.Stem!=GANID_GUI);
+    XunKong kong;
     kong.Branch[0] = get_next_branch(sb.Branch);
     kong.Branch[1] = get_next_branch(kong.Branch[0]);
     return kong;
  }
 
-bool get_xunkong_name(XUNKONG xk,char * name)
+bool GanZhi::get_xunkong_name(XunKong xk,char * name)
 {
     char xkName1[5];
     if(!get_zhi_name(xk.Branch[0],name))
@@ -257,7 +257,10 @@ bool get_xunkong_name(XUNKONG xk,char * name)
     return true;
 }
 
-bool get_gan_element(){
-
+bool GanZhi::get_gan_element()
+{
+    return true;
 }
+
+
 }

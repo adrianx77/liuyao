@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "element.hxx"
 namespace Zhouyi{
+const char * BaseElement::Names[] = {ELEMENT_JIN,ELEMENT_SHUI,ELEMENT_MU,ELEMENT_HUO,ELEMENT_TU};
     const char * ElementNames[] ={
         ELEMENT_JIN,
         ELEMENT_SHUI,
@@ -11,7 +12,7 @@ namespace Zhouyi{
         ELEMENT_TU
     };
 
-    const char * RelationNames[] = {
+    const char * ShengkeGuanxiMing[] = {
         RELATION_RESTRICT,
         RELATION_RESTRICTED,
         RELATION_SAME,
@@ -21,15 +22,16 @@ namespace Zhouyi{
     };
 
 
-    typedef struct {
+    class WuxingShengkeGuanxi {
+    public:
         WUXING_ID self;
         WUXING_ID generate;
         WUXING_ID restrict;
         WUXING_ID restricted;
         WUXING_ID generated;
-    }WXSK_GUANXI;
+    };
 
-    WXSK_GUANXI ElementRelation[]={
+    WuxingShengkeGuanxi WuXinShengKeGuanxi[]={
         {
             WUXING_JIN,
             WUXING_SHUI,
@@ -67,7 +69,19 @@ namespace Zhouyi{
         }
     };
 
+    BaseElement * BaseElement::_instance = new BaseElement();
+    BaseElement::BaseElement()
+    {
+        if(_instance==NULL)
+        {
+            Init();
+        }
+    }
 
+    void BaseElement::Init()
+    {
+            
+    }
     bool BaseElement::get_name(WUXING_ID element,char * name)
     {
         if(element<0)
@@ -82,23 +96,23 @@ namespace Zhouyi{
     {
         if(e1<0)
             return WXSK_INVALID;
-        size_t count = sizeof(ElementRelation)/sizeof(ElementRelation[0]);
+        size_t count = sizeof(WuXinShengKeGuanxi)/sizeof(WuXinShengKeGuanxi[0]);
         if(e1>count || e2> count)
             return WXSK_INVALID;
         
         if(e1==e2)
             return WXSK_SAME;
         
-        if(ElementRelation[e1].generate == e2)
+        if(WuXinShengKeGuanxi[e1].generate == e2)
             return WXSK_GENERATE;
         
-        if(ElementRelation[e1].restrict == e2)
+        if(WuXinShengKeGuanxi[e1].restrict == e2)
             return WXSK_RESTRICT;
 
-        if(ElementRelation[e1].generated == e2)
+        if(WuXinShengKeGuanxi[e1].generated == e2)
             return WXSK_GENERATED;
 
-        if(ElementRelation[e1].restricted == e2)
+        if(WuXinShengKeGuanxi[e1].restricted == e2)
             return WXSK_RESTRICTED;
         
         return WXSK_INVALID;
@@ -110,7 +124,7 @@ namespace Zhouyi{
             return false;
         if(r>=WXSK_INVALID)
             return false;
-        strcpy(name,RelationNames[r]);
+        strcpy(name,ShengkeGuanxiMing[r]);
         return true;
     }
 }
