@@ -39,14 +39,15 @@ namespace Zhouyi{
 
         static bool get_name(WUXING_ID element,char * name);
         static WUXING_SHENGKE get_shengke(WUXING_ID e1,WUXING_ID e2);
-        static bool get_relation_name(WUXING_SHENGKE r,char * name);
+        static bool get_skgx_format(WUXING_SHENGKE r,char * name);
 
         static BaseElement * from(WUXING_ID element);
         BaseElement * clone();
         protected:
         BaseElement();
         
-        static const char * Names[];
+        static const char * _names[];
+        static const char * _guanxi_format[];
         static BaseElement * _instance;
         
     private:

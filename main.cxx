@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <locale.h>
 #include "element.hxx"
 #include "najia.hxx"
 
@@ -9,6 +10,11 @@ using namespace Zhouyi;
 
 int main(int argc, char *argv[])
 {
+#ifdef  _WINDOWS || _WIN32
+    setlocale (LC_ALL,"zh-CN");
+#else    
+    setlocale(LC_COLLATE, "zh_CN");     
+#endif    
 //    GANZHI sb = {STEMINDEX_DING,BRANCHINDEX_WEI};
 //    char sbName[10];
 //    char Xuankong[10];
