@@ -31,9 +31,13 @@ namespace Zhouyi{
         TIANGANID    _gan;
         DIZHIID      _zhi;
         XunKong * _xunkong;
-    public:
         static void init();
         static Xun * _xun[];
+        static const char * _names[];
+    public:
+        XunKong * get_xunkong();
+        const char * get_name();
+        friend TianganDizhi;
         static Xun* from(TIANGANID xg,DIZHIID xz);
     };
 
@@ -45,16 +49,14 @@ namespace Zhouyi{
         TIANGANID   _tiangan;
         DIZHIID     _dizhi;
         Xun *       _xun;
-    public:
-        bool get_name(char * sbName);
         static const char * _ganzi_name[][6];
         static TianganDizhi _ganzhi[][6];
-        
+    public:
+        const char * get_name();
         static TianganDizhi * from(TIANGANID gan,DIZHIID zhi);
-
-        static TianganDizhi * get_next();
-        static TianganDizhi * get_prev();
-        static Xun* get_xun();
+        TianganDizhi * get_next();
+        TianganDizhi * get_prev();
+        Xun* get_xun();
     };
 
 

@@ -4,7 +4,7 @@
 #include "Tiangan.hxx"
 
 namespace Zhouyi{
-    const char * Tiangan::_names[] = {GAN_JIA, GAN_YI,GAN_BING,GAN_DING,GAN_WU,GAN_JI,GAN_GEN,GAN_XIN,GAN_REN,GAN_GUI};
+    const char * Tiangan::_names[] = {GAN_JIA, GAN_YI,GAN_BING,GAN_DING,GAN_WU,GAN_JI,GAN_GENG,GAN_XIN,GAN_REN,GAN_GUI};
 
     bool Tiangan::get_name(TIANGANID gan,char * name)
     {

@@ -15,35 +15,21 @@ int main(int argc, char *argv[])
 #else    
     setlocale(LC_COLLATE, "zh_CN");     
 #endif    
-//    GANZHI sb = {STEMINDEX_DING,BRANCHINDEX_WEI};
-//    char sbName[10];
-//    char Xuankong[10];
-//    if(get_ganzhi_name(sb,sbName))
-//    {
-//        printf("%s\n",sbName);
-//        XUNKONG xk = get_ganzhi_kong(sb);
-//        get_xunkong_name(xk,Xuankong);
-//        printf("旬空:%s\n",Xuankong);    }
-//    else
-//        printf("error get sb\n");
-//
-//    char re[10];
-//
-//    for(size_t i=0;i<=WUXING_TU;i++)
-//    {
-//        for(size_t j=0;j<=WUXING_TU;j++)
-//        {
-//            WUXING_SHENGKE r =get_relation((WUXING_ID)i,(WUXING_ID)j);
-//            if(get_relation_name(r,re))
-//            {
-//                char e1[10],e2[10];
-//                get_element_name((WUXING_ID)i,e1);
-//                get_element_name((WUXING_ID)j,e2);
-//                printf(re,e1,e2);
-//                printf("\n");
-//            }
-//        }
-//    }
+
+   for (size_t i = 0; i < 10; i++)
+   {
+       TianganDizhi * gz = NULL;
+       for (size_t j = 0; j < 12; j++)
+       {
+           if(i%2 != j%2)
+                continue;
+            gz= TianganDizhi::from((TIANGANID)i,(DIZHIID)j);
+            
+            Xun * xun = gz->get_xun();
+            printf("%s->%s 旬空:%s\n",gz->get_name(),xun->get_name(),xun->get_xunkong()->get_name());
+       }
+   }
+   
 
     return 0;
 }

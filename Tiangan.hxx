@@ -11,7 +11,7 @@ namespace Zhouyi{
 #define  GAN_DING   "丁"
 #define  GAN_WU     "戊"
 #define  GAN_JI     "己"
-#define  GAN_GEN    "艮"
+#define  GAN_GENG   "庚"
 #define  GAN_XIN    "辛"
 #define  GAN_REN    "壬"
 #define  GAN_GUI    "癸"
