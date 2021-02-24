@@ -3,130 +3,131 @@
 #include <stdlib.h>
 #include "najia.hxx"
 #include "element.hxx"
+namespace Zhouyi{
 
 const char * StemTable[] ={
-    STEM_JIA,
-    STEM_YI,
-    STEM_BING,
-    STEM_DING,
-    STEM_WU,
-    STEM_JI,
-    STEM_GEN,
-    STEM_XIN,
-    STEM_REN,
-    STEM_GUI
+    GAN_JIA,
+    GAN_YI,
+    GAN_BING,
+    GAN_DING,
+    GAN_WU,
+    GAN_JI,
+    GAN_GEN,
+    GAN_XIN,
+    GAN_REN,
+    GAN_GUI
 };
 const char * BranchTable[] ={
-    BRANCH_ZI,
-    BRANCH_CHOU,
-    BRANCH_YIN,
-    BRANCH_MAO,
-    BRANCH_CHEN,
-    BRANCH_SI,
-    BRANCH_WU, 
-    BRANCH_WEI, 
-    BRANCH_SHEN,
-    BRANCH_YOU,
-    BRANCH_XU,
-    BRANCH_HAI
+    ZHI_ZI,
+    ZHI_CHOU,
+    ZHI_YIN,
+    ZHI_MAO,
+    ZHI_CHEN,
+    ZHI_SI,
+    ZHI_WU, 
+    ZHI_WEI, 
+    ZHI_SHEN,
+    ZHI_YOU,
+    ZHI_XU,
+    ZHI_HAI
 };
 
 const char * StemBranchTable [][6] = {
     {
-        STEM_JIA BRANCH_ZI,
-        STEM_JIA BRANCH_YIN,
-        STEM_JIA BRANCH_CHEN,
-        STEM_JIA BRANCH_WU,
-        STEM_JIA BRANCH_SHEN,
-        STEM_JIA BRANCH_XU,
+        GAN_JIA ZHI_ZI,
+        GAN_JIA ZHI_YIN,
+        GAN_JIA ZHI_CHEN,
+        GAN_JIA ZHI_WU,
+        GAN_JIA ZHI_SHEN,
+        GAN_JIA ZHI_XU,
     },
     {
-        STEM_YI BRANCH_CHOU,
-        STEM_YI BRANCH_MAO,
-        STEM_YI BRANCH_SI,
-        STEM_YI BRANCH_WEI,
-        STEM_YI BRANCH_YOU,
-        STEM_YI BRANCH_HAI,
+        GAN_YI ZHI_CHOU,
+        GAN_YI ZHI_MAO,
+        GAN_YI ZHI_SI,
+        GAN_YI ZHI_WEI,
+        GAN_YI ZHI_YOU,
+        GAN_YI ZHI_HAI,
     },
     {
-        STEM_BING BRANCH_ZI,
-        STEM_BING BRANCH_YIN,
-        STEM_BING BRANCH_CHEN,
-        STEM_BING BRANCH_WU,
-        STEM_BING BRANCH_SHEN,
-        STEM_BING BRANCH_XU,
+        GAN_BING ZHI_ZI,
+        GAN_BING ZHI_YIN,
+        GAN_BING ZHI_CHEN,
+        GAN_BING ZHI_WU,
+        GAN_BING ZHI_SHEN,
+        GAN_BING ZHI_XU,
     },
     {
-        STEM_DING BRANCH_CHOU,
-        STEM_DING BRANCH_MAO,
-        STEM_DING BRANCH_SI,
-        STEM_DING BRANCH_WEI,
-        STEM_DING BRANCH_YOU,
-        STEM_DING BRANCH_HAI,
+        GAN_DING ZHI_CHOU,
+        GAN_DING ZHI_MAO,
+        GAN_DING ZHI_SI,
+        GAN_DING ZHI_WEI,
+        GAN_DING ZHI_YOU,
+        GAN_DING ZHI_HAI,
     },    
     {
-        STEM_WU BRANCH_ZI,
-        STEM_WU BRANCH_YIN,
-        STEM_WU BRANCH_CHEN,
-        STEM_WU BRANCH_WU,
-        STEM_WU BRANCH_SHEN,
-        STEM_WU BRANCH_XU,
+        GAN_WU ZHI_ZI,
+        GAN_WU ZHI_YIN,
+        GAN_WU ZHI_CHEN,
+        GAN_WU ZHI_WU,
+        GAN_WU ZHI_SHEN,
+        GAN_WU ZHI_XU,
     },
     {
-        STEM_YI BRANCH_CHOU,
-        STEM_YI BRANCH_MAO,
-        STEM_YI BRANCH_SI,
-        STEM_YI BRANCH_WEI,
-        STEM_YI BRANCH_YOU,
-        STEM_YI BRANCH_HAI,
+        GAN_YI ZHI_CHOU,
+        GAN_YI ZHI_MAO,
+        GAN_YI ZHI_SI,
+        GAN_YI ZHI_WEI,
+        GAN_YI ZHI_YOU,
+        GAN_YI ZHI_HAI,
     },    
     {
-        STEM_JIA BRANCH_ZI,
-        STEM_JIA BRANCH_YIN,
-        STEM_JIA BRANCH_CHEN,
-        STEM_JIA BRANCH_WU,
-        STEM_JIA BRANCH_SHEN,
-        STEM_JIA BRANCH_XU,
+        GAN_JIA ZHI_ZI,
+        GAN_JIA ZHI_YIN,
+        GAN_JIA ZHI_CHEN,
+        GAN_JIA ZHI_WU,
+        GAN_JIA ZHI_SHEN,
+        GAN_JIA ZHI_XU,
     },
     {
-        STEM_JI BRANCH_CHOU,
-        STEM_JI BRANCH_MAO,
-        STEM_JI BRANCH_SI,
-        STEM_JI BRANCH_WEI,
-        STEM_JI BRANCH_YOU,
-        STEM_JI BRANCH_HAI,
+        GAN_JI ZHI_CHOU,
+        GAN_JI ZHI_MAO,
+        GAN_JI ZHI_SI,
+        GAN_JI ZHI_WEI,
+        GAN_JI ZHI_YOU,
+        GAN_JI ZHI_HAI,
     },    
     {
-        STEM_GEN BRANCH_ZI,
-        STEM_GEN BRANCH_YIN,
-        STEM_GEN BRANCH_CHEN,
-        STEM_GEN BRANCH_WU,
-        STEM_GEN BRANCH_SHEN,
-        STEM_GEN BRANCH_XU,
+        GAN_GEN ZHI_ZI,
+        GAN_GEN ZHI_YIN,
+        GAN_GEN ZHI_CHEN,
+        GAN_GEN ZHI_WU,
+        GAN_GEN ZHI_SHEN,
+        GAN_GEN ZHI_XU,
     },
     {
-        STEM_XIN BRANCH_CHOU,
-        STEM_XIN BRANCH_MAO,
-        STEM_XIN BRANCH_SI,
-        STEM_XIN BRANCH_WEI,
-        STEM_XIN BRANCH_YOU,
-        STEM_XIN BRANCH_HAI,
+        GAN_XIN ZHI_CHOU,
+        GAN_XIN ZHI_MAO,
+        GAN_XIN ZHI_SI,
+        GAN_XIN ZHI_WEI,
+        GAN_XIN ZHI_YOU,
+        GAN_XIN ZHI_HAI,
     },    
     {
-        STEM_REN BRANCH_ZI,
-        STEM_REN BRANCH_YIN,
-        STEM_REN BRANCH_CHEN,
-        STEM_REN BRANCH_WU,
-        STEM_REN BRANCH_SHEN,
-        STEM_REN BRANCH_XU,
+        GAN_REN ZHI_ZI,
+        GAN_REN ZHI_YIN,
+        GAN_REN ZHI_CHEN,
+        GAN_REN ZHI_WU,
+        GAN_REN ZHI_SHEN,
+        GAN_REN ZHI_XU,
     },
     {
-        STEM_GUI BRANCH_CHOU,
-        STEM_GUI BRANCH_MAO,
-        STEM_GUI BRANCH_SI,
-        STEM_GUI BRANCH_WEI,
-        STEM_GUI BRANCH_YOU,
-        STEM_GUI BRANCH_HAI,
+        GAN_GUI ZHI_CHOU,
+        GAN_GUI ZHI_MAO,
+        GAN_GUI ZHI_SI,
+        GAN_GUI ZHI_WEI,
+        GAN_GUI ZHI_YOU,
+        GAN_GUI ZHI_HAI,
     }
 };
 
@@ -134,18 +135,18 @@ const char * StemBranchTable [][6] = {
 
 typedef struct 
 {
-    BRANCH_INDEX self;
-    ELEMENT_INDEX element;          //五行
-    BRANCH_INDEX  impact;           //冲
-    BRANCH_INDEX  sixcombine;       //六合
-    BRANCH_INDEX  tricombine[2];    //三合
-    BRANCH_INDEX  forward;          //进
-    BRANCH_INDEX  backward;         //退
+    ZHI_INDEX self;
+    WUXING_ID element;          //五行
+    ZHI_INDEX  impact;           //冲
+    ZHI_INDEX  sixcombine;       //六合
+    ZHI_INDEX  tricombine[2];    //三合
+    ZHI_INDEX  forward;          //进
+    ZHI_INDEX  backward;         //退
 }BRANCHINFO;
 
 
 
-bool get_stem_name(STEM_INDEX stem,char * name)
+bool get_gan_name(GAN_INDEX stem,char * name)
 {
     if(stem<0)
         return false;
@@ -154,7 +155,7 @@ bool get_stem_name(STEM_INDEX stem,char * name)
     strcpy(name,StemTable[stem]);
     return true;
 }
-bool get_branch_name(BRANCH_INDEX branch,char * name)
+bool get_zhi_name(ZHI_INDEX branch,char * name)
 {
     if(branch<0)
         return false;
@@ -163,7 +164,7 @@ bool get_branch_name(BRANCH_INDEX branch,char * name)
     strcpy(name,BranchTable[branch]);
     return true;    
 }
-bool get_stembranch_name(STEAMBRANCH sb,char * sbName)
+bool get_ganzhi_name(GANZHI sb,char * sbName)
 {
     if(sb.Stem<0 || sb.Stem<0)
         return false;    
@@ -180,46 +181,46 @@ bool get_stembranch_name(STEAMBRANCH sb,char * sbName)
     return true;        
 }
 
-BRANCH_INDEX get_next_branch(BRANCH_INDEX branch)
+ZHI_INDEX get_next_branch(ZHI_INDEX branch)
 {
     int b = branch;
     b++;
     if(b >BRANCHINDEX_HAI)        
         b = 0;
-    return (BRANCH_INDEX)b;
+    return (ZHI_INDEX)b;
 }
 
-STEM_INDEX get_next_stem(STEM_INDEX stem)
+GAN_INDEX get_next_stem(GAN_INDEX stem)
 {
     int s = stem;
     s++;
     if(s>STEMINDEX_GUI)
         s = 0;
-    return (STEM_INDEX)s;  
+    return (GAN_INDEX)s;  
 }
 
 
-BRANCH_INDEX get_prev_branch(BRANCH_INDEX branch)
+ZHI_INDEX get_prev_branch(ZHI_INDEX branch)
 {
     int b = branch;
     b--;
     if(b <0)        
         b = BRANCHINDEX_HAI;
-    return (BRANCH_INDEX)b;
+    return (ZHI_INDEX)b;
 }
 
-STEM_INDEX get_prev_stem(STEM_INDEX stem)
+GAN_INDEX get_prev_stem(GAN_INDEX stem)
 {
     int s = stem;
     s--;
     if(s<0)
         s = STEMINDEX_GUI;
-    return (STEM_INDEX)s;  
+    return (GAN_INDEX)s;  
 }
 
 
 
-STEAMBRANCH get_next_stembranch(STEAMBRANCH sb)
+GANZHI get_next_stembranch(GANZHI sb)
 {
     sb.Stem = get_next_stem(sb.Stem);
     sb.Branch = get_next_branch(sb.Branch);
@@ -227,14 +228,14 @@ STEAMBRANCH get_next_stembranch(STEAMBRANCH sb)
 }
 
 
-STEAMBRANCH get_prev_stembranch(STEAMBRANCH sb)
+GANZHI get_prev_stembranch(GANZHI sb)
 {
     sb.Stem = get_prev_stem(sb.Stem);
     sb.Branch = get_prev_branch(sb.Branch);
     return sb;
 }
 
- XUNKONG get_stembranch_kong(STEAMBRANCH sb)
+ XUNKONG get_ganzhi_kong(GANZHI sb)
  {
      do{
         sb = get_next_stembranch(sb);
@@ -248,14 +249,15 @@ STEAMBRANCH get_prev_stembranch(STEAMBRANCH sb)
 bool get_xunkong_name(XUNKONG xk,char * name)
 {
     char xkName1[5];
-    if(!get_branch_name(xk.Branch[0],name))
+    if(!get_zhi_name(xk.Branch[0],name))
         return false;
-    if(!get_branch_name(xk.Branch[1],xkName1))
+    if(!get_zhi_name(xk.Branch[1],xkName1))
         return false;
     strcat(name,xkName1);
     return true;
 }
 
-bool get_stem_element(){
+bool get_gan_element(){
 
+}
 }

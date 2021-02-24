@@ -2,30 +2,30 @@
 #define _NAJIA_H_XX_
 
 
-#define  STEM_JIA    "甲"
-#define  STEM_YI     "乙"
-#define  STEM_BING   "丙"
-#define  STEM_DING   "丁"
-#define  STEM_WU     "戊"
-#define  STEM_JI     "己"
-#define  STEM_GEN    "艮"
-#define  STEM_XIN    "辛"
-#define  STEM_REN    "壬"
-#define  STEM_GUI    "癸"
+#define  GAN_JIA    "甲"
+#define  GAN_YI     "乙"
+#define  GAN_BING   "丙"
+#define  GAN_DING   "丁"
+#define  GAN_WU     "戊"
+#define  GAN_JI     "己"
+#define  GAN_GEN    "艮"
+#define  GAN_XIN    "辛"
+#define  GAN_REN    "壬"
+#define  GAN_GUI    "癸"
 
-#define  BRANCH_ZI       "子"
-#define  BRANCH_CHOU     "丑"
-#define  BRANCH_YIN      "寅"
-#define  BRANCH_MAO      "卯"
-#define  BRANCH_CHEN     "辰"
-#define  BRANCH_SI       "巳"
-#define  BRANCH_WU       "午"
-#define  BRANCH_WEI      "未"
-#define  BRANCH_SHEN     "申"
-#define  BRANCH_YOU      "酉"
-#define  BRANCH_XU       "戌"
-#define  BRANCH_HAI      "亥"
-
+#define  ZHI_ZI       "子"
+#define  ZHI_CHOU     "丑"
+#define  ZHI_YIN      "寅"
+#define  ZHI_MAO      "卯"
+#define  ZHI_CHEN     "辰"
+#define  ZHI_SI       "巳"
+#define  ZHI_WU       "午"
+#define  ZHI_WEI      "未"
+#define  ZHI_SHEN     "申"
+#define  ZHI_YOU      "酉"
+#define  ZHI_XU       "戌"
+#define  ZHI_HAI      "亥"
+namespace Zhouyi{
 typedef enum {
     STEMINDEX_INVALID = -1,
     STEMINDEX_JIA = 0,
@@ -38,7 +38,7 @@ typedef enum {
     STEMINDEX_XIN, 
     STEMINDEX_REN, 
     STEMINDEX_GUI 
-}STEM_INDEX;
+}GAN_INDEX;
 
 typedef enum {
     BRANCHINDEX_INVALIDE = -1,
@@ -54,23 +54,26 @@ typedef enum {
     BRANCHINDEX_YOU,
     BRANCHINDEX_XU,
     BRANCHINDEX_HAI
-}BRANCH_INDEX;
+}ZHI_INDEX;
 
 typedef struct StemBranch
 {
-    STEM_INDEX Stem;
-    BRANCH_INDEX Branch;
-}STEAMBRANCH;
+    GAN_INDEX Stem;
+    ZHI_INDEX Branch;
+}GANZHI;
 
 typedef struct XunKong
 {
-    BRANCH_INDEX Branch[2];
+    ZHI_INDEX Branch[2];
 }XUNKONG;
 
+class GanZhi{
+static bool get_gan_name(GAN_INDEX stem,char * name);
+static bool get_zhi_name(ZHI_INDEX branch,char * name);
+static bool get_ganzhi_name(GANZHI sb,char * sbName);
+static XUNKONG get_ganzhi_kong(GANZHI sb);
+static bool get_xunkong_name(XUNKONG xk,char * name);
+}
 
-extern bool get_stem_name(STEM_INDEX stem,char * name);
-extern bool get_branch_name(BRANCH_INDEX branch,char * name);
-extern bool get_stembranch_name(STEAMBRANCH sb,char * sbName);
-extern XUNKONG get_stembranch_kong(STEAMBRANCH sb);
-extern bool get_xunkong_name(XUNKONG xk,char * name);
+}
 #endif//_NAJIA_H_XX_

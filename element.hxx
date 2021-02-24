@@ -13,24 +13,46 @@
 #define RELATION_GENERATE   "【%s】=>【%s】"
 #define RELATION_GENERATED  "【%s】<=【%s】"
 #define RELATION_INVALID    "错误"
+
+namespace Zhouyi{
+
 typedef enum {
-    ELEMENTINDEX_JIN,
-    ELEMENTINDEX_SHUI,
-    ELEMENTINDEX_MU,
-    ELEMENTINDEX_HUO,
-    ELEMENTINDEX_TU
-}ELEMENT_INDEX;
+    WUXING_INVALID  = -1,
+    WUXING_JIN      = 0,
+    WUXING_SHUI,
+    WUXING_MU,
+    WUXING_HUO,
+    WUXING_TU
+}WUXING_ID;
 
 typedef enum{
-    ER_RESTRICT,    //克
-    ER_RESTRICTED,  //被克
-    ER_SAME,        //同
-    ER_GENERATE,    //生
-    ER_GENERATED,    //被生
-    ER_INVALID       //错误
-}ELEMENT_RELATION;
+    WXSK_INVALID = -1. //错误
+    WXSK_RESTRICT = 0, //克
+    WXSK_RESTRICTED,   //被克
+    WXSK_SAME,         //同
+    WXSK_GENERATE,     //生
+    WXSK_GENERATED     //被生
+}WUXING_SHENGKE;
 
-extern bool get_element_name(ELEMENT_INDEX element,char * name);
-extern ELEMENT_RELATION get_relation(ELEMENT_INDEX e1,ELEMENT_INDEX e2);
-extern bool get_relation_name(ELEMENT_RELATION r,char * name);
+    class BaseElement{
+        public:
+
+        public:
+        
+
+        static bool get_name(WUXING_ID element,char * name);
+        static WUXING_SHENGKE get_shengke(WUXING_ID e1,WUXING_ID e2);
+        static bool get_relation_name(WUXING_SHENGKE r,char * name);
+
+        static BaseElement * from(WUXING_ID element);
+        BaseElement * clone();
+        protected:
+        BaseElement(){}
+        static const char * Names[] = {ELEMENT_JIN,ELEMENT_SHUI,ELEMENT_MU,ELEMENT_HUO,ELEMENT_TU};
+        static BaseElement * _instance;
+    };
+
+}
+
+
 #endif//__BASE_DEFINE_H_XX_

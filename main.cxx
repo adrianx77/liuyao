@@ -3,15 +3,16 @@
 #include <math.h>
 #include "element.hxx"
 #include "najia.hxx"
+using Zhouyi;
 int main(int argc, char *argv[])
 {
-    STEAMBRANCH sb = {STEMINDEX_DING,BRANCHINDEX_WEI};
+    GANZHI sb = {STEMINDEX_DING,BRANCHINDEX_WEI};
     char sbName[10];
     char Xuankong[10];
-    if(get_stembranch_name(sb,sbName))
+    if(get_ganzhi_name(sb,sbName))
     {
         printf("%s\n",sbName);
-        XUNKONG xk = get_stembranch_kong(sb);
+        XUNKONG xk = get_ganzhi_kong(sb);
         get_xunkong_name(xk,Xuankong);
         printf("旬空:%s\n",Xuankong);    }
     else
@@ -19,22 +20,21 @@ int main(int argc, char *argv[])
 
     char re[10];
 
-    for(size_t i=0;i<=ELEMENTINDEX_TU;i++)
+    for(size_t i=0;i<=WUXING_TU;i++)
     {
-        for(size_t j=0;j<=ELEMENTINDEX_TU;j++)
+        for(size_t j=0;j<=WUXING_TU;j++)
         {
-            ELEMENT_RELATION r =get_relation((ELEMENT_INDEX)i,(ELEMENT_INDEX)j);
+            WUXING_SHENGKE r =get_relation((WUXING_ID)i,(WUXING_ID)j);
             if(get_relation_name(r,re))
             {
                 char e1[10],e2[10];
-                get_element_name((ELEMENT_INDEX)i,e1);
-                get_element_name((ELEMENT_INDEX)j,e2);
+                get_element_name((WUXING_ID)i,e1);
+                get_element_name((WUXING_ID)j,e2);
                 printf(re,e1,e2);
                 printf("\n");
             }
         }
     }
-
 
     return 0;
 }
