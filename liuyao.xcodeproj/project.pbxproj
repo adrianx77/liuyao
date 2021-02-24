@@ -12,6 +12,8 @@
 		CCA9F07D25E4D9FC00E445EC /* liuyao.cxx in Sources */ = {isa = PBXBuildFile; fileRef = CCA9F07725E4D9FC00E445EC /* liuyao.cxx */; };
 		CCA9F07E25E4D9FC00E445EC /* stembranch.cxx in Sources */ = {isa = PBXBuildFile; fileRef = CCA9F07A25E4D9FC00E445EC /* stembranch.cxx */; };
 		CCA9F08325E5391800E445EC /* element.cxx in Sources */ = {isa = PBXBuildFile; fileRef = CCA9F08125E5391800E445EC /* element.cxx */; };
+		CCA9F08725E6863100E445EC /* Dizhi.cxx in Sources */ = {isa = PBXBuildFile; fileRef = CCA9F08525E6863100E445EC /* Dizhi.cxx */; };
+		CCA9F08B25E6863D00E445EC /* Tiangan.cxx in Sources */ = {isa = PBXBuildFile; fileRef = CCA9F08925E6863D00E445EC /* Tiangan.cxx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,6 +38,10 @@
 		CCA9F07A25E4D9FC00E445EC /* stembranch.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stembranch.cxx; sourceTree = "<group>"; };
 		CCA9F08125E5391800E445EC /* element.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = element.cxx; sourceTree = "<group>"; };
 		CCA9F08225E5391800E445EC /* element.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = element.hxx; sourceTree = "<group>"; };
+		CCA9F08525E6863100E445EC /* Dizhi.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dizhi.cxx; sourceTree = "<group>"; };
+		CCA9F08625E6863100E445EC /* Dizhi.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Dizhi.hxx; sourceTree = "<group>"; };
+		CCA9F08925E6863D00E445EC /* Tiangan.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tiangan.cxx; sourceTree = "<group>"; };
+		CCA9F08A25E6863D00E445EC /* Tiangan.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Tiangan.hxx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +58,10 @@
 		CC6548D825E4D91B009ECE2C = {
 			isa = PBXGroup;
 			children = (
+				CCA9F08925E6863D00E445EC /* Tiangan.cxx */,
+				CCA9F08A25E6863D00E445EC /* Tiangan.hxx */,
+				CCA9F08525E6863100E445EC /* Dizhi.cxx */,
+				CCA9F08625E6863100E445EC /* Dizhi.hxx */,
 				CCA9F08125E5391800E445EC /* element.cxx */,
 				CCA9F08225E5391800E445EC /* element.hxx */,
 				CCA9F07725E4D9FC00E445EC /* liuyao.cxx */,
@@ -130,7 +140,9 @@
 			files = (
 				CC6548E525E4D91B009ECE2C /* main.cxx in Sources */,
 				CCA9F07D25E4D9FC00E445EC /* liuyao.cxx in Sources */,
+				CCA9F08725E6863100E445EC /* Dizhi.cxx in Sources */,
 				CCA9F07E25E4D9FC00E445EC /* stembranch.cxx in Sources */,
+				CCA9F08B25E6863D00E445EC /* Tiangan.cxx in Sources */,
 				CCA9F08325E5391800E445EC /* element.cxx in Sources */,
 				CCA9F07C25E4D9FC00E445EC /* najia.cxx in Sources */,
 			);

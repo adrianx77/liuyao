@@ -43,7 +43,6 @@ Xun::Xun(TIANGANID xg,DIZHIID xz)
 {
     _gan = xg;
     _zhi   = xz;
-    printf("旬:%d,%d",xg,xz);
     _xunkong = XunKong::from(xz);
 }
 
@@ -182,6 +181,13 @@ public:
     DIZHIID     backward;         //退
 };
 
+TianganDizhi::TianganDizhi(TIANGANID gan,DIZHIID zhi,TIANGANID xg,DIZHIID xz){
+    Xun::init();
+    _tiangan = gan;
+    _dizhi   = zhi;
+    _xun = Xun::from(xg,xz);
+}
+
 bool TianganDizhi::get_name(char * sbName)
 {
     if(_tiangan<0 || _tiangan<0)
@@ -211,19 +217,20 @@ TianganDizhi * TianganDizhi::from(TIANGANID gan,DIZHIID zhi)
     return &_ganzhi[gan][zhi/2];
 }
 
-TianganDizhi* TianganDizhi::get_next(TianganDizhi* gz)
+TianganDizhi* TianganDizhi::get_next()
 {
-    return from(Tiangan::get_next(gz->_tiangan),Dizhi::get_next(gz->_dizhi));
+    return from(_tiangan->get_next(),Dizhi::get_next(_dizhi));
 }
 
 
-TianganDizhi* TianganDizhi::get_prev(TianganDizhi* gz)
+TianganDizhi* TianganDizhi::get_prev()
 {
-    return from(Tiangan::get_prev(gz->_tiangan),Dizhi::get_prev(gz->_dizhi));
+    return from(Tiangan::get_prev(_tiangan),Dizhi::get_prev(_dizhi));
 }
 
- XunKong* TianganDizhi::get_xunkong(TianganDizhi* gz)
+ Xun* TianganDizhi::get_xun()
  {
+     return _xun;
     do{
         gz = get_next(gz);
     }while(gz->_tiangan!=TGID_GUI);
