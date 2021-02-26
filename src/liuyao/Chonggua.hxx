@@ -35,7 +35,7 @@ protected:
     int  _shiwei;
     int  _yingwei;
     const char * _name;
-    GuaYao * _guayao[6];
+    Guayao * _guayao[6];
     Gua& _shanggua;
     Gua& _xiagua;
     Wuxing& _wuxing;
@@ -48,6 +48,7 @@ protected:
 public:
     static void init();
     static Chonggua & from(BAGUA_ID sgid,BAGUA_ID xgid);
+    Guayao * get_yao(int i);
     const char* get_guaxing_name();
     const char* get_name();
 };

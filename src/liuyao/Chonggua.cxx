@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "Chonggua.hxx"
 namespace Zhouyi{
-bool _init = false;
+bool Chonggua::_init = false;
 const char* guaxing[] = {
     "",GUAXING_LIUCHONG,GUAXING_LIUCHE,GUAXING_YOUHUN,GUAXING_GUIHUN
 };
@@ -25,10 +25,10 @@ static PURECHONGGUAINFO PureChonggua[8] =
     {BGID_QIAN,BGID_QIAN,WXID_JIN,{{YID_YANG,TGID_JIA,DZID_ZI},{YID_YANG,TGID_JIA,DZID_YIN},{YID_YANG,TGID_JIA,DZID_CHEN},{YID_YANG,TGID_REN,DZID_WU},{YID_YANG,TGID_REN,DZID_SHEN},{YID_YANG,TGID_REN,DZID_XU}}},
     {BGID_DUI,BGID_DUI,WXID_JIN,{{YID_YANG,TGID_DING,DZID_SI},{YID_YANG,TGID_DING,DZID_MAO},{YID_YING,TGID_DING,DZID_CHOU},{YID_YANG,TGID_DING,DZID_HAI},{YID_YANG,TGID_DING,DZID_YOU},{YID_YING,TGID_DING,DZID_WEI}}},
     {BGID_LI,BGID_LI,WXID_HUO,{{YID_YANG,TGID_JI,DZID_MAO},{YID_YING,TGID_JI,DZID_CHOU},{YID_YANG,TGID_JI,DZID_HAI},{YID_YANG,TGID_JI,DZID_YOU},{YID_YING,TGID_JI,DZID_WEI},{YID_YANG,TGID_JI,DZID_SI}}},
-    {BGID_ZHEN,BGID_ZHEN,WXID_MU,{{YID_YANG,TGID_GEN,DZID_ZI},{YID_YING,TGID_GEN,DZID_YOU},{YID_YING,TGID_GEN,DZID_CHEN},{YID_YANG,TGID_GEN,DZID_WU},{YID_YANG,TGID_GEN,DZID_SHEN},{YID_YING,TGID_GEN,DZID_XU}}},
+    {BGID_ZHEN,BGID_ZHEN,WXID_MU,{{YID_YANG,TGID_GEN,DZID_ZI},{YID_YING,TGID_GEN,DZID_YIN},{YID_YING,TGID_GEN,DZID_CHEN},{YID_YANG,TGID_GEN,DZID_WU},{YID_YANG,TGID_GEN,DZID_SHEN},{YID_YING,TGID_GEN,DZID_XU}}},
     {BGID_XUN,BGID_XUN,WXID_MU,{{YID_YING,TGID_XIN,DZID_CHOU},{YID_YANG,TGID_XIN,DZID_HAI},{YID_YANG,TGID_XIN,DZID_YOU},{YID_YING,TGID_XIN,DZID_WEI},{YID_YANG,TGID_XIN,DZID_SI},{YID_YANG,TGID_XIN,DZID_MAO}}},
-    {BGID_KAN,BGID_KAN,WXID_SHUI,{{YID_YING,TGID_WU,DZID_YIN},{YID_YANG,TGID_WU,DZID_CHEN},{YID_YING,TGID_WU,DZID_WEI},{YID_YING,TGID_WU,DZID_SHEN},{YID_YANG,TGID_WU,DZID_XU},{YID_YING,TGID_WU,DZID_ZI}}},
-    {BGID_GEN,BGID_GEN,WXID_TU,{{YID_YING,TGID_BING,DZID_CHOU},{YID_YING,TGID_BING,DZID_WU},{YID_YANG,TGID_BING,DZID_SHEN},{YID_YING,TGID_BING,DZID_XU},{YID_YING,TGID_BING,DZID_ZI},{YID_YANG,TGID_BING,DZID_YIN}}},
+    {BGID_KAN,BGID_KAN,WXID_SHUI,{{YID_YING,TGID_WU,DZID_YIN},{YID_YANG,TGID_WU,DZID_CHEN},{YID_YING,TGID_WU,DZID_WU},{YID_YING,TGID_WU,DZID_SHEN},{YID_YANG,TGID_WU,DZID_XU},{YID_YING,TGID_WU,DZID_ZI}}},
+    {BGID_GEN,BGID_GEN,WXID_TU,{{YID_YING,TGID_BING,DZID_CHEN},{YID_YING,TGID_BING,DZID_WU},{YID_YANG,TGID_BING,DZID_SHEN},{YID_YING,TGID_BING,DZID_XU},{YID_YING,TGID_BING,DZID_ZI},{YID_YANG,TGID_BING,DZID_YIN}}},
     {BGID_KUN,BGID_KUN,WXID_TU,{{YID_YING,TGID_YI,DZID_WEI},{YID_YING,TGID_YI,DZID_SI},{YID_YING,TGID_YI,DZID_MAO},{YID_YING,TGID_GUI,DZID_CHOU},{YID_YING,TGID_GUI,DZID_HAI},{YID_YING,TGID_GUI,DZID_YOU}}}
 };
 
@@ -148,14 +148,14 @@ void Chonggua::init()
 
             for(int x=0;x<3;x++)
             {
-                gua->_guayao[x] = new GuaYao(xiaPureGua.ganzhi[x].yao,xiaPureGua.ganzhi[x].gan,xiaPureGua.ganzhi[x].zhi,x);
+                gua->_guayao[x] = new Guayao(xiaPureGua.ganzhi[x].yao,xiaPureGua.ganzhi[x].gan,xiaPureGua.ganzhi[x].zhi,x);
             }
             for(int s=3;s<6;++s)
             {
-                gua->_guayao[s] = new GuaYao(xiaPureGua.ganzhi[s].yao,xiaPureGua.ganzhi[s].gan,xiaPureGua.ganzhi[s].zhi,s);
+                gua->_guayao[s] = new Guayao(shangPureGua.ganzhi[s].yao,shangPureGua.ganzhi[s].gan,shangPureGua.ganzhi[s].zhi,s);
             }
 
-            _chonggua[i][j] = gua;
+            _chonggua[info.sgid][info.xgid] = gua;
         }
     }
 
@@ -186,5 +186,8 @@ const char* Chonggua::get_name()
 {
     return _name;
 }
-
+Guayao * Chonggua::get_yao(int i)
+{
+    return _guayao[i];
+}
 }

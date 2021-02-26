@@ -42,7 +42,16 @@ void test_gua()
 {
     for(size_t i = 0; i < 8; i++)
     {
-        Chonggua::from((BAGUA_ID)i,(BAGUA_ID)i).get_guaxing_name();
+        for(size_t j = 0; j < 8; j++)
+        {
+            Chonggua & g =Chonggua::from((BAGUA_ID)i,(BAGUA_ID)j); 
+            printf("%s %s\n",g.get_name(),g.get_guaxing_name());
+            for(int k=5;k>=0;k--)
+            {
+                printf("%s %s\n",g.get_yao(k)->get_name(),g.get_yao(k)->get_ganzhi().get_name());
+
+            }
+        }
     }
 }
 

@@ -6,12 +6,14 @@
 #include "../najia/TianganDizhi.hxx"
 namespace Zhouyi{
 
-class GuaYao :public Yao{
+class Guayao :public Yao{
 protected:
     int             _yaowei;
     TianganDizhi&   _gz;
 public:
-    GuaYao(YAO_ID yao,TIANGAN_ID gan,DIZHI_ID zhi,int yaowei);
+    Guayao(YAO_ID yao,TIANGAN_ID gan,DIZHI_ID zhi,int yaowei);
+    TianganDizhi& get_ganzhi();
+
 };
 
 }
