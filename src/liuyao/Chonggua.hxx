@@ -44,9 +44,9 @@ protected:
 
 //初始化
     static bool _init;
-    static void init();
     Chonggua(BAGUA_ID sgid,BAGUA_ID xgid,int s,int y,WUXING_ID wx,GUAXING_ID gx,const char * name);
 public:
+    static void init();
     static Chonggua & from(BAGUA_ID sgid,BAGUA_ID xgid);
     const char* get_guaxing_name();
     const char* get_name();

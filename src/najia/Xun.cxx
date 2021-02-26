@@ -4,7 +4,8 @@
 #include "TianganDizhi.hxx"
 #include "../base/Error.hxx"
 namespace Zhouyi{
-    
+
+bool XunKong ::_init = false;
 const char * XunKong ::_names[] =   
 {
     ZHI_XU " " ZHI_HAI,
@@ -14,8 +15,15 @@ const char * XunKong ::_names[] =
     ZHI_WU " " ZHI_WEI,
     ZHI_SHEN " " ZHI_YOU
 };
-XunKong XunKong :: _xunkong[] = 
+
+typedef struct 
 {
+    DIZHI_ID dz1;
+    DIZHI_ID dz2;
+    int      index;
+}XUNKONGINFO;
+
+XUNKONGINFO xunkongInfo [6] ={
     {DZID_XU,DZID_HAI,0},
     {DZID_ZI,DZID_CHOU,1},
     {DZID_YIN,DZID_MAO,2},
@@ -23,6 +31,21 @@ XunKong XunKong :: _xunkong[] =
     {DZID_WU,DZID_WEI,4},
     {DZID_SHEN,DZID_YOU,5}
 };
+
+XunKong* XunKong :: _xunkong[6] = {};
+
+void XunKong::init()
+{
+    if(_init)
+        return;
+
+    for(size_t i=0;i<6;i++)
+    {
+        _xunkong[i] = new XunKong(xunkongInfo[i].dz1,xunkongInfo[i].dz2,xunkongInfo[i].index);
+    }
+    _init = true;
+}
+
 XunKong::XunKong(DIZHI_ID dz1,DIZHI_ID dz2,int index)
 {
     _dizhi1 = dz1;
@@ -31,7 +54,7 @@ XunKong::XunKong(DIZHI_ID dz1,DIZHI_ID dz2,int index)
 }
 XunKong& XunKong ::from(DIZHI_ID x)
 {
-    return _xunkong[x/2];
+    return *_xunkong[x/2];
 }
 const char * XunKong::get_name()
 {
@@ -65,7 +88,9 @@ void Xun::init()
 }
 Xun& Xun::from(Tiangan& xg,Dizhi& xz)
 {
+    XunKong::init();
     Xun::init();
+
     for (size_t i = 0; i < sizeof(_xun)/sizeof(_xun[0]); i++)
     {
         if(_xun[i]->_gan == xg.id() && _xun[i]->_zhi == xz.id())
