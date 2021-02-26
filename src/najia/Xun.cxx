@@ -65,6 +65,7 @@ void Xun::init()
 }
 Xun& Xun::from(Tiangan& xg,Dizhi& xz)
 {
+    Xun::init();
     for (size_t i = 0; i < sizeof(_xun)/sizeof(_xun[0]); i++)
     {
         if(_xun[i]->_gan == xg.id() && _xun[i]->_zhi == xz.id())
@@ -86,6 +87,9 @@ const char * Xun::get_name()
 void Xun::dump_xun()
 {
     auto it = _ganzhi.begin();
+    if(it== _ganzhi.end())
+        return;
+
     printf("%s",(*it)->get_name());
     ++it;
     for(;it!= _ganzhi.end();++it)
@@ -95,6 +99,7 @@ void Xun::dump_xun()
 }
 void Xun::push_ganzhi(TianganDizhi *gz)
 {
+    printf(" %s <- %s\n",get_name(),gz->get_name());
     for(auto it = _ganzhi.begin();it != _ganzhi.end();++it)
     {
         if(gz->get_tiangan() < (*it)->get_tiangan())

@@ -19,8 +19,7 @@ class TianganDizhi;
         static const char *  _names[];
         static XunKong _xunkong[];
     };
-   
-
+    
     class Xun
     {
         Xun(TIANGAN_ID xg,DIZHI_ID xz);
@@ -37,7 +36,11 @@ class TianganDizhi;
         const char * get_name();
         friend TianganDizhi;
         static Xun& from(Tiangan& xg,Dizhi& xz);
-        static Xun * * get_xun_table(){return _xun;}
+        static Xun * * get_xun_table()
+        {
+            init();
+            return _xun;
+        }
         
         void dump_xun();
         void push_ganzhi(TianganDizhi *);

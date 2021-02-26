@@ -1,10 +1,10 @@
 #ifndef _YAO_H_XX_
 #define _YAO_H_XX_
 
-#define YAONAME_YIN         "▆▆　▆▆"
-#define YAONAME_YANG        "▆▆▆▆▆"
-#define YAONAME_LAOYIN      "▆▆　▆▆x"
-#define YAONAME_LAOYANG     "▆▆▆▆▆o"
+#define YAO_YIN         "▆▆　▆▆"
+#define YAO_YANG        "▆▆▆▆▆"
+#define YAO_LAOYIN      "▆▆　▆▆x"
+#define YAO_LAOYANG     "▆▆▆▆▆o"
 
 namespace Zhouyi{
 
@@ -17,14 +17,19 @@ typedef enum{
 }YAO_ID;
 
 class Yao{
+    Yao();
+    Yao(Yao&);
 protected:    
-    YAO_ID _yao;
+    YAO_ID _id;
     static const char * _names[];
 public:
     static void dump(); 
-
-    YAO_ID get_id(){return _yao;}
+    operator YAO_ID ();
+    YAO_ID id();
+    Yao(YAO_ID id);
     const char * get_name()const;
 };
+
+
 }
 #endif//_YAO_H_XX_

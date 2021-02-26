@@ -23,7 +23,7 @@ const char * TianganDizhi::_ganzi_name [][6] = {
 
 TianganDizhi TianganDizhi::_ganzhi[][6] =
 {
-    { 
+    {
         {TGID_JIA ,DZID_ZI , TGID_JIA ,DZID_ZI}, 
         {TGID_JIA ,DZID_YIN, TGID_JIA ,DZID_YIN},
         {TGID_JIA ,DZID_CHEN,TGID_JIA ,DZID_CHEN},
@@ -122,7 +122,6 @@ public:
 TianganDizhi::TianganDizhi(TIANGAN_ID gan,DIZHI_ID zhi,TIANGAN_ID xg,DIZHI_ID xz)
     :_tiangan(Tiangan::from(gan)),_dizhi(Dizhi::from(zhi)),_xun(Xun::from(Tiangan::from(xg),Dizhi::from(xz)))
 {
-    Xun::init();
     _xun.push_ganzhi(this);
 }
 

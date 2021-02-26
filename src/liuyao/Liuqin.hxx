@@ -21,9 +21,15 @@ class Liuqin{
 protected:
     LIUQIN_ID    _liuqin;
     static const char * _names[];
-public:
+    static Liuqin * _liuqins[];
+//初始化
+    static bool _init;
+    static void init();
     Liuqin(LIUQIN_ID lq);
-    LIUQIN_ID  get_Id()const;
+public:
+    static Liuqin & from(LIUQIN_ID lq);
+    LIUQIN_ID  id()const;
+    operator LIUQIN_ID() const;
     const char * get_name();
 };
 

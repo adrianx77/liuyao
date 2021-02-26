@@ -4,20 +4,20 @@
 #include <string.h>
 #include <stdlib.h>
 
-const char * LIUSHEN_TABLE[] = {
-    LIUSHEN_QINGLONG,
-    LIUSHEN_ZHUQUE,
-    LIUSHEN_GOUCHEN,
-    LIUSHEN_TENGSHE,
-    LIUSHEN_BAIHU,
-    LIUSHEN_XUANWU
-};
+// const char * LIUSHEN_TABLE[] = {
+//     LIUSHEN_QINGLONG,
+//     LIUSHEN_ZHUQUE,
+//     LIUSHEN_GOUCHEN,
+//     LIUSHEN_TENGSHE,
+//     LIUSHEN_BAIHU,
+//     LIUSHEN_XUANWU
+// };
 
-const char * YaoWeiTable[] ={
-    YAOWEI_KONG
-    YAOWEI_SHI,
-    YAOWEI_YING,
-};
+// const char * YaoWeiTable[] ={
+//     YAOWEI_KONG
+//     YAOWEI_SHI,
+//     YAOWEI_YING,
+// };
 
 // const PUREGUA PureGuaTable[] = {
 //     {BGID_QIAN,GUANAME_QIAN,{YAO_YANG,YAO_YANG,YAO_YANG},WUXINGMING_JIN},

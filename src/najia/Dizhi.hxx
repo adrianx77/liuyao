@@ -13,36 +13,41 @@
 #define  ZHI_XU       "戌"
 #define  ZHI_HAI      "亥"
 namespace Zhouyi{
-    typedef enum {
-        DZID_INVALIDE = -1,
-        DZID_ZI = 0,
-        DZID_CHOU,
-        DZID_YIN,
-        DZID_MAO,
-        DZID_CHEN,
-        DZID_SI,
-        DZID_WU,
-        DZID_WEI,
-        DZID_SHEN,
-        DZID_YOU,
-        DZID_XU,
-        DZID_HAI
-    }DIZHI_ID;
 
-    //地支
-    class Dizhi{
-    protected:
-        Dizhi(DIZHI_ID zhi);
-        DIZHI_ID _dizhi;
-        static Dizhi _dizhis[];
-        static const char * _names[];
-    public:
-        DIZHI_ID id();
-        operator DIZHI_ID();
-        static Dizhi& from(DIZHI_ID zhi);
-        const char * get_name();
-        Dizhi& get_next();
-        Dizhi& get_prev();    
-    };
+typedef enum {
+    DZID_INVALIDE = -1,
+    DZID_ZI = 0,
+    DZID_CHOU,
+    DZID_YIN,
+    DZID_MAO,
+    DZID_CHEN,
+    DZID_SI,
+    DZID_WU,
+    DZID_WEI,
+    DZID_SHEN,
+    DZID_YOU,
+    DZID_XU,
+    DZID_HAI
+}DIZHI_ID;
+
+//地支
+class Dizhi{
+protected:
+    Dizhi(DIZHI_ID zhi);
+    DIZHI_ID _dizhi;
+    static Dizhi* _dizhis[];
+    static const char * _names[];
+//初始化
+    static bool   _init;
+    static void init();
+public:
+    DIZHI_ID id()const;
+    operator DIZHI_ID()const;
+    static Dizhi& from(DIZHI_ID zhi);
+    const char * get_name();
+    Dizhi& get_next();
+    Dizhi& get_prev();    
+};
+
 }
 #endif//_DIZHI_HXX_

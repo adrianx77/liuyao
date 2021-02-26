@@ -4,17 +4,20 @@
 #include "src/base/Wuxing.hxx"
 #include "src/najia/TianganDizhi.hxx"
 #include "src/liuyao/liuyaodef.hxx"
+#include "src/liuyao/Gua.hxx"
+#include "src/liuyao/Chonggua.hxx"
+
 using namespace Zhouyi;
 
 
 void test_xuntable()
 {
- Xun ** xun = Xun::get_xun_table();
+    Xun ** xun = Xun::get_xun_table();
    for (size_t j = 0; j < 6; j++)
    {
        //printf("%s:",xun[j]->get_name());
        xun[j]->dump_xun();
-       printf(" (遇)%s\n",xun[j]->get_xunkong().get_name());
+       printf(" (旬空)%s\n",xun[j]->get_xunkong().get_name());
    }
 }
 
@@ -22,7 +25,6 @@ void test_60jiazi()
 {
    for (size_t i = 0; i < 10; i++)
    {
-       TianganDizhi * gz = NULL;
        for (size_t j = 0; j < 12; j++)
        {
            if(i%2 != j%2)
@@ -34,6 +36,16 @@ void test_60jiazi()
        }
    }
 }
+
+
+void test_gua()
+{
+    for(size_t i = 0; i < 8; i++)
+    {
+        Chonggua::from((BAGUA_ID)i,(BAGUA_ID)i).get_guaxing_name();
+    }
+}
+
 int main(int argc, char *argv[])
 {
 #if (defined _WIN32 || defined _WIN64)
@@ -44,5 +56,7 @@ int main(int argc, char *argv[])
 
     test_60jiazi();
     test_xuntable();
+    test_gua();
+
     return 0;
 }

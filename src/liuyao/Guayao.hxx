@@ -7,17 +7,12 @@
 namespace Zhouyi{
 
 class GuaYao :public Yao{
-    protected:
+protected:
     int             _yaowei;
-    TianganDizhi *  _gz;
-    Liuqin *        _liuqin;
-    public:
-    GuaYao(TIANGAN_ID gan,DIZHI_ID zhi,LIUQIN_ID liuqin)
-    {
-        _gz = TianganDizhi::from(gan,zhi);
-        _liuqin = new Liuqin(liuqin);
-    }
-}
+    TianganDizhi&   _gz;
+public:
+    GuaYao(YAO_ID yao,TIANGAN_ID gan,DIZHI_ID zhi,int yaowei);
+};
 
 }
 

@@ -5,10 +5,10 @@
 #include "../base/Error.hxx"
 
 namespace Zhouyi{
+bool Dizhi::_init = false;
+static DIZHI_ID dizhiInit [] = {DZID_ZI,DZID_CHOU,DZID_YIN,DZID_MAO,DZID_CHEN,DZID_SI,DZID_WU,DZID_WEI,DZID_SHEN,DZID_YOU,DZID_XU,DZID_HAI};
 const char * Dizhi::_names[]   = {ZHI_ZI,ZHI_CHOU,ZHI_YIN,ZHI_MAO,ZHI_CHEN,ZHI_SI,ZHI_WU, ZHI_WEI, ZHI_SHEN,ZHI_YOU,ZHI_XU,ZHI_HAI};
-Dizhi Dizhi::_dizhis[] = {
-
-};
+Dizhi* Dizhi::_dizhis[12];
 
 Dizhi::Dizhi(DIZHI_ID z)
 {
@@ -16,19 +16,32 @@ Dizhi::Dizhi(DIZHI_ID z)
         throw Error(ERROR_INVALID_ID);
     _dizhi = z;
 }
-DIZHI_ID Dizhi::id()
+DIZHI_ID Dizhi::id()const
 {
     return _dizhi;
 }
-Dizhi::operator DIZHI_ID()
+
+void Dizhi::init()
+{
+    if(_init)
+        return;
+    for(size_t i=0;i<sizeof(dizhiInit)/sizeof(dizhiInit[0]);i++)
+    {
+        _dizhis[i] = new Dizhi(dizhiInit[i]);
+    }
+    _init = true;        
+}
+
+Dizhi::operator DIZHI_ID()const
 {
     return _dizhi;
 }
 Dizhi& Dizhi::from(DIZHI_ID z)
 {
+    Dizhi::init();
     if(z<0 || z>DZID_HAI)
         throw Error(ERROR_INVALID_ID);
-    return _dizhis[z];
+    return *_dizhis[z];
 }
 
 const char * Dizhi::get_name()
