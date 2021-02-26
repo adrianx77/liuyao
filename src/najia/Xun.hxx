@@ -34,7 +34,7 @@ class TianganDizhi;
     public:
         XunKong& get_xunkong();
         const char * get_name();
-        friend TianganDizhi;
+        friend class TianganDizhi;
         static Xun& from(Tiangan& xg,Dizhi& xz);
         static Xun * * get_xun_table()
         {

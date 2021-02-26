@@ -1,7 +1,7 @@
 #ifndef _CHONG_GUA_HXX_
 #define _CHONG_GUA_HXX_
 #include "Gua.hxx"
-#include "GuaYao.hxx"
+#include "Guayao.hxx"
 
 #define YAOWEI_SHI     "世"
 #define YAOWEI_YING    "应"
