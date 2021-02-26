@@ -1,6 +1,7 @@
 #ifndef _TIANGAN_HXX_
 #define _TIANGAN_HXX_
-#include "element.hxx"
+
+#include "../base/Wuxing.hxx"
 
 namespace Zhouyi{
 
@@ -28,18 +29,24 @@ typedef enum {
         TGID_XIN,
         TGID_REN,
         TGID_GUI
-    }TIANGANID;
+    }TIANGAN_ID;
 
 //天干
     class Tiangan{
-
-    public:
+    protected:
+        Tiangan(TIANGAN_ID gan);
+        TIANGAN_ID _tiangan;
         static const char * _names[];
-        static bool get_name(TIANGANID gan,char * name);
-        static Tiangan * from(TIANGANID gan);
-        static TIANGANID get_next(TIANGANID gan);
-        static TIANGANID get_prev(TIANGANID gan);
-        static WUXING_ID get_element(TIANGANID gan);
+        static Tiangan _tiangans[];
+        static WUXING_ID _Wuxings[];
+    public:
+        TIANGAN_ID id();
+        operator TIANGAN_ID();
+        static Tiangan& from(TIANGAN_ID gan);
+        const char* get_name();
+        Tiangan& get_next();
+        Tiangan& get_prev();
+        Wuxing& get_wuxing();
     };
 
 

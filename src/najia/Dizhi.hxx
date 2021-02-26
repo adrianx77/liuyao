@@ -27,16 +27,22 @@ namespace Zhouyi{
         DZID_YOU,
         DZID_XU,
         DZID_HAI
-    }DIZHIID;
+    }DIZHI_ID;
 
     //地支
     class Dizhi{
-    public:
+    protected:
+        Dizhi(DIZHI_ID zhi);
+        DIZHI_ID _dizhi;
+        static Dizhi _dizhis[];
         static const char * _names[];
-        static bool get_name(DIZHIID zhi,char * name);
-        static Dizhi * from(DIZHIID zhi);
-        static DIZHIID get_next(DIZHIID zhi);
-        static DIZHIID get_prev(DIZHIID zhi);    
+    public:
+        DIZHI_ID id();
+        operator DIZHI_ID();
+        static Dizhi& from(DIZHI_ID zhi);
+        const char * get_name();
+        Dizhi& get_next();
+        Dizhi& get_prev();    
     };
 }
 #endif//_DIZHI_HXX_

@@ -1,88 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "najia.hxx"
-#include "element.hxx"
-
-
-
+#include "TianganDizhi.hxx"
+#include "Xun.hxx"
+#include "../base/Wuxing.hxx"
+#include "../base/Error.hxx"
 
 namespace Zhouyi{
-    
-const char * XunKong ::_names[] =   
-{
-    ZHI_XU ZHI_HAI,
-    ZHI_ZI ZHI_CHOU,
-    ZHI_YIN ZHI_MAO,
-    ZHI_CHEN ZHI_SI,
-    ZHI_WU ZHI_WEI,
-    ZHI_SHEN ZHI_YOU
-};
-XunKong XunKong :: _xunkong[] = 
-{
-    {DZID_XU,DZID_HAI,0},
-    {DZID_ZI,DZID_CHOU,1},
-    {DZID_YIN,DZID_MAO,2},
-    {DZID_CHEN,DZID_SI,3},
-    {DZID_WU,DZID_WEI,4},
-    {DZID_SHEN,DZID_YOU,5}
-};
-XunKong * XunKong ::from(DIZHIID x)
-{
-    return &_xunkong[x/2];
-}
-const char * XunKong::get_name()
-{
-    return _names[_index];
-}
-
-Xun * Xun::_xun[6] = {};
-const char * Xun::_names[] = {
-    GAN_JIA ZHI_ZI,   GAN_JIA ZHI_YIN,  GAN_JIA ZHI_CHEN, GAN_JIA ZHI_WU,  GAN_JIA ZHI_SHEN, GAN_JIA ZHI_XU 
-};
-
-bool Xun::_inited = false;
-Xun::Xun(TIANGANID xg,DIZHIID xz)
-{
-    _gan = xg;
-    _zhi   = xz;
-    _xunkong = XunKong::from(xz);
-}
-
-void Xun::init()
-{
-    if(_inited)
-        return;
-
-    _xun[0] = new Xun(TGID_JIA ,DZID_ZI);   //戌 亥
-    _xun[1] = new Xun(TGID_JIA ,DZID_YIN);  //子 丑
-    _xun[2] = new Xun(TGID_JIA ,DZID_CHEN); //寅 卯
-    _xun[3] = new Xun(TGID_JIA ,DZID_WU);   //辰 巳
-    _xun[4] = new Xun(TGID_JIA ,DZID_SHEN); //午 未
-    _xun[5] = new Xun(TGID_JIA ,DZID_XU);   //申 酉
-    _inited = true;
-}
- Xun* Xun::from(TIANGANID xg,DIZHIID xz)
- {
-     for (size_t i = 0; i < sizeof(_xun)/sizeof(_xun[0]); i++)
-     {
-         if(_xun[i]->_gan == xg && _xun[i]->_zhi == xz)
-         {
-             return _xun[i];
-         }
-     }
-     return NULL;
- }
-
-XunKong * Xun::get_xunkong()
-{
-    return _xunkong;
-}
-
-const char * Xun::get_name()
-{
-    return _names[_zhi/2];
-}
+ 
 const char * TianganDizhi::_ganzi_name [][6] = {
     { GAN_JIA ZHI_ZI,   GAN_JIA ZHI_YIN,  GAN_JIA ZHI_CHEN, GAN_JIA ZHI_WU,  GAN_JIA ZHI_SHEN, GAN_JIA ZHI_XU  },
     { GAN_YI ZHI_CHOU,  GAN_YI ZHI_MAO,   GAN_YI ZHI_SI,    GAN_YI ZHI_WEI,  GAN_YI ZHI_YOU,   GAN_YI ZHI_HAI  },
@@ -95,12 +20,7 @@ const char * TianganDizhi::_ganzi_name [][6] = {
     { GAN_REN ZHI_ZI,   GAN_REN ZHI_YIN,  GAN_REN ZHI_CHEN, GAN_REN ZHI_WU,  GAN_REN ZHI_SHEN, GAN_REN ZHI_XU  },
     { GAN_GUI ZHI_CHOU, GAN_GUI ZHI_MAO,  GAN_GUI ZHI_SI,   GAN_GUI ZHI_WEI, GAN_GUI ZHI_YOU,  GAN_GUI ZHI_HAI }
 };
-// 甲子---乙丑---丙寅---丁卯---戊辰---己巳---庚午---辛未---壬申---癸酉 (遇)戌 亥
-// 甲戌---乙亥---丙子---丁丑---戊寅---己卯---庚辰---辛巳---壬午---癸未 (遇)申 酉
-// 甲申---乙酉---丙戌---丁亥---戊子---己丑---庚寅---辛卯---壬辰---癸巳 (遇)午 未
-// 甲午---乙未---丙申---丁酉---戊戌---己亥---庚子---辛丑---壬寅---癸卯 (遇)辰 巳
-// 甲辰---乙巳---丙午---丁未---戊申---己酉---庚戌---辛亥---壬子---癸丑 (遇)寅 卯
-// 甲寅---乙卯---丙辰---丁巳---戊午---己未---庚申---辛酉---壬戌---癸亥 (遇)子 丑
+
 TianganDizhi TianganDizhi::_ganzhi[][6] =
 {
     { 
@@ -187,69 +107,67 @@ TianganDizhi TianganDizhi::_ganzhi[][6] =
     }
 };
 
-class DizhiXinxi                //地支信息  
+class DizhiXinxi                  //地支信息  
 {
 public:
-    DIZHIID     self;
-    WUXING_ID   element;      //五行
-    DIZHIID     impact;           //冲
-    DIZHIID     sixcombine;       //六合
-    DIZHIID     tricombine[2];    //三合
-    DIZHIID     forward;          //进
-    DIZHIID     backward;         //退
+    DIZHI_ID     self;
+    WUXING_ID   element;          //五行
+    DIZHI_ID     impact;           //冲
+    DIZHI_ID     sixcombine;       //六合
+    DIZHI_ID     tricombine[2];    //三合
+    DIZHI_ID     forward;          //进
+    DIZHI_ID     backward;         //退
 };
 
-TianganDizhi::TianganDizhi(TIANGANID gan,DIZHIID zhi,TIANGANID xg,DIZHIID xz){
+TianganDizhi::TianganDizhi(TIANGAN_ID gan,DIZHI_ID zhi,TIANGAN_ID xg,DIZHI_ID xz)
+    :_tiangan(Tiangan::from(gan)),_dizhi(Dizhi::from(zhi)),_xun(Xun::from(Tiangan::from(xg),Dizhi::from(xz)))
+{
     Xun::init();
-    _tiangan = gan;
-    _dizhi   = zhi;
-    _xun = Xun::from(xg,xz);
+    _xun.push_ganzhi(this);
 }
 
-const char* TianganDizhi::get_name()
+TianganDizhi::TianganDizhi(Tiangan& gan,Dizhi& zhi,Tiangan& xg,Dizhi& xz):_tiangan(gan),_dizhi(zhi),_xun(Xun::from(xg,xz))
 {
-    if(_tiangan<0 || _tiangan<0)
-        return NULL;
-
-    if(_tiangan % 2 != _dizhi%2)
-        return NULL;
-
-    if(_tiangan>=10 || _tiangan>=12)
-        return NULL;
-
-    return _ganzi_name[_tiangan][_dizhi/2];        
+    Xun::init();
+    _xun.push_ganzhi(this);
 }
-
-TianganDizhi * TianganDizhi::from(TIANGANID gan,DIZHIID zhi)
+const char* TianganDizhi::get_name()const
 {
-    if(gan<0 || gan<0)
-        return NULL;    
-
-    if(gan % 2 != zhi%2)
+    if(_tiangan.id()<0 || _tiangan.id()<0)
         return NULL;
 
-    if(gan>=10 || gan>=12)
+    if(_tiangan.id() % 2 != _dizhi.id()%2)
         return NULL;
-    return &_ganzhi[gan][zhi/2];
+
+    if(_tiangan.id()>=10 || _tiangan.id()>=12)
+        return NULL;
+
+    return _ganzi_name[_tiangan.id()][_dizhi.id()/2];        
 }
 
-TianganDizhi* TianganDizhi::get_next()
+TianganDizhi& TianganDizhi::from(Tiangan& gan,Dizhi& zhi)
 {
-    return from(Tiangan::get_next(_tiangan),Dizhi::get_next(_dizhi));
+    if(gan.id() % 2 != zhi.id()%2)
+        throw Error(ERROR_GANZHI_NOT_MATCH);
+
+    return _ganzhi[gan.id()][zhi.id()/2];
 }
 
-
-TianganDizhi* TianganDizhi::get_prev()
+TianganDizhi& TianganDizhi::get_next()
 {
-    return from(Tiangan::get_prev(_tiangan),Dizhi::get_prev(_dizhi));
+    return from(_tiangan.get_next(),_dizhi.get_next());
 }
 
- Xun* TianganDizhi::get_xun()
- {
+
+TianganDizhi& TianganDizhi::get_prev()
+{
+    return from(_tiangan.get_prev(),_dizhi.get_prev());
+}
+
+Xun& TianganDizhi::get_xun()
+{
     return _xun;
- }
-
-
+}
 
 
 }

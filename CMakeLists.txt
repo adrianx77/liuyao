@@ -1,3 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
 project(LiuYao)
-add_executable(LiuYao main.cxx najia.cxx liuyao.cxx element.cxx Dizhi.cxx Tiangan.cxx)
+#set the source directory
+file(GLOB_RECURSE SOURCES src/*/*.cxx)
+add_executable(LiuYao main.cxx ${SOURCES})

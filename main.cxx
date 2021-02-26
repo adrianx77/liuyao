@@ -1,21 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <locale.h>
-#include "element.hxx"
-#include "najia.hxx"
-
+#include "src/base/Wuxing.hxx"
+#include "src/najia/TianganDizhi.hxx"
+#include "src/liuyao/liuyaodef.hxx"
 using namespace Zhouyi;
 
 
-int main(int argc, char *argv[])
+void test_xuntable()
 {
-#ifdef  _WINDOWS || _WIN32
-    setlocale (LC_ALL,"zh-CN");
-#else    
-    setlocale(LC_COLLATE, "zh_CN");     
-#endif    
+ Xun ** xun = Xun::get_xun_table();
+   for (size_t j = 0; j < 6; j++)
+   {
+       //printf("%s:",xun[j]->get_name());
+       xun[j]->dump_xun();
+       printf(" (遇)%s\n",xun[j]->get_xunkong().get_name());
+   }
+}
 
+void test_60jiazi()
+{
    for (size_t i = 0; i < 10; i++)
    {
        TianganDizhi * gz = NULL;
@@ -23,13 +27,22 @@ int main(int argc, char *argv[])
        {
            if(i%2 != j%2)
                 continue;
-            gz= TianganDizhi::from((TIANGANID)i,(DIZHIID)j);
+            TianganDizhi &gz= TianganDizhi::from(Tiangan::from((TIANGAN_ID)i),Dizhi::from((DIZHI_ID)j));
             
-            Xun * xun = gz->get_xun();
-            printf("%s->%s 旬空:%s\n",gz->get_name(),xun->get_name(),xun->get_xunkong()->get_name());
+            Xun & xun = gz.get_xun();
+            printf("%s->%s 旬空:%s\n",gz.get_name(),xun.get_name(),xun.get_xunkong().get_name());
        }
    }
-   
+}
+int main(int argc, char *argv[])
+{
+#if (defined _WIN32 || defined _WIN64)
+    setlocale (LC_ALL,"zh-CN");
+#else    
+    setlocale(LC_COLLATE, "zh_CN");     
+#endif    
 
+    test_60jiazi();
+    test_xuntable();
     return 0;
 }
