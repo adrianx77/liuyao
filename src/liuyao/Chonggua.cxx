@@ -1,11 +1,12 @@
 #include <stdlib.h>
 #include "Chonggua.hxx"
 namespace Zhouyi{
-
+bool _init = false;
 const char* guaxing[] = {
     "",GUAXING_LIUCHONG,GUAXING_LIUCHE,GUAXING_YOUHUN,GUAXING_GUIHUN
 };
 
+Chonggua * Chonggua::_chonggua[8][8]={};
 
 typedef struct 
 {
@@ -41,7 +42,8 @@ typedef struct
     const char * name;
     GUAXING_ID   guaxing;
 }CHONGGUAINFO;
-static CHONGGUAINFO chonggua[8][8] = {
+static CHONGGUAINFO chonggua[8][8] = 
+{
     {
         {BGID_QIAN,BGID_QIAN,5,2,WXID_JIN,"乾为天",GXID_LIUCHONG},
         {BGID_QIAN,BGID_XUN,0,3,WXID_JIN,"天风姤",GXID_KONG},
@@ -123,9 +125,7 @@ static CHONGGUAINFO chonggua[8][8] = {
         {BGID_KAN,BGID_KUN,2,5,WXID_TU,"水地比",GXID_GUIHUN},
     }
 };
-Chonggua * Chonggua::_chonggua[8][8];
 
-bool _init = false;
 void Chonggua::init()
 {
     if(_init)
@@ -146,16 +146,16 @@ void Chonggua::init()
                                            info.guaxing,
                                            info.name);
 
-            // for(int x=0;x<3;x++)
-            // {
-            //     gua->_guayao[x] = new GuaYao(xiaPureGua.ganzhi[x].yao,xiaPureGua.ganzhi[x].gan,xiaPureGua.ganzhi[x].zhi,x);
-            // }
-            // for(int s=3;s<6;++s)
-            // {
-            //     gua->_guayao[s] = new GuaYao(xiaPureGua.ganzhi[s].yao,xiaPureGua.ganzhi[s].gan,xiaPureGua.ganzhi[s].zhi,s);
-            // }
+            for(int x=0;x<3;x++)
+            {
+                gua->_guayao[x] = new GuaYao(xiaPureGua.ganzhi[x].yao,xiaPureGua.ganzhi[x].gan,xiaPureGua.ganzhi[x].zhi,x);
+            }
+            for(int s=3;s<6;++s)
+            {
+                gua->_guayao[s] = new GuaYao(xiaPureGua.ganzhi[s].yao,xiaPureGua.ganzhi[s].gan,xiaPureGua.ganzhi[s].zhi,s);
+            }
 
-            // _chonggua[i][j] = gua;
+            _chonggua[i][j] = gua;
         }
     }
 
@@ -173,7 +173,7 @@ Chonggua::Chonggua(BAGUA_ID sgid,BAGUA_ID xgid,int s,int y,WUXING_ID wx,GUAXING_
 
 Chonggua & Chonggua::from(BAGUA_ID sgid,BAGUA_ID xgid)
 {
-    init();
+    Chonggua::init();
     return *_chonggua[sgid][xgid];
 }
 

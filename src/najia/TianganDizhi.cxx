@@ -8,7 +8,8 @@
 
 namespace Zhouyi{
  
-const char * TianganDizhi::_ganzi_name [][6] = {
+TianganDizhi* TianganDizhi::_ganzhi[10][6] ={};
+const char * TianganDizhi::_ganzi_name [10][6] = {
     { GAN_JIA ZHI_ZI,   GAN_JIA ZHI_YIN,  GAN_JIA ZHI_CHEN, GAN_JIA ZHI_WU,  GAN_JIA ZHI_SHEN, GAN_JIA ZHI_XU  },
     { GAN_YI ZHI_CHOU,  GAN_YI ZHI_MAO,   GAN_YI ZHI_SI,    GAN_YI ZHI_WEI,  GAN_YI ZHI_YOU,   GAN_YI ZHI_HAI  },
     { GAN_BING ZHI_ZI,  GAN_BING ZHI_YIN, GAN_BING ZHI_CHEN,GAN_BING ZHI_WU, GAN_BING ZHI_SHEN,GAN_BING ZHI_XU },
@@ -21,7 +22,16 @@ const char * TianganDizhi::_ganzi_name [][6] = {
     { GAN_GUI ZHI_CHOU, GAN_GUI ZHI_MAO,  GAN_GUI ZHI_SI,   GAN_GUI ZHI_WEI, GAN_GUI ZHI_YOU,  GAN_GUI ZHI_HAI }
 };
 
-TianganDizhi TianganDizhi::_ganzhi[][6] =
+bool TianganDizhi::_init =false;
+
+typedef struct{
+    TIANGAN_ID  tiangan;
+    DIZHI_ID    dizhi;
+    TIANGAN_ID  xungan;
+    DIZHI_ID    xunzhi;
+}TIANGGANDIZHIINFO;
+
+TIANGGANDIZHIINFO GanzhiInfo[][6] =
 {
     {
         {TGID_JIA ,DZID_ZI , TGID_JIA ,DZID_ZI}, 
@@ -119,6 +129,23 @@ public:
     DIZHI_ID     backward;         //退
 };
 
+void TianganDizhi::init()
+{
+    if(_init)
+        return;
+    for(size_t i=0;i<10;i++)
+    {
+        for(size_t j=0;j<6;j++)
+        {
+            TIANGGANDIZHIINFO info = GanzhiInfo[i][j];
+            TianganDizhi * gz = new TianganDizhi(info.tiangan,info.dizhi,info.xungan,info.xunzhi);
+            _ganzhi[i][j] = gz;
+        }
+    }
+    _init = true;        
+}
+
+
 TianganDizhi::TianganDizhi(TIANGAN_ID gan,DIZHI_ID zhi,TIANGAN_ID xg,DIZHI_ID xz)
     :_tiangan(Tiangan::from(gan)),_dizhi(Dizhi::from(zhi)),_xun(Xun::from(Tiangan::from(xg),Dizhi::from(xz)))
 {
@@ -146,10 +173,12 @@ const char* TianganDizhi::get_name()const
 
 TianganDizhi& TianganDizhi::from(Tiangan& gan,Dizhi& zhi)
 {
+    TianganDizhi::init();
+
     if(gan.id() % 2 != zhi.id()%2)
         throw Error(ERROR_GANZHI_NOT_MATCH);
 
-    return _ganzhi[gan.id()][zhi.id()/2];
+    return *_ganzhi[gan.id()][zhi.id()/2];
 }
 
 TianganDizhi& TianganDizhi::get_next()

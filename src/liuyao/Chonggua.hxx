@@ -41,11 +41,11 @@ protected:
     Wuxing& _wuxing;
     GUAXING_ID _guaxing;
     static Chonggua * _chonggua[8][8];
-    Chonggua(BAGUA_ID sgid,BAGUA_ID xgid,int s,int y,WUXING_ID wx,GUAXING_ID gx,const char * name);
 
 //初始化
     static bool _init;
     static void init();
+    Chonggua(BAGUA_ID sgid,BAGUA_ID xgid,int s,int y,WUXING_ID wx,GUAXING_ID gx,const char * name);
 public:
     static Chonggua & from(BAGUA_ID sgid,BAGUA_ID xgid);
     const char* get_guaxing_name();
