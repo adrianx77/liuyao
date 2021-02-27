@@ -1,5 +1,7 @@
 #ifndef _DIZHI_HXX_
 #define _DIZHI_HXX_
+#include "../base/Wuxing.hxx"
+
 #define  ZHI_ZI       "子"
 #define  ZHI_CHOU     "丑"
 #define  ZHI_YIN      "寅"
@@ -12,6 +14,7 @@
 #define  ZHI_YOU      "酉"
 #define  ZHI_XU       "戌"
 #define  ZHI_HAI      "亥"
+
 namespace Zhouyi{
 
 typedef enum {
@@ -35,10 +38,7 @@ class Dizhi{
 protected:
     Dizhi(DIZHI_ID zhi);
     DIZHI_ID _dizhi;
-    static Dizhi* _dizhis[];
-    static const char * _names[];
 //初始化
-    static bool   _init;
     static void init();
 public:
     DIZHI_ID id()const;
@@ -47,6 +47,7 @@ public:
     const char * get_name();
     Dizhi& get_next();
     Dizhi& get_prev();    
+    Wuxing& get_wuxing();
 };
 
 }

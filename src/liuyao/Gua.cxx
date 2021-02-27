@@ -7,6 +7,7 @@ bool Gua::_init = false;
 Gua * Gua::_guas[8] = {};
 
 static WUXING_ID wuxing[8] = {WXID_JIN,WXID_JIN,WXID_HUO,WXID_MU,WXID_MU,WXID_SHUI,WXID_TU,WXID_TU};
+static const char * Names[8] ={GUANAME_QIAN,GUANAME_DUI,GUANAME_LI,GUANAME_ZHEN,GUANAME_XUN,GUANAME_KAN,GUANAME_GEN,GUANAME_KUN};
 static YAO_ID yaoIds[8][3] = {
     {YID_YANG,YID_YANG,YID_YANG},//乾
     {YID_YANG,YID_YANG,YID_YING},//兑
@@ -18,7 +19,7 @@ static YAO_ID yaoIds[8][3] = {
 	{YID_YING,YID_YING,YID_YING},//坤
 };  
 
-Gua::Gua(BAGUA_ID id):
+Gua::Gua(BAGUA_ID id):_id(id),
     _wuxing(Wuxing::from(wuxing[id]))
 {
     for(int i=0;i<3;i++)
@@ -51,11 +52,14 @@ Gua & Gua::from(BAGUA_ID id)
     return * _guas[id];
 }
 
-void Gua::dump()
+BAGUA_ID Gua::get_id()
 {
-    printf("%s\n",_yao[YWID_TIAN]->get_name());
-    printf("%s\n",_yao[YWID_REN]->get_name());
-    printf("%s\n",_yao[YWID_DI]->get_name());
+    return _id;
+}
+
+const char * Gua::get_name()
+{
+    return Names[_id];
 }
 
 

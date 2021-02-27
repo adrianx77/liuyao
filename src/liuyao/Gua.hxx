@@ -47,7 +47,7 @@ public:
     static Gua & from(BAGUA_ID id);
     const char * get_name();
     Yao & get_yao(YAOWEI_ID yaowei);
-    void dump();
+    BAGUA_ID get_id();
 };
 
 }

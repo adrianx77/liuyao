@@ -5,10 +5,11 @@
 #include "../base/Error.hxx"
 
 namespace Zhouyi{
-bool Dizhi::_init = false;
-static DIZHI_ID dizhiInit [] = {DZID_ZI,DZID_CHOU,DZID_YIN,DZID_MAO,DZID_CHEN,DZID_SI,DZID_WU,DZID_WEI,DZID_SHEN,DZID_YOU,DZID_XU,DZID_HAI};
-const char * Dizhi::_names[]   = {ZHI_ZI,ZHI_CHOU,ZHI_YIN,ZHI_MAO,ZHI_CHEN,ZHI_SI,ZHI_WU, ZHI_WEI, ZHI_SHEN,ZHI_YOU,ZHI_XU,ZHI_HAI};
-Dizhi* Dizhi::_dizhis[12];
+static bool Init = false;
+static DIZHI_ID DizhiInit [12] = {DZID_ZI,DZID_CHOU,DZID_YIN,DZID_MAO,DZID_CHEN,DZID_SI,DZID_WU,DZID_WEI,DZID_SHEN,DZID_YOU,DZID_XU,DZID_HAI};
+static WUXING_ID Wuxings[12] = {WXID_SHUI,WXID_TU,WXID_MU,WXID_MU,WXID_TU,WXID_HUO,WXID_HUO,WXID_TU,WXID_JIN,WXID_JIN,WXID_TU,WXID_SHUI};
+static const char * Names[12]   = {ZHI_ZI,ZHI_CHOU,ZHI_YIN,ZHI_MAO,ZHI_CHEN,ZHI_SI,ZHI_WU, ZHI_WEI, ZHI_SHEN,ZHI_YOU,ZHI_XU,ZHI_HAI};
+static Dizhi* Dizhis[12];
 
 Dizhi::Dizhi(DIZHI_ID z)
 {
@@ -23,13 +24,13 @@ DIZHI_ID Dizhi::id()const
 
 void Dizhi::init()
 {
-    if(_init)
+    if(Init)
         return;
-    for(size_t i=0;i<sizeof(dizhiInit)/sizeof(dizhiInit[0]);i++)
+    for(size_t i=0;i<sizeof(DizhiInit)/sizeof(DizhiInit[0]);i++)
     {
-        _dizhis[i] = new Dizhi(dizhiInit[i]);
+        Dizhis[i] = new Dizhi(DizhiInit[i]);
     }
-    _init = true;        
+    Init = true;        
 }
 
 Dizhi::operator DIZHI_ID()const
@@ -41,16 +42,16 @@ Dizhi& Dizhi::from(DIZHI_ID z)
     Dizhi::init();
     if(z<0 || z>DZID_HAI)
         throw Error(ERROR_INVALID_ID);
-    return *_dizhis[z];
+    return *Dizhis[z];
 }
 
 const char * Dizhi::get_name()
 {
     if(_dizhi<0)
         return NULL;
-    if(_dizhi>=sizeof(_names)/sizeof(_names[0]))
+    if(_dizhi>=sizeof(Names)/sizeof(Names[0]))
         return NULL;  
-    return _names[_dizhi];
+    return Names[_dizhi];
 }
 
 Dizhi& Dizhi::get_next()
@@ -70,6 +71,10 @@ Dizhi& Dizhi::get_prev()
     return Dizhi::from((DIZHI_ID)b);
 }
 
+Wuxing& Dizhi::get_wuxing()
+{
+    return Wuxing::from(Wuxings[_dizhi]);
+}
 
 }
 

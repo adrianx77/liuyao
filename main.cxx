@@ -6,6 +6,7 @@
 #include "src/liuyao/liuyaodef.hxx"
 #include "src/liuyao/Gua.hxx"
 #include "src/liuyao/Chonggua.hxx"
+#include "src/liuyao/LiuqinChonggua.hxx"
 
 using namespace Zhouyi;
 
@@ -45,7 +46,7 @@ void test_gua()
         for(size_t j = 0; j < 8; j++)
         {
             Chonggua & g =Chonggua::from((BAGUA_ID)i,(BAGUA_ID)j); 
-            printf("%s %s\n",g.get_name(),g.get_guaxing_name());
+            printf("(%d %d)\n%s %s\n",i,j,g.get_name(),g.get_guaxing_name());
             for(int k=5;k>=0;k--)
             {
                 printf("%s %s\n",g.get_yao(k)->get_name(),g.get_yao(k)->get_ganzhi().get_name());
@@ -54,6 +55,38 @@ void test_gua()
         }
     }
 }
+
+void test_zhuanggua()
+{
+    for(size_t i = 0; i < 8; i++)
+    {
+        for(size_t j = 0; j < 8; j++)
+        {
+            Chonggua & g =Chonggua::from((BAGUA_ID)i,(BAGUA_ID)j); 
+            LiuqinChonggua lqg(g);
+            LiuqinChonggua lqgonggua(lqg.get_gonggua());
+            printf("\n%s宫: %s (%s)\n",lqg.get_gonggua().get_gonggua().get_name(),g.get_name(),g.get_guaxing_name());
+            for(int k=5;k>=0;k--)
+            {
+                Dizhi & dz = g.get_yao(k)->get_ganzhi().get_dizhi();
+                Liuqin * fs = lqg.get_fushen(k);
+                if(fs)
+                {
+                    Dizhi & dzfs = lqg.get_gonggua().get_yao(k)->get_ganzhi().get_dizhi();
+                    printf("%s%s%s%s %s [%s%s%s]\n",g.get_yao(k)->get_name(),lqg.get_liuqin(k)->get_name(),dz.get_name(),dz.get_wuxing().get_name() , 
+                                               lqg.get_gonggua().get_shiwei()==k?"世":(lqg.get_gonggua().get_yingwei()==k?"应":" "),
+                                               fs->get_name(),dzfs.get_name(),dzfs.get_wuxing().get_name() );
+                }
+                else
+                {
+                    printf("%s%s%s%s %s\n",g.get_yao(k)->get_name(),lqg.get_liuqin(k)->get_name(),dz.get_name(),dz.get_wuxing().get_name(),
+                                                lqg.get_gonggua().get_shiwei()==k?"世":(lqg.get_gonggua().get_yingwei()==k?"应":" "));
+                }
+            }
+        }
+    }
+}
+
 
 int main(int argc, char *argv[])
 {
@@ -66,6 +99,6 @@ int main(int argc, char *argv[])
     test_60jiazi();
     test_xuntable();
     test_gua();
-
+    test_zhuanggua();
     return 0;
 }

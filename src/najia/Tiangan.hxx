@@ -38,8 +38,6 @@ protected:
     TIANGAN_ID _tiangan;
     static const char * _names[];
     static Tiangan* _tiangans[];
-    static WUXING_ID _Wuxings[];
-
 //初始化    
     static bool   _init;
     static void init();   

@@ -38,17 +38,23 @@ protected:
     Guayao * _guayao[6];
     Gua& _shanggua;
     Gua& _xiagua;
+    Gua& _gonggua;
     Wuxing& _wuxing;
     GUAXING_ID _guaxing;
     static Chonggua * _chonggua[8][8];
 
 //初始化
     static bool _init;
-    Chonggua(BAGUA_ID sgid,BAGUA_ID xgid,int s,int y,WUXING_ID wx,GUAXING_ID gx,const char * name);
+    Chonggua(BAGUA_ID gong,BAGUA_ID sgid,BAGUA_ID xgid,int s,int y,WUXING_ID wx,GUAXING_ID gx,const char * name);
 public:
     static void init();
     static Chonggua & from(BAGUA_ID sgid,BAGUA_ID xgid);
+    static Chonggua & from(Gua& sgid,Gua& xgid);
     Guayao * get_yao(int i);
+    Wuxing & get_wuxing();
+    Gua    & get_gonggua();
+    int      get_shiwei();
+    int      get_yingwei();
     const char* get_guaxing_name();
     const char* get_name();
 };

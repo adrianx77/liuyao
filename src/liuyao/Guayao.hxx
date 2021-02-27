@@ -13,7 +13,7 @@ protected:
 public:
     Guayao(YAO_ID yao,TIANGAN_ID gan,DIZHI_ID zhi,int yaowei);
     TianganDizhi& get_ganzhi();
-
+    
 };
 
 }

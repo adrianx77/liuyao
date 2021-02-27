@@ -4,13 +4,12 @@
 #include "Tiangan.hxx"
 #include "../base/Error.hxx"
 namespace Zhouyi{
-    bool   Tiangan::_init = false;
     static TIANGAN_ID tianganInit[] = {TGID_JIA,TGID_YI,TGID_BING,TGID_DING,TGID_WU,TGID_JI,TGID_GEN,TGID_XIN,TGID_REN,TGID_GUI};
+    static WUXING_ID Wuxings[] = {WXID_MU,WXID_MU,WXID_HUO,WXID_HUO,WXID_TU,WXID_TU,WXID_JIN,WXID_JIN,WXID_SHUI,WXID_SHUI};
+
+    bool   Tiangan::_init = false;
     const char * Tiangan::_names[] = {GAN_JIA, GAN_YI,GAN_BING,GAN_DING,GAN_WU,GAN_JI,GAN_GENG,GAN_XIN,GAN_REN,GAN_GUI};
     Tiangan* Tiangan::_tiangans[10] = {};
-    WUXING_ID Tiangan::_Wuxings[] = {
-        WXID_MU,WXID_MU,WXID_HUO,WXID_HUO,WXID_TU,WXID_TU,WXID_JIN,WXID_JIN,WXID_SHUI,WXID_SHUI
-    };
     Tiangan::Tiangan(TIANGAN_ID gan)
     {
         _tiangan = gan;
@@ -73,7 +72,7 @@ namespace Zhouyi{
 
     Wuxing& Tiangan::get_wuxing()
     {
-        return Wuxing::from(_Wuxings[_tiangan]);
+        return Wuxing::from(Wuxings[_tiangan]);
     }
 
 }

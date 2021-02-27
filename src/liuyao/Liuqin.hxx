@@ -1,6 +1,6 @@
 #ifndef _LIUQIN_HXX_
 #define _LIUQIN_HXX_
-
+#include "../najia/TianganDizhi.hxx"
 #define LIUQIN_XIONGDI   "兄弟"
 #define LIUQIN_FUMU      "父母"
 #define LIUQIN_GUANGUI   "官鬼"
@@ -28,6 +28,8 @@ protected:
     Liuqin(LIUQIN_ID lq);
 public:
     static Liuqin & from(LIUQIN_ID lq);
+    static Liuqin & from(Dizhi& wo, Dizhi & ta);
+    static Liuqin & from(WUXING_ID wo,WUXING_ID ta);
     LIUQIN_ID  id()const;
     operator LIUQIN_ID() const;
     const char * get_name();
