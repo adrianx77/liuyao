@@ -1,13 +1,14 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 #include "Lunar.hxx"
-#include "base/Error.hxx"
+#include "../base/Error.hxx"
 
 #define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
 
 namespace Zhouyi{
 
-typedef enum {
+enum {
 	cvalue20 = 0,
 	cvalue21,
 	cvalue22
@@ -349,16 +350,6 @@ GANZHI get_ganzhi(int y)
 	gz.zhi = (DIZHI_ID)(y%12);
 	return gz;
 }
-
-// 获取时柱
-GANZHI HourGanZhi(int y, int m, int d, int h)
-{
-	int i = GanzhiIndex(y, m, d) % 5 * 12;
-	int idx = (h + 1) / 2 % 12;
-	int nx = fixDayNext(i, idx, h);
-	return ganZhiTable[nx];
-}
-
 int fixDayNext(int row,int idx,int hour)
 {
 	if(hour >= 23)
@@ -381,6 +372,19 @@ int GanzhiIndex(int y, int m,int d)
 	m = (m - 1) % 12;
 	return (yearNumber[y] + monthNumber[m] + d - 1) % 60;
 }
+
+
+// 获取时柱
+GANZHI HourGanZhi(int y, int m, int d, int h)
+{
+	int i = GanzhiIndex(y, m, d) % 5 * 12;
+	int idx = (h + 1) / 2 % 12;
+	int nx = fixDayNext(i, idx, h);
+	return ganZhiTable[nx];
+}
+
+
+
 
 // 获取日柱
 GANZHI DayGanZhi(int y, int m,int d)
@@ -408,7 +412,7 @@ GANZHI MonthGanZhi(int y,int m,int d)
 GANZHI YearGanZhi(int y)
 {
 	int num = y - 4;
-	return get_ganzhi(y);
+	return get_ganzhi(num);
 }
 
 
@@ -477,7 +481,18 @@ TianganDizhi * Lunar::shi()
 {
 	return _ganzhi[3];
 }
-
+Lunar * Lunar::now()
+{
+	time_t nowt;
+	time ( &nowt);
+	nowt += 8*3600;
+	struct tm * timeinfo;
+	time(&nowt);
+  	timeinfo = localtime (&nowt);
+  	printf ("Current local time and date: %s\n", asctime(timeinfo));
+	printf("%d %d %d %d\n",timeinfo->tm_year + 1900,timeinfo->tm_mon+1,timeinfo->tm_mday,timeinfo->tm_hour);
+	 return create(timeinfo->tm_year+1900,timeinfo->tm_mon+1,timeinfo->tm_mday,timeinfo->tm_hour);
+}
 Lunar * Lunar::create(int year,int month,int day,int shi)
 {
 	GANZHI ygz = YearGanZhi(year);

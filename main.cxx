@@ -1,12 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <iostream>
 #include "src/base/Wuxing.hxx"
 #include "src/najia/TianganDizhi.hxx"
 #include "src/liuyao/liuyaodef.hxx"
 #include "src/liuyao/Gua.hxx"
 #include "src/liuyao/Chonggua.hxx"
 #include "src/liuyao/LiuqinChonggua.hxx"
+#include "src/najia/Lunar.hxx"
+#include "src/base/Error.hxx"
+
 
 using namespace Zhouyi;
 
@@ -90,6 +94,11 @@ void test_zhuanggua()
 
 int main(int argc, char *argv[])
 {
+    try
+    {
+        Zhouyi::Lunar * l = Zhouyi::Lunar::now();
+        printf("%s年 %s月 %s日",l->year()->get_name(),l->month()->get_name(),l->day()->get_name());
+
 #if (defined _WIN32 || defined _WIN64)
     setlocale (LC_ALL,"zh-CN");
 #else    
@@ -100,5 +109,11 @@ int main(int argc, char *argv[])
     test_xuntable();
     test_gua();
     test_zhuanggua();
+    }
+    catch(Zhouyi::Error& e)
+    {
+        std::cout << e.error() << '\n';
+    }
+        
     return 0;
 }

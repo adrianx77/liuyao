@@ -1,5 +1,4 @@
 #include "LiuqinChonggua.hxx"
-#include "../najia/QiguaGanzhi.hxx"
 #include <map>
 #include <set>
 
