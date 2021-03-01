@@ -12,7 +12,7 @@ class Zhuanggua
 private:
 
 public:
-    ZhuangguaJieguo * zhuanggua(YAO_ID yaos[6],DateTime * dt);
+    ZhuangguaJieguo * zhuanggua(YAO_ID yaos[6],Lunar * dt);
     ZhuangguaJieguo * zhuanggua(YAO_ID yaos[6]);
 };
 

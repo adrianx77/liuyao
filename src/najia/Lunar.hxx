@@ -4,16 +4,15 @@
 namespace Zhouyi{
 
 
-class DateTime{
+class Lunar{
 protected:
-    TianganDizhi * ganzhi[4];
-    DateTime(TIANGAN_ID yg,DIZHI_ID yz,TIANGAN_ID mg,DIZHI_ID mz,TIANGAN_ID dg,DIZHI_ID dz,TIANGAN_ID sg,DIZHI_ID sz);
+    TianganDizhi * _ganzhi[4];
+    Lunar(TIANGAN_ID yg,DIZHI_ID yz,TIANGAN_ID mg,DIZHI_ID mz,TIANGAN_ID dg,DIZHI_ID dz,TIANGAN_ID sg,DIZHI_ID sz);
     
 public:
-    static DateTime * now();
-    static DateTime * create(int year,int month,int day,int shi);
-    static DateTime * create(int year,int month,int day);
-    static DateTime * create(DIZHI_ID month,TIANGAN_ID daygan,DIZHI_ID dayzhi);
+    static Lunar * now();
+    static Lunar * create(int year,int month,int day,int shi);
+    static Lunar * create(int year,int month,int day);
     TianganDizhi * year();
     TianganDizhi * month();
     TianganDizhi * day();
