@@ -45,9 +45,10 @@ protected:
     Gua(BAGUA_ID id);
 public:
     static Gua & from(BAGUA_ID id);
-    const char * get_name();
-    Yao & get_yao(YAOWEI_ID yaowei);
-    BAGUA_ID get_id();
+    static Gua & from(YAO_ID _1,YAO_ID _2,YAO_ID _3);
+    const char * name();
+    Yao & yao(YAOWEI_ID yaowei);
+    BAGUA_ID id();
 };
 
 }

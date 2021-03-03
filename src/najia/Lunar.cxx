@@ -477,7 +477,7 @@ TianganDizhi * Lunar::day()
 {
 	return _ganzhi[2];
 }
-TianganDizhi * Lunar::shi()
+TianganDizhi * Lunar::hour()
 {
 	return _ganzhi[3];
 }
@@ -489,16 +489,14 @@ Lunar * Lunar::now()
 	struct tm * timeinfo;
 	time(&nowt);
   	timeinfo = localtime (&nowt);
-  	printf ("Current local time and date: %s\n", asctime(timeinfo));
-	printf("%d %d %d %d\n",timeinfo->tm_year + 1900,timeinfo->tm_mon+1,timeinfo->tm_mday,timeinfo->tm_hour);
-	 return create(timeinfo->tm_year+1900,timeinfo->tm_mon+1,timeinfo->tm_mday,timeinfo->tm_hour);
+	return create(timeinfo->tm_year+1900,timeinfo->tm_mon+1,timeinfo->tm_mday,timeinfo->tm_hour);
 }
-Lunar * Lunar::create(int year,int month,int day,int shi)
+Lunar * Lunar::create(int year,int month,int day,int hour)
 {
 	GANZHI ygz = YearGanZhi(year);
 	GANZHI mgz = MonthGanZhi(year,month,day);
 	GANZHI dgz = DayGanZhi(year,month,day);
-	GANZHI sgz = HourGanZhi(year,month,day,shi);
+	GANZHI sgz = HourGanZhi(year,month,day,hour);
 	return new Lunar(ygz.gan,ygz.zhi,mgz.gan,mgz.zhi,dgz.gan,dgz.zhi,sgz.gan,sgz.zhi);
 }
 

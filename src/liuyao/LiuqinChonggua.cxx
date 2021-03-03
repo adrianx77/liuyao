@@ -6,27 +6,28 @@ namespace Zhouyi{
 
 void LiuqinChonggua::init()
 {
-    Wuxing & Wo = _chonggua.get_wuxing();
+    Wuxing & Wo = _chonggua.wuxing();
     for(size_t i =0;i<6;i++)
     {
-        TianganDizhi &z = _chonggua.get_yao(i)->get_ganzhi();
+        TianganDizhi &z = _chonggua.yao(i)->get_ganzhi();
         _liuqin[i] = &Liuqin::from(Wo,z.get_dizhi().get_wuxing());
         _fushen[i] = NULL;
     }
     
     checkFushen();
-
 }
 
 LiuqinChonggua::LiuqinChonggua(Chonggua & chonggua,Chonggua& gonggua)
                 :_chonggua(chonggua),
-                _gonggua(gonggua)
+                _gonggua(gonggua),
+                _gong(Chonggua::from(_chonggua.gonggua(),_chonggua.gonggua()))
 {
     init();
 }
 LiuqinChonggua::LiuqinChonggua(Chonggua & chonggua)
                 :_chonggua(chonggua),
-                _gonggua(Chonggua::from(_chonggua.get_gonggua(),_chonggua.get_gonggua()))
+                _gonggua(Chonggua::from(_chonggua.gonggua(),_chonggua.gonggua())),
+                _gong(_gonggua)
 {
     init();
 }
@@ -57,12 +58,12 @@ void LiuqinChonggua::checkFushen()
     if(fushengs.empty())
         return;
 
-    Wuxing & Wo = _chonggua.get_wuxing();
-    Chonggua& purgua = Chonggua::from(_chonggua.get_gonggua(),_chonggua.get_gonggua());
+    Wuxing & Wo = _chonggua.wuxing();
+    Chonggua& purgua = Chonggua::from(_chonggua.gonggua(),_chonggua.gonggua());
     for(size_t i =0;i<6;i++)
     {
         
-        TianganDizhi &z = purgua.get_yao(i)->get_ganzhi();
+        TianganDizhi &z = purgua.yao(i)->get_ganzhi();
         Liuqin& lq = Liuqin::from(Wo,z.get_dizhi().get_wuxing());
         if(fushengs.find(lq.id()) != fushengs.end()) 
         {
@@ -75,18 +76,40 @@ void LiuqinChonggua::checkFushen()
     }
 
 }
-Chonggua & LiuqinChonggua::get_gonggua()
+
+Chonggua & LiuqinChonggua::gonggua()
 {
     return _gonggua;
 }
-
-Liuqin * LiuqinChonggua::get_liuqin(int y)
+Chonggua & LiuqinChonggua::gong()
 {
-    return _liuqin[y];
+    return _gong;
 }
-Liuqin * LiuqinChonggua::get_fushen(int y)
+
+Chonggua & LiuqinChonggua::chonggua()
 {
-    return _fushen[y];
+    return _chonggua;
+}
+
+Liuqin * LiuqinChonggua::liuqin(int pos)
+{
+    return _liuqin[pos];
+}
+
+Liuqin * LiuqinChonggua::fushen(int pos)
+{
+    return _fushen[pos];
+}
+bool LiuqinChonggua::hasFushen()
+{
+    for(int i=0;i<6 ;i++)
+    {
+        if(_fushen[i])
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 

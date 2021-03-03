@@ -8,12 +8,12 @@ namespace Zhouyi{
 bool XunKong ::_init = false;
 const char * XunKong ::_names[] =   
 {
-    ZHI_XU " " ZHI_HAI,
-    ZHI_ZI " " ZHI_CHOU,
-    ZHI_YIN " " ZHI_MAO,
-    ZHI_CHEN " " ZHI_SI,
-    ZHI_WU " " ZHI_WEI,
-    ZHI_SHEN " " ZHI_YOU
+    ZHI_XU  ZHI_HAI,
+    ZHI_ZI  ZHI_CHOU,
+    ZHI_YIN  ZHI_MAO,
+    ZHI_CHEN  ZHI_SI,
+    ZHI_WU  ZHI_WEI,
+    ZHI_SHEN  ZHI_YOU
 };
 
 typedef struct 
@@ -124,7 +124,6 @@ void Xun::dump_xun()
 }
 void Xun::push_ganzhi(TianganDizhi *gz)
 {
-    printf(" %s <- %s\n",get_name(),gz->get_name());
     for(auto it = _ganzhi.begin();it != _ganzhi.end();++it)
     {
         if(gz->get_tiangan() < (*it)->get_tiangan())

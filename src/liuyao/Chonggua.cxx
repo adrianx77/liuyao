@@ -24,7 +24,7 @@ static PURECHONGGUAINFO PureChonggua[8] =
     {BGID_QIAN,BGID_QIAN,WXID_JIN,{{YID_YANG,TGID_JIA,DZID_ZI},{YID_YANG,TGID_JIA,DZID_YIN},{YID_YANG,TGID_JIA,DZID_CHEN},{YID_YANG,TGID_REN,DZID_WU},{YID_YANG,TGID_REN,DZID_SHEN},{YID_YANG,TGID_REN,DZID_XU}}},
     {BGID_DUI,BGID_DUI,WXID_JIN,{{YID_YANG,TGID_DING,DZID_SI},{YID_YANG,TGID_DING,DZID_MAO},{YID_YING,TGID_DING,DZID_CHOU},{YID_YANG,TGID_DING,DZID_HAI},{YID_YANG,TGID_DING,DZID_YOU},{YID_YING,TGID_DING,DZID_WEI}}},
     {BGID_LI,BGID_LI,WXID_HUO,{{YID_YANG,TGID_JI,DZID_MAO},{YID_YING,TGID_JI,DZID_CHOU},{YID_YANG,TGID_JI,DZID_HAI},{YID_YANG,TGID_JI,DZID_YOU},{YID_YING,TGID_JI,DZID_WEI},{YID_YANG,TGID_JI,DZID_SI}}},
-    {BGID_ZHEN,BGID_ZHEN,WXID_MU,{{YID_YANG,TGID_GEN,DZID_ZI},{YID_YING,TGID_GEN,DZID_YIN},{YID_YING,TGID_GEN,DZID_CHEN},{YID_YANG,TGID_GEN,DZID_WU},{YID_YANG,TGID_GEN,DZID_SHEN},{YID_YING,TGID_GEN,DZID_XU}}},
+    {BGID_ZHEN,BGID_ZHEN,WXID_MU,{{YID_YANG,TGID_GEN,DZID_ZI},{YID_YING,TGID_GEN,DZID_YIN},{YID_YING,TGID_GEN,DZID_CHEN},{YID_YANG,TGID_GEN,DZID_WU},{YID_YING,TGID_GEN,DZID_SHEN},{YID_YING,TGID_GEN,DZID_XU}}},
     {BGID_XUN,BGID_XUN,WXID_MU,{{YID_YING,TGID_XIN,DZID_CHOU},{YID_YANG,TGID_XIN,DZID_HAI},{YID_YANG,TGID_XIN,DZID_YOU},{YID_YING,TGID_XIN,DZID_WEI},{YID_YANG,TGID_XIN,DZID_SI},{YID_YANG,TGID_XIN,DZID_MAO}}},
     {BGID_KAN,BGID_KAN,WXID_SHUI,{{YID_YING,TGID_WU,DZID_YIN},{YID_YANG,TGID_WU,DZID_CHEN},{YID_YING,TGID_WU,DZID_WU},{YID_YING,TGID_WU,DZID_SHEN},{YID_YANG,TGID_WU,DZID_XU},{YID_YING,TGID_WU,DZID_ZI}}},
     {BGID_GEN,BGID_GEN,WXID_TU,{{YID_YING,TGID_BING,DZID_CHEN},{YID_YING,TGID_BING,DZID_WU},{YID_YANG,TGID_BING,DZID_SHEN},{YID_YING,TGID_BING,DZID_XU},{YID_YING,TGID_BING,DZID_ZI},{YID_YANG,TGID_BING,DZID_YIN}}},
@@ -183,7 +183,7 @@ Chonggua::Chonggua(BAGUA_ID gong,BAGUA_ID sgid,BAGUA_ID xgid,int s,int y,WUXING_
 
 Chonggua & Chonggua::from(Gua& sgid,Gua& xgid)
 {
-    return Chonggua::from(sgid.get_id(),xgid.get_id());
+    return Chonggua::from(sgid.id(),xgid.id());
 }
 
 
@@ -193,34 +193,34 @@ Chonggua & Chonggua::from(BAGUA_ID sgid,BAGUA_ID xgid)
     return *_chonggua[sgid][xgid];
 }
 
-const char* Chonggua::get_guaxing_name()
+const char* Chonggua::guaxing_name()
 {
     return guaxing[_guaxing];
 }
 
-const char* Chonggua::get_name()
+const char* Chonggua::name()
 {
     return _name;
 }
-Guayao * Chonggua::get_yao(int i)
+Guayao * Chonggua::yao(int i)
 {
     return _guayao[i];
 }
 
-Wuxing & Chonggua::get_wuxing()
+Wuxing & Chonggua::wuxing()
 {
     return _wuxing;
 }
-Gua & Chonggua::get_gonggua()
+Gua & Chonggua::gonggua()
 {
     return _gonggua;
 }
 
-int Chonggua::get_shiwei()
+int Chonggua::shiyao()
 {
     return _shiwei;
 }
-int Chonggua::get_yingwei()
+int Chonggua::yingyao()
 {
     return _yingwei;
 }

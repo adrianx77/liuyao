@@ -50,13 +50,13 @@ public:
     static void init();
     static Chonggua & from(BAGUA_ID sgid,BAGUA_ID xgid);
     static Chonggua & from(Gua& sgid,Gua& xgid);
-    Guayao * get_yao(int i);
-    Wuxing & get_wuxing();
-    Gua    & get_gonggua();
-    int      get_shiwei();
-    int      get_yingwei();
-    const char* get_guaxing_name();
-    const char* get_name();
+    Guayao * yao(int i);
+    Wuxing & wuxing();
+    Gua    & gonggua();
+    int      shiyao();
+    int      yingyao();
+    const char* guaxing_name();
+    const char* name();
 };
 
 }

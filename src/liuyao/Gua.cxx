@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "Gua.hxx"
+#include "../base/Error.hxx"
 namespace Zhouyi{
 
 bool Gua::_init = false;
@@ -41,7 +42,7 @@ void Gua::init()
     _init = true;
 }
 
-Yao & Gua::get_yao(YAOWEI_ID yaowei)
+Yao & Gua::yao(YAOWEI_ID yaowei)
 {
     return *_yao[yaowei];
 }
@@ -51,13 +52,24 @@ Gua & Gua::from(BAGUA_ID id)
     init();
     return * _guas[id];
 }
-
-BAGUA_ID Gua::get_id()
+Gua & Gua::from(YAO_ID _1,YAO_ID _2,YAO_ID _3)
+{
+    init();
+    for(int i=0;i<8;i++)
+    {
+        if(_1 == yaoIds[i][0] && _2 == yaoIds[i][1] && _3 == yaoIds[i][2])
+        {
+            return from((BAGUA_ID)i);
+        }
+    }
+    throw Error(ERROR_INVALID_ID);
+}
+BAGUA_ID Gua::id()
 {
     return _id;
 }
 
-const char * Gua::get_name()
+const char * Gua::name()
 {
     return Names[_id];
 }

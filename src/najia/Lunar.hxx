@@ -11,12 +11,12 @@ protected:
     
 public:
     static Lunar * now();
-    static Lunar * create(int year,int month,int day,int shi);
+    static Lunar * create(int year,int month,int day,int hour);
     static Lunar * create(int year,int month,int day);
     TianganDizhi * year();
     TianganDizhi * month();
     TianganDizhi * day();
-    TianganDizhi * shi();
+    TianganDizhi * hour();
 };
 
 
