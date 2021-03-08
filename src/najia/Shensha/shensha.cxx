@@ -11,6 +11,8 @@
 #include "Huagai.hxx"
 #include "Mouxing.hxx"
 #include "Tianyi.hxx"
+#include "Tianxi.hxx"
+#include "Zaisha.hxx"
 
 
 #define SHENSHA_GUIREN      "贵人"
@@ -81,11 +83,10 @@ namespace Zhouyi{
                 return &Mouxing::from(month,day);                         
             case SSID_TIANYI:
                 return &Tianyi::from(month,day);                         
-
-
-
-
-
+            case SSID_TIANXI:
+                return &Tianxi::from(month,day);                         
+            case SSID_ZAISHA:
+                return &Zaisha::from(month,day);                         
             default:
                 break;
             }            

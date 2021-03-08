@@ -55,13 +55,15 @@ void ZhuangguaJieguo::dum(std::string &str)
             str+= _shengsha[i]->name();
             str+="-";
             str+=_shengsha[i]->zhiname();
-            str+=" ";
+            str+="　";
         }
+        if(i%6==0 && i!=0)
+           str+="\n";    
     }
     str+="\n";
     //宫卦名
 
-    sprintf(s,"%s宫: %s ",_bengua->gong().gonggua().name(),_bengua->chonggua().name());
+    sprintf(s,"%s宫:　%s　",_bengua->gong().gonggua().name(),_bengua->chonggua().name());
     str+=s;
     if(strlen(_bengua->chonggua().guaxing_name()))
     {
@@ -71,19 +73,19 @@ void ZhuangguaJieguo::dum(std::string &str)
     }
     else
     {
-        str+="    ";
+        str+="　　";
     }
     if(_zhigua!=NULL)
     {
         if(_bengua->hasFushen())
         {
-            str +="                     ";
+            str +="　　　　　　　　　　　　";
         }
         else
         {
-            str +="           ";
+            str +="　　　　　　";
         }
-        sprintf(s,"%s宫: %s ",_zhigua->gong().gonggua().name(),_zhigua->chonggua().name());
+        sprintf(s,"%s宫:　%s　",_zhigua->gong().gonggua().name(),_zhigua->chonggua().name());
         str += s;
         if(strlen(_zhigua->chonggua().guaxing_name()))
         {
@@ -98,17 +100,17 @@ void ZhuangguaJieguo::dum(std::string &str)
 
     //标题
     str +="六神";
-    str +=" ";
+    str +="　";
 
     if(_bengua->hasFushen())
     {
         str += "伏　　神";
     }
-    str +=" ";
+    str +="　";
     str +="【本　卦】";
     if(_zhigua)
     {
-        str +="              ";
+        str +="　　　　　　　　";
         str +="【变　卦】";
     }
     str+="\n";
@@ -120,7 +122,7 @@ void ZhuangguaJieguo::dum(std::string &str)
     {
         //六神
         str+=_liushen[i]->name();
-        str += "  ";
+        str += "　";
         //伏神
         if(_bengua->hasFushen())
         {
@@ -133,15 +135,15 @@ void ZhuangguaJieguo::dum(std::string &str)
                 str += z.get_wuxing().name();
             }
             else
-                str += "        ";
+                str += "　　　　";
          }
-        str += " ";
+        str += "　";
 
         //爻
         Guayao* bgy = _bengua->chonggua().yao(i);
         const char * yao = bgy->name();
         str += yao;        
-        str += " ";
+        str += "　";
         //六亲
         const char * lq = _bengua->liuqin(i)->name();
         str += lq;    
@@ -149,7 +151,7 @@ void ZhuangguaJieguo::dum(std::string &str)
         str += _bengua->chonggua().yao(i)->get_ganzhi().get_dizhi().get_wuxing().name();
 
 
-        str += " ";
+        str += "　";
         //世应
         if(shi==i)
         {
@@ -175,16 +177,16 @@ void ZhuangguaJieguo::dum(std::string &str)
             {
                 if(bgyid & YID_YANG)
                 {
-                    str+="o->";
+                    str+="○　→";
                 }
                 else
                 {
-                    str+="x->";
+                    str+="х　→";
                 }
             }
             else
             {
-                str+="   ";
+                str+="　 　";
             }
             //爻
             str+="　";  

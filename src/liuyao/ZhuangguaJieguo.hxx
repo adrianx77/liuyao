@@ -4,7 +4,7 @@
 #include "LiuqinChonggua.hxx"
 #include "liushen.hxx"
 #include <string>
-#include "Shensha/shensha.hxx"
+#include "../najia/Shensha/shensha.hxx"
 namespace Zhouyi{
 
 
