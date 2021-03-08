@@ -22,12 +22,20 @@ namespace Zhouyi
             SSID_ZAISHA
         }SHENSHA_ID;
 
+
+        typedef struct 
+        {
+            TIANGAN_ID gan;     //日干
+            DIZHI_ID   zhi;     //爻支
+            const char * zhiname;
+        }TIANGAN_ZHI1;
+
         typedef struct 
         {
             TIANGAN_ID gan;     //日干
             DIZHI_ID   zhi[2];  //爻支
             const char * zhiname;
-        }TIANGAN_ZHI;
+        }TIANGAN_ZHI2;
 
         typedef struct 
         {

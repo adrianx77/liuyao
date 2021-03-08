@@ -2,6 +2,7 @@
 #include "../../najia/TianganDizhi.hxx"
 #include "Guiren.hxx"
 #include "Lushen.hxx"
+#include "Yangren.hxx"
 
 #define SHENSHA_GUIREN      "贵人"
 #define SHENSHA_LUSHEN      "禄神"
@@ -53,6 +54,8 @@ namespace Zhouyi{
                 return &Guiren::from(month,day);
             case SSID_LUSHEN:
                 return &Lushen::from(month,day);
+            case SSID_YANGREN:
+                return &Yangren::from(month,day);                
             default:
                 break;
             }            

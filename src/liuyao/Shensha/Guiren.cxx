@@ -8,7 +8,7 @@ namespace Shensha{
 
 static bool _init = false;
 
-static TIANGAN_ZHI GuiRenTable [] = {
+static TIANGAN_ZHI2 GuiRenTable [] = {
     {TGID_JIA,{DZID_CHOU,DZID_WEI}, ZHI_CHOU "," ZHI_WEI },
     {TGID_WU,{DZID_CHOU,DZID_WEI},ZHI_CHOU "," ZHI_WEI},
     {TGID_YI,{DZID_ZI,DZID_SHEN},ZHI_ZI "," ZHI_SHEN},
@@ -24,6 +24,7 @@ static TIANGAN_ZHI GuiRenTable [] = {
 
     Guiren::Guiren(int index)
     {
+        _id = SSID_GUIREN;
         _guirenIndex = index;
     }
     const char * Guiren::zhiname()
