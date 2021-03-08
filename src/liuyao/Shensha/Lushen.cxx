@@ -6,7 +6,7 @@ namespace Zhouyi
 {
 namespace Shensha{
 
-static bool _init = false;
+static bool _lushen_init = false;
 
 static TIANGAN_ZHI1 LushenTable [] = {
     {TGID_JIA,DZID_YIN, ZHI_YIN},
@@ -46,14 +46,14 @@ Lushen * Lushen::_lushens[10] = {};
 
     void Lushen::init()
     {
-        if(_init)
+        if(_lushen_init)
             return;
 
         for(int i=0;i<COUNTOF(LushenTable);i++)
         {
             _lushens[i] = new Lushen(i);
         }
-        _init = true;
+        _lushen_init = true;
     }
 
 

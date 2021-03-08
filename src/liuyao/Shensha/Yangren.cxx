@@ -6,7 +6,7 @@ namespace Zhouyi
 {
 namespace Shensha{
 
-static bool _init = false;
+static bool _yangren_init = false;
 
 static TIANGAN_ZHI1 YangrenTable [] = {
     {TGID_JIA,DZID_MAO,ZHI_MAO},
@@ -46,14 +46,14 @@ Yangren * Yangren::_yangrens[10] = {};
 
     void Yangren::init()
     {
-        if(_init)
+        if(_yangren_init)
             return;
 
         for(int i=0;i<COUNTOF(YangrenTable);i++)
         {
             _yangrens[i] = new Yangren(i);
         }
-        _init = true;
+        _yangren_init = true;
     }
 
 

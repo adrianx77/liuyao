@@ -3,6 +3,8 @@
 #include "Guiren.hxx"
 #include "Lushen.hxx"
 #include "Yangren.hxx"
+#include "Wenchang.hxx"
+
 
 #define SHENSHA_GUIREN      "贵人"
 #define SHENSHA_LUSHEN      "禄神"
@@ -56,6 +58,8 @@ namespace Zhouyi{
                 return &Lushen::from(month,day);
             case SSID_YANGREN:
                 return &Yangren::from(month,day);                
+            case SSID_WENCHANG:
+                return &Wenchang::from(month,day);                         
             default:
                 break;
             }            

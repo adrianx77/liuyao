@@ -6,7 +6,7 @@ namespace Zhouyi
 {
 namespace Shensha{
 
-static bool _init = false;
+static bool _guiren_init = false;
 
 static TIANGAN_ZHI2 GuiRenTable [] = {
     {TGID_JIA,{DZID_CHOU,DZID_WEI}, ZHI_CHOU "," ZHI_WEI },
@@ -45,14 +45,14 @@ static TIANGAN_ZHI2 GuiRenTable [] = {
 
     void Guiren::init()
     {
-        if(_init)
+        if(_guiren_init)
             return;
 
         for(int i=0;i<COUNTOF(GuiRenTable);i++)
         {
             _guirens[i] = new Guiren(i);
         }
-        _init = true;
+        _guiren_init = true;
     }
 
 
