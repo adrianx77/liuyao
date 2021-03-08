@@ -13,10 +13,10 @@ namespace Zhouyi
             SSID_WENCHANG,
             SSID_YIMA,
             SSID_TAOHUA,
-            SSID_JIANGXIN,
+            SSID_JIANGXING,
             SSID_JIESHA,
             SSID_HUAGAI,
-            SSID_MOUXIN,
+            SSID_MOUXING,
             SSID_TIANYI,
             SSID_TIANXI,
             SSID_ZAISHA
@@ -40,9 +40,16 @@ namespace Zhouyi
         typedef struct 
         {
             DIZHI_ID    timezhi;     //日月支
-            DIZHI_ID    zhi[2];  //爻支
+            DIZHI_ID    zhi;        //爻支
             const char * zhiname;
-        }DIZHI_ZHI;
+        }DIZHI_ZHI1;
+
+        typedef struct 
+        {
+            DIZHI_ID    timezhi;    //日月支
+            DIZHI_ID    zhi[2];     //爻支
+            const char * zhiname;
+        }DIZHI_ZHI2;
 
 
 
