@@ -43,7 +43,7 @@ namespace Zhouyi{
         }
         _init = true;
     }
-    const char* Tiangan::get_name()
+    const char* Tiangan::name()
     {
         if(_tiangan<0)
             return NULL;

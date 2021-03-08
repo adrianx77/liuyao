@@ -56,7 +56,7 @@ XunKong& XunKong ::from(DIZHI_ID x)
 {
     return *_xunkong[x/2];
 }
-const char * XunKong::get_name()
+const char * XunKong::name()
 {
     return _names[_index];
 }
@@ -104,7 +104,7 @@ XunKong& Xun::get_xunkong()
 {
     return _xunkong;
 }
-const char * Xun::get_name()
+const char * Xun::name()
 {
     return _names[_zhi/2];
 }
@@ -115,11 +115,11 @@ void Xun::dump_xun()
     if(it== _ganzhi.end())
         return;
 
-    printf("%s",(*it)->get_name());
+    printf("%s",(*it)->name());
     ++it;
     for(;it!= _ganzhi.end();++it)
     {
-        printf("---%s",(*it)->get_name());
+        printf("---%s",(*it)->name());
     }
 }
 void Xun::push_ganzhi(TianganDizhi *gz)

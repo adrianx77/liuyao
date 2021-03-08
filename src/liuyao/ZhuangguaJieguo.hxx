@@ -4,7 +4,7 @@
 #include "LiuqinChonggua.hxx"
 #include "liushen.hxx"
 #include <string>
-
+#include "Shensha/shensha.hxx"
 namespace Zhouyi{
 
 
@@ -15,6 +15,7 @@ private:
     LiuqinChonggua * _zhigua;
     TianganDizhi   * _ganzhi[4];
     Liushen  *       _liushen[6];
+    Shensha::ShenshaBase * _shengsha[13];
     ZhuangguaJieguo(LiuqinChonggua * ben, LiuqinChonggua *bian,TianganDizhi * gz[4],Liushen * startLiushen);
 public:
     static ZhuangguaJieguo * from(LiuqinChonggua * ben, LiuqinChonggua *bian,Lunar * lunar);

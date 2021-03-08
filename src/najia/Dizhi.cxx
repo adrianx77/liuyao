@@ -45,7 +45,7 @@ Dizhi& Dizhi::from(DIZHI_ID z)
     return *Dizhis[z];
 }
 
-const char * Dizhi::get_name()
+const char * Dizhi::name()
 {
     if(_dizhi<0)
         return NULL;

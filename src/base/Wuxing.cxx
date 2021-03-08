@@ -39,7 +39,7 @@ namespace Zhouyi{
         return *_wuxing[wx];
     }
 
-    const char* Wuxing::get_name() const
+    const char* Wuxing::name() const
     {
         return _names[_baseWuxing];
     }

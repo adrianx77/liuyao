@@ -30,7 +30,7 @@ class Wuxing{
 public:
     static Wuxing &from(WUXING_ID wx);
     Wuxing * clone();
-    const char* get_name() const;
+    const char* name() const;
     WUXING_ID   id() const;
     operator WUXING_ID()const;
     WUXING_SHENGKE get_shengke(Wuxing * wx);

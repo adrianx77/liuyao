@@ -6,7 +6,7 @@ namespace Zhouyi{
 
 void LiuqinChonggua::init()
 {
-    Wuxing & Wo = _chonggua.wuxing();
+    Wuxing & Wo = _gonggua.wuxing();
     for(size_t i =0;i<6;i++)
     {
         TianganDizhi &z = _chonggua.yao(i)->get_ganzhi();

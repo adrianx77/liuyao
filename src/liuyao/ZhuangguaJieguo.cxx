@@ -1,4 +1,6 @@
 #include "ZhuangguaJieguo.hxx"
+#define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
+using namespace Zhouyi::Shensha;
 namespace Zhouyi{
 ZhuangguaJieguo::ZhuangguaJieguo(LiuqinChonggua * ben, LiuqinChonggua *bian,TianganDizhi * gz[4],Liushen * startLiushen)
 {
@@ -13,6 +15,14 @@ ZhuangguaJieguo::ZhuangguaJieguo(LiuqinChonggua * ben, LiuqinChonggua *bian,Tian
         _liushen[i] = startLiushen;
         startLiushen = startLiushen->next();
     }
+
+
+    for(int i=SSID_GUIREN;i<=Shensha::SSID_ZAISHA;++i)
+    {
+        _shengsha[i] = ShenshaFactory::create((SHENSHA_ID)i,_ganzhi[1],_ganzhi[2]);
+    }
+
+
 }
 ZhuangguaJieguo * ZhuangguaJieguo::from(LiuqinChonggua * ben, LiuqinChonggua *bian,Lunar * lunar)
 {
@@ -34,10 +44,21 @@ void ZhuangguaJieguo::dum(std::string &str)
 {
     char s[500];
     //DUMP 干支
-    sprintf(s,"干支: %s月 %s日 (旬空：%s)\n", _ganzhi[1]->get_dizhi().get_name(), _ganzhi[2]->get_name(),_ganzhi[2]->get_xun().get_xunkong().get_name());
+    sprintf(s,"干支: %s月 %s日 (旬空：%s)\n", _ganzhi[1]->get_dizhi().name(), _ganzhi[2]->name(),_ganzhi[2]->get_xun().get_xunkong().name());
     str = s;
     //DUMP 神煞
-
+    str+= "神煞:";
+    for(int i=SSID_GUIREN;i<=Shensha::SSID_ZAISHA;++i)
+    {
+        if(_shengsha[i])
+        {
+            str+= _shengsha[i]->name();
+            str+="-";
+            str+=_shengsha[i]->zhiname();
+            str+=" ";
+        }
+    }
+    str+="\n";
     //宫卦名
 
     sprintf(s,"%s宫: %s ",_bengua->gong().gonggua().name(),_bengua->chonggua().name());
@@ -88,8 +109,9 @@ void ZhuangguaJieguo::dum(std::string &str)
     if(_zhigua)
     {
         str +="              ";
-        str +="【变　卦】\n";
+        str +="【变　卦】";
     }
+    str+="\n";
     //DUMP 爻
     int shi= _bengua->chonggua().shiyao();
     int ying= _bengua->chonggua().yingyao();
@@ -105,10 +127,10 @@ void ZhuangguaJieguo::dum(std::string &str)
             Liuqin * fs = _bengua->fushen(i);
             if(fs)
             {
-                str += fs->get_name();
+                str += fs->name();
                 Dizhi &z = _bengua->gonggua().yao(i)->get_ganzhi().get_dizhi(); 
-                str += z.get_name();
-                str += z.get_wuxing().get_name();
+                str += z.name();
+                str += z.get_wuxing().name();
             }
             else
                 str += "        ";
@@ -117,14 +139,14 @@ void ZhuangguaJieguo::dum(std::string &str)
 
         //爻
         Guayao* bgy = _bengua->chonggua().yao(i);
-        const char * yao = bgy->get_name();
+        const char * yao = bgy->name();
         str += yao;        
         str += " ";
         //六亲
-        const char * lq = _bengua->liuqin(i)->get_name();
+        const char * lq = _bengua->liuqin(i)->name();
         str += lq;    
-        str += _bengua->chonggua().yao(i)->get_ganzhi().get_dizhi().get_name();
-        str += _bengua->chonggua().yao(i)->get_ganzhi().get_dizhi().get_wuxing().get_name();
+        str += _bengua->chonggua().yao(i)->get_ganzhi().get_dizhi().name();
+        str += _bengua->chonggua().yao(i)->get_ganzhi().get_dizhi().get_wuxing().name();
 
 
         str += " ";
@@ -166,14 +188,14 @@ void ZhuangguaJieguo::dum(std::string &str)
             }
             //爻
             str+="　";  
-            str += zgy->get_name();
+            str += zgy->name();
 
             //六亲
             str+="　";  
-            const char * lq = _zhigua->liuqin(i)->get_name();
+            const char * lq = _zhigua->liuqin(i)->name();
             str += lq;    
-            str += _zhigua->chonggua().yao(i)->get_ganzhi().get_dizhi().get_name();
-            str += _zhigua->chonggua().yao(i)->get_ganzhi().get_dizhi().get_wuxing().get_name();
+            str += _zhigua->chonggua().yao(i)->get_ganzhi().get_dizhi().name();
+            str += _zhigua->chonggua().yao(i)->get_ganzhi().get_dizhi().get_wuxing().name();
 
 
         }

@@ -157,7 +157,7 @@ TianganDizhi::TianganDizhi(Tiangan& gan,Dizhi& zhi,Tiangan& xg,Dizhi& xz):_tiang
     Xun::init();
     _xun.push_ganzhi(this);
 }
-const char* TianganDizhi::get_name()const
+const char* TianganDizhi::name()const
 {
     if(_tiangan.id()<0 || _tiangan.id()<0)
         return NULL;

@@ -21,9 +21,9 @@ void test_xuntable()
     Xun ** xun = Xun::get_xun_table();
    for (size_t j = 0; j < 6; j++)
    {
-       //printf("%s:",xun[j]->get_name());
+       //printf("%s:",xun[j]->name());
        xun[j]->dump_xun();
-       printf(" (旬空)%s\n",xun[j]->get_xunkong().get_name());
+       printf(" (旬空)%s\n",xun[j]->get_xunkong().name());
    }
 }
 
@@ -38,7 +38,7 @@ void test_60jiazi()
             TianganDizhi &gz= TianganDizhi::from(Tiangan::from((TIANGAN_ID)i),Dizhi::from((DIZHI_ID)j));
             
             Xun & xun = gz.get_xun();
-            printf("%s->%s 旬空:%s\n",gz.get_name(),xun.get_name(),xun.get_xunkong().get_name());
+            printf("%s->%s 旬空:%s\n",gz.name(),xun.name(),xun.get_xunkong().name());
        }
    }
 }
@@ -54,7 +54,7 @@ void test_gua()
             printf("(%d %d)\n%s %s\n",i,j,g.name(),g.guaxing_name());
             for(int k=5;k>=0;k--)
             {
-                printf("%s %s\n",g.yao(k)->get_name(),g.yao(k)->get_ganzhi().get_name());
+                printf("%s %s\n",g.yao(k)->name(),g.yao(k)->get_ganzhi().name());
 
             }
         }
@@ -78,13 +78,13 @@ void test_zhuanggua0()
                 if(fs)
                 {
                     Dizhi & dzfs = lqg.gonggua().yao(k)->get_ganzhi().get_dizhi();
-                    printf("%s%s%s%s %s [%s%s%s]\n",g.yao(k)->get_name(),lqg.liuqin(k)->get_name(),dz.get_name(),dz.get_wuxing().get_name() , 
+                    printf("%s%s%s%s %s [%s%s%s]\n",g.yao(k)->name(),lqg.liuqin(k)->name(),dz.name(),dz.get_wuxing().name() , 
                                                lqg.gonggua().shiyao()==k?"世":(lqg.gonggua().yingyao()==k?"应":" "),
-                                               fs->get_name(),dzfs.get_name(),dzfs.get_wuxing().get_name() );
+                                               fs->name(),dzfs.name(),dzfs.get_wuxing().name() );
                 }
                 else
                 {
-                    printf("%s%s%s%s %s\n",g.yao(k)->get_name(),lqg.liuqin(k)->get_name(),dz.get_name(),dz.get_wuxing().get_name(),
+                    printf("%s%s%s%s %s\n",g.yao(k)->name(),lqg.liuqin(k)->name(),dz.name(),dz.get_wuxing().name(),
                                                 lqg.gonggua().shiyao()==k?"世":(lqg.gonggua().yingyao()==k?"应":" "));
                 }
             }
@@ -119,13 +119,13 @@ int main(int argc, char *argv[])
         //     for(int i=0;i<24;i++)
         //     {
         //         Zhouyi::Lunar * l = Zhouyi::Lunar::create(2021,3,2,i);
-        //         printf("%s年 %s月 %s日 %s时\n",l->year()->get_name(),l->month()->get_name(),l->day()->get_name(),l->hour()->get_name());
+        //         printf("%s年 %s月 %s日 %s时\n",l->year()->name(),l->month()->name(),l->day()->name(),l->hour()->name());
         //     }
         // }
         // for(int i=0;i<24;i++)
         // {
         //     Zhouyi::Lunar * l = Zhouyi::Lunar::create(2021,3,3,i);
-        //     printf("%s年 %s月 %s日 %s时\n",l->year()->get_name(),l->month()->get_name(),l->day()->get_name(),l->hour()->get_name());
+        //     printf("%s年 %s月 %s日 %s时\n",l->year()->name(),l->month()->name(),l->day()->name(),l->hour()->name());
         // }
 #if (defined _WIN32 || defined _WIN64)
     setlocale (LC_ALL,"zh-CN");

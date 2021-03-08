@@ -49,6 +49,8 @@ ZhuangguaJieguo * Zhuanggua::zhuanggua(YAO_ID yaos[6],Lunar * lunar)
         bian= new LiuqinChonggua(biangua,gonggua);
     }
 
+
+
     return ZhuangguaJieguo::from(beng,bian,lunar);
 }
 

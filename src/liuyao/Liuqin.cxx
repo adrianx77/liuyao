@@ -103,7 +103,7 @@ LIUQIN_ID  Liuqin::id()const
     return _liuqin;
 }
 
-const char * Liuqin::get_name()
+const char * Liuqin::name()
 {
     return _names[_liuqin];
 }

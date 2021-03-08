@@ -45,7 +45,7 @@ public:
     TIANGAN_ID id()const;
     operator TIANGAN_ID()const;
     static Tiangan& from(TIANGAN_ID gan);
-    const char* get_name();
+    const char* name();
     Tiangan& get_next();
     Tiangan& get_prev();
     Wuxing& get_wuxing();

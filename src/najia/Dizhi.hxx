@@ -44,7 +44,7 @@ public:
     DIZHI_ID id()const;
     operator DIZHI_ID()const;
     static Dizhi& from(DIZHI_ID zhi);
-    const char * get_name();
+    const char * name();
     Dizhi& get_next();
     Dizhi& get_prev();    
     Wuxing& get_wuxing();

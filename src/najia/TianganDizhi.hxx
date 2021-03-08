@@ -22,7 +22,7 @@ protected:
     static void init();
 
 public:
-    const char * get_name()const;
+    const char * name()const;
     static TianganDizhi& from(Tiangan& gan,Dizhi& zhi);
     Tiangan&      get_tiangan()const {return _tiangan;}
     Dizhi&        get_dizhi()const {return _dizhi;}

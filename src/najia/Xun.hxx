@@ -17,7 +17,7 @@ class XunKong
 public:
     static void init();
     static XunKong& from(DIZHI_ID x);
-    const char * get_name();
+    const char * name();
     static const char *  _names[];
     static XunKong* _xunkong[];
 };
@@ -35,7 +35,7 @@ class Xun
     std::vector<TianganDizhi*> _ganzhi;
 public:
     XunKong& get_xunkong();
-    const char * get_name();
+    const char * name();
     friend class TianganDizhi;
     static Xun& from(Tiangan& xg,Dizhi& xz);
     static Xun * * get_xun_table()

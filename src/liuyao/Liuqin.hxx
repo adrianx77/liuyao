@@ -32,7 +32,7 @@ public:
     static Liuqin & from(WUXING_ID wo,WUXING_ID ta);
     LIUQIN_ID  id()const;
     operator LIUQIN_ID() const;
-    const char * get_name();
+    const char * name();
 };
 
 
