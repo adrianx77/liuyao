@@ -1,6 +1,6 @@
 #include "Guiren.hxx"
 #include "../../base/Error.hxx"
-#define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
+#include "../../base/basic.hxx"
 
 namespace Zhouyi
 {
@@ -35,7 +35,7 @@ static TIANGAN_ZHI2 GuiRenTable [] = {
     {
         init();
         TIANGAN_ID chankao = day->get_tiangan().id();
-        for(int i=0;i<COUNTOF(GuiRenTable);i++)
+        for(int i=0;i<countof(GuiRenTable);i++)
         {
             if(GuiRenTable[i].gan == chankao)
                 return *_guirens[i];
@@ -48,7 +48,7 @@ static TIANGAN_ZHI2 GuiRenTable [] = {
         if(_guiren_init)
             return;
 
-        for(int i=0;i<COUNTOF(GuiRenTable);i++)
+        for(int i=0;i<countof(GuiRenTable);i++)
         {
             _guirens[i] = new Guiren(i);
         }

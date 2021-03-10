@@ -1,6 +1,7 @@
 #include "Yima.hxx"
 #include "../../base/Error.hxx"
-#define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
+#include "../../base/basic.hxx"
+// #define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
 
 namespace Zhouyi
 {
@@ -45,7 +46,7 @@ Yima& Yima::from(TianganDizhi * month,TianganDizhi * day)
 {
     init();
     DIZHI_ID chankao = day->get_dizhi().id();
-    for(int i=0;i<COUNTOF(YimaTable);i++)
+    for(int i=0;i<countof(YimaTable);i++)
     {
         if(YimaTable[i].timezhi == chankao)
             return *_yimas[i];
@@ -58,7 +59,7 @@ void Yima::init()
     if(_yima_init)
         return;
 
-    for(int i=0;i<COUNTOF(YimaTable);i++)
+    for(int i=0;i<countof(YimaTable);i++)
     {
         _yimas[i] = new Yima(i);
     }

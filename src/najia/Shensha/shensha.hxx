@@ -19,7 +19,8 @@ namespace Zhouyi
             SSID_MOUXING,
             SSID_TIANYI,
             SSID_TIANXI,
-            SSID_ZAISHA
+            SSID_ZAISHA,
+            SSID_MAX
         }SHENSHA_ID;
 
 

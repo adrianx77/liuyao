@@ -1,6 +1,7 @@
 #include "Jiesha.hxx"
 #include "../../base/Error.hxx"
-#define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
+#include "../../base/basic.hxx"
+// #define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
 
 namespace Zhouyi
 {
@@ -45,7 +46,7 @@ Jiesha& Jiesha::from(TianganDizhi * month,TianganDizhi * day)
 {
     init();
     DIZHI_ID chankao = day->get_dizhi().id();
-    for(int i=0;i<COUNTOF(JieshaTable);i++)
+    for(int i=0;i<countof(JieshaTable);i++)
     {
         if(JieshaTable[i].timezhi == chankao)
             return *_jieshas[i];
@@ -58,7 +59,7 @@ void Jiesha::init()
     if(_jiesha_init)
         return;
 
-    for(int i=0;i<COUNTOF(JieshaTable);i++)
+    for(int i=0;i<countof(JieshaTable);i++)
     {
         _jieshas[i] = new Jiesha(i);
     }

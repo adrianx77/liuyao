@@ -1,39 +1,50 @@
 #include "ZhuangguaJieguo.hxx"
-#define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
-using namespace Zhouyi::Shensha;
+// #define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
+#include "../base/basic.hxx"
+
+
+
 namespace Zhouyi{
-ZhuangguaJieguo::ZhuangguaJieguo(LiuqinChonggua * ben, LiuqinChonggua *bian,TianganDizhi * gz[4],Liushen * startLiushen)
+ZhuangguaJieguo::ZhuangguaJieguo(LiuqinChonggua * ben, LiuqinChonggua *bian,TianganDizhi * gz[GZI_MAX],Liushen * startLiushen)
 {
     _bengua = ben;
     _zhigua = bian;
-    for(int i=0;i<4;i++)
+    for(int i=GZI_YEAR;i<GZI_MAX;i++)
     {
         _ganzhi[i] = gz[i];
     }
-    for(int i=0;i<6;i++)
+    for(int i=LSID_QINGLONG;i<LSID_MAX;i++)
     {
         _liushen[i] = startLiushen;
         startLiushen = startLiushen->next();
     }
 
 
-    for(int i=SSID_GUIREN;i<=Shensha::SSID_ZAISHA;++i)
+    for(int i=SSID_GUIREN;i<=SSID_MAX;++i)
     {
-        _shengsha[i] = ShenshaFactory::create((SHENSHA_ID)i,_ganzhi[1],_ganzhi[2]);
+        _shengsha[i] = ShenshaFactory::create((SHENSHA_ID)i,_ganzhi[GZI_MONTH],_ganzhi[GZI_DAY]);
     }
 
 
 }
 ZhuangguaJieguo * ZhuangguaJieguo::from(LiuqinChonggua * ben, LiuqinChonggua *bian,Lunar * lunar)
 {
-    TianganDizhi * gz[4] ={};
-    gz[0] = lunar->year();
-    gz[1] = lunar->month();
-    gz[2] = lunar->day();
-    gz[3] = lunar->hour();
+    TianganDizhi * gz[GZI_MAX] ={};
+    gz[GZI_YEAR] = lunar->year();
+    gz[GZI_MONTH] = lunar->month();
+    gz[GZI_DAY] = lunar->day();
+    gz[GZI_HOUR] = lunar->hour();
 
     return new ZhuangguaJieguo(ben,bian,gz,Liushen::from(lunar)); 
 }
+
+ZhuangguaJieguo * ZhuangguaJieguo::from(LiuqinChonggua * ben, LiuqinChonggua *bian,TianganDizhi * gz[GZI_MAX])
+{
+    TIANGAN_ID gan = gz[GZI_DAY]->get_tiangan();
+    return new ZhuangguaJieguo(ben,bian,gz,Liushen::from(gan)); 
+}
+
+
 
 Liushen * ZhuangguaJieguo::liushen(int pos)
 {
@@ -44,11 +55,11 @@ void ZhuangguaJieguo::dum(std::string &str)
 {
     char s[500];
     //DUMP 干支
-    sprintf(s,"干支: %s月 %s日 (旬空：%s)\n", _ganzhi[1]->get_dizhi().name(), _ganzhi[2]->name(),_ganzhi[2]->get_xun().get_xunkong().name());
+    sprintf(s,"干支: %s月 %s日 (旬空：%s)\n", _ganzhi[GZI_MONTH]->get_dizhi().name(), _ganzhi[GZI_DAY]->name(),_ganzhi[GZI_DAY]->get_xun().get_xunkong().name());
     str = s;
     //DUMP 神煞
     str+= "神煞:";
-    for(int i=SSID_GUIREN;i<=Shensha::SSID_ZAISHA;++i)
+    for(int i=SSID_GUIREN;i<SSID_MAX;++i)
     {
         if(_shengsha[i])
         {
@@ -57,7 +68,7 @@ void ZhuangguaJieguo::dum(std::string &str)
             str+=_shengsha[i]->zhiname();
             str+="　";
         }
-        if(i%6==0 && i!=0)
+        if(i%6==0 && i!=0) //第七个换行
            str+="\n";    
     }
     str+="\n";
@@ -118,7 +129,7 @@ void ZhuangguaJieguo::dum(std::string &str)
     int shi= _bengua->chonggua().shiyao();
     int ying= _bengua->chonggua().yingyao();
 
-    for(int i=5;i>=0;i--)
+    for(int i=LSID_MAX-1;i>=0;i--)
     {
         //六神
         str+=_liushen[i]->name();
@@ -177,11 +188,11 @@ void ZhuangguaJieguo::dum(std::string &str)
             {
                 if(bgyid & YID_YANG)
                 {
-                    str+="○　→";
+                    str+="○→";
                 }
                 else
                 {
-                    str+="х　→";
+                    str+="×→";
                 }
             }
             else

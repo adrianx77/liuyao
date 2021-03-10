@@ -7,19 +7,36 @@
 #include "../najia/Shensha/shensha.hxx"
 namespace Zhouyi{
 
-
+using namespace Shensha;
 class ZhuangguaJieguo
 {
 private:
     LiuqinChonggua * _bengua;
     LiuqinChonggua * _zhigua;
-    TianganDizhi   * _ganzhi[4];
-    Liushen  *       _liushen[6];
-    Shensha::ShenshaBase * _shengsha[13];
-    ZhuangguaJieguo(LiuqinChonggua * ben, LiuqinChonggua *bian,TianganDizhi * gz[4],Liushen * startLiushen);
+    TianganDizhi   * _ganzhi[GZI_MAX];
+    Liushen  *       _liushen[LSID_MAX];
+    ShenshaBase * _shengsha[SSID_MAX];
+    ZhuangguaJieguo(LiuqinChonggua * ben, LiuqinChonggua *bian,TianganDizhi * gz[GZI_MAX],Liushen * startLiushen);
 public:
     static ZhuangguaJieguo * from(LiuqinChonggua * ben, LiuqinChonggua *bian,Lunar * lunar);
+    static ZhuangguaJieguo * from(LiuqinChonggua * ben, LiuqinChonggua *bian,TianganDizhi * gz[GZI_MAX]);
+
+    //六神（六兽）
     Liushen * liushen(int pos);
+
+    //神煞
+    ShenshaBase * shensha(SHENSHA_ID id);
+    size_t  shensha_count();
+    //卜卦时间
+    TianganDizhi * year();
+    TianganDizhi * month();
+    TianganDizhi * day();
+    TianganDizhi * hour();
+
+    //本卦
+    LiuqinChonggua * bengua();
+    LiuqinChonggua * zhigua();
+
     void dum(std::string & str);
 };
 

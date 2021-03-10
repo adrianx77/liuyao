@@ -1,6 +1,7 @@
 #include "Tianyi.hxx"
 #include "../../base/Error.hxx"
-#define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
+#include "../../base/basic.hxx"
+// #define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
 
 namespace Zhouyi
 {
@@ -38,7 +39,7 @@ Tianyi& Tianyi::from(TianganDizhi * month,TianganDizhi * day)
 {
     init();
     DIZHI_ID chankao = day->get_dizhi().id();
-    for(int i=0;i<COUNTOF(TianyiTable);i++)
+    for(int i=0;i<countof(TianyiTable);i++)
     {
         if(TianyiTable[i].timezhi == chankao)
             return *_tianyis[i];
@@ -51,7 +52,7 @@ void Tianyi::init()
     if(_tianyi_init)
         return;
 
-    for(int i=0;i<COUNTOF(TianyiTable);i++)
+    for(int i=0;i<countof(TianyiTable);i++)
     {
         _tianyis[i] = new Tianyi(i);
     }

@@ -3,8 +3,8 @@
 #include <time.h>
 #include "Lunar.hxx"
 #include "../base/Error.hxx"
-
-#define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
+#include "../base/basic.hxx"
+//#define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
 
 namespace Zhouyi{
 
@@ -319,7 +319,7 @@ int fixSuffix(int y)
 int GetLunarInfo(int y)
 {
 	y = fixSuffix(y);
-	if( y < 0 || y > COUNTOF(lunarInfoList))
+	if( y < 0 || y > countof(lunarInfoList))
     {
 		return 0;
 	}
@@ -328,7 +328,7 @@ int GetLunarInfo(int y)
 
 int GetTermInfo(int y,int n) {
 	y = fixSuffix(y);
-	if( y < 0 || y > COUNTOF(termInfoList)) {
+	if( y < 0 || y > countof(termInfoList)) {
 		return -1;
 	}
 
@@ -366,7 +366,7 @@ int fixDayNext(int row,int idx,int hour)
 int GanzhiIndex(int y, int m,int d)
 {
 	y = fixSuffix(y);
-	if(y < 0 || y > COUNTOF(yearNumber)) 
+	if(y < 0 || y > countof(yearNumber)) 
 		return 0;
 	if(m < 3)
 		y--;
@@ -466,21 +466,21 @@ Lunar::Lunar(TIANGAN_ID yg,DIZHI_ID yz,TIANGAN_ID mg,DIZHI_ID mz,TIANGAN_ID dg,D
 
 TianganDizhi * Lunar::year()
 {
-	return _ganzhi[0];
+	return _ganzhi[GZI_YEAR];
 }
 
 TianganDizhi * Lunar::month()
 {
-	return _ganzhi[1];
+	return _ganzhi[GZI_MONTH];
 }
 
 TianganDizhi * Lunar::day()
 {
-	return _ganzhi[2];
+	return _ganzhi[GZI_DAY];
 }
 TianganDizhi * Lunar::hour()
 {
-	return _ganzhi[3];
+	return _ganzhi[GZI_HOUR];
 }
 Lunar * Lunar::now()
 {

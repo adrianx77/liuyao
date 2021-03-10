@@ -1,6 +1,7 @@
 #include "Lushen.hxx"
 #include "../../base/Error.hxx"
-#define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
+#include "../../base/basic.hxx"
+// #define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
 
 namespace Zhouyi
 {
@@ -36,7 +37,7 @@ Lushen * Lushen::_lushens[10] = {};
     {
         init();
         TIANGAN_ID chankao = day->get_tiangan().id();
-        for(int i=0;i<COUNTOF(LushenTable);i++)
+        for(int i=0;i<countof(LushenTable);i++)
         {
             if(LushenTable[i].gan == chankao)
                 return *_lushens[i];
@@ -49,7 +50,7 @@ Lushen * Lushen::_lushens[10] = {};
         if(_lushen_init)
             return;
 
-        for(int i=0;i<COUNTOF(LushenTable);i++)
+        for(int i=0;i<countof(LushenTable);i++)
         {
             _lushens[i] = new Lushen(i);
         }

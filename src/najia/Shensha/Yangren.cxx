@@ -1,6 +1,7 @@
 #include "Yangren.hxx"
 #include "../../base/Error.hxx"
-#define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
+#include "../../base/basic.hxx"
+// #define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
 
 namespace Zhouyi
 {
@@ -36,7 +37,7 @@ Yangren * Yangren::_yangrens[10] = {};
     {
         init();
         TIANGAN_ID chankao = day->get_tiangan().id();
-        for(int i=0;i<COUNTOF(YangrenTable);i++)
+        for(int i=0;i<countof(YangrenTable);i++)
         {
             if(YangrenTable[i].gan == chankao)
                 return *_yangrens[i];
@@ -49,7 +50,7 @@ Yangren * Yangren::_yangrens[10] = {};
         if(_yangren_init)
             return;
 
-        for(int i=0;i<COUNTOF(YangrenTable);i++)
+        for(int i=0;i<countof(YangrenTable);i++)
         {
             _yangrens[i] = new Yangren(i);
         }

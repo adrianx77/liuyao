@@ -1,6 +1,7 @@
 #include "Wenchang.hxx"
 #include "../../base/Error.hxx"
-#define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
+#include "../../base/basic.hxx"
+// #define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
 
 namespace Zhouyi
 {
@@ -36,7 +37,7 @@ Wenchang * Wenchang::_wenchangs[10] = {};
     {
         init();
         TIANGAN_ID chankao = day->get_tiangan().id();
-        for(int i=0;i<COUNTOF(WenchangTable);i++)
+        for(int i=0;i<countof(WenchangTable);i++)
         {
             if(WenchangTable[i].gan == chankao)
                 return *_wenchangs[i];
@@ -49,7 +50,7 @@ Wenchang * Wenchang::_wenchangs[10] = {};
         if(_wenchang_init)
             return;
 
-        for(int i=0;i<COUNTOF(WenchangTable);i++)
+        for(int i=0;i<countof(WenchangTable);i++)
         {
             _wenchangs[i] = new Wenchang(i);
         }

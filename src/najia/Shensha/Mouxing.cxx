@@ -1,6 +1,7 @@
 #include "Mouxing.hxx"
 #include "../../base/Error.hxx"
-#define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
+#include "../../base/basic.hxx"
+// #define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
 
 namespace Zhouyi
 {
@@ -45,7 +46,7 @@ Mouxing& Mouxing::from(TianganDizhi * month,TianganDizhi * day)
 {
     init();
     DIZHI_ID chankao = day->get_dizhi().id();
-    for(int i=0;i<COUNTOF(MouxingTable);i++)
+    for(int i=0;i<countof(MouxingTable);i++)
     {
         if(MouxingTable[i].timezhi == chankao)
             return *_mouxings[i];
@@ -58,7 +59,7 @@ void Mouxing::init()
     if(_mouxing_init)
         return;
 
-    for(int i=0;i<COUNTOF(MouxingTable);i++)
+    for(int i=0;i<countof(MouxingTable);i++)
     {
         _mouxings[i] = new Mouxing(i);
     }

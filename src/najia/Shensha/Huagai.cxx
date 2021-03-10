@@ -1,6 +1,7 @@
 #include "Huagai.hxx"
 #include "../../base/Error.hxx"
-#define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
+#include "../../base/basic.hxx"
+// #define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
 
 namespace Zhouyi
 {
@@ -45,7 +46,7 @@ Huagai& Huagai::from(TianganDizhi * month,TianganDizhi * day)
 {
     init();
     DIZHI_ID chankao = day->get_dizhi().id();
-    for(int i=0;i<COUNTOF(HuagaiTable);i++)
+    for(int i=0;i<countof(HuagaiTable);i++)
     {
         if(HuagaiTable[i].timezhi == chankao)
             return *_huagais[i];
@@ -58,7 +59,7 @@ void Huagai::init()
     if(_huagai_init)
         return;
 
-    for(int i=0;i<COUNTOF(HuagaiTable);i++)
+    for(int i=0;i<countof(HuagaiTable);i++)
     {
         _huagais[i] = new Huagai(i);
     }

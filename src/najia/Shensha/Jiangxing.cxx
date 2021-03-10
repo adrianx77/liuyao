@@ -1,6 +1,7 @@
 #include "Jiangxing.hxx"
 #include "../../base/Error.hxx"
-#define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
+#include "../../base/basic.hxx"
+// #define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
 
 namespace Zhouyi
 {
@@ -45,7 +46,7 @@ Jiangxing& Jiangxing::from(TianganDizhi * month,TianganDizhi * day)
 {
     init();
     DIZHI_ID chankao = day->get_dizhi().id();
-    for(int i=0;i<COUNTOF(JiangxingTable);i++)
+    for(int i=0;i<countof(JiangxingTable);i++)
     {
         if(JiangxingTable[i].timezhi == chankao)
             return *_jiangxings[i];
@@ -58,7 +59,7 @@ void Jiangxing::init()
     if(_jiangxing_init)
         return;
 
-    for(int i=0;i<COUNTOF(JiangxingTable);i++)
+    for(int i=0;i<countof(JiangxingTable);i++)
     {
         _jiangxings[i] = new Jiangxing(i);
     }

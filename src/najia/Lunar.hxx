@@ -3,10 +3,18 @@
 #include "TianganDizhi.hxx"
 namespace Zhouyi{
 
+typedef enum
+{
+    GZI_YEAR = 0,
+    GZI_MONTH,
+    GZI_DAY,
+    GZI_HOUR,
+    GZI_MAX
+}GANZHI_INDEX;
 
 class Lunar{
 protected:
-    TianganDizhi * _ganzhi[4];
+    TianganDizhi * _ganzhi[GZI_MAX];
     Lunar(TIANGAN_ID yg,DIZHI_ID yz,TIANGAN_ID mg,DIZHI_ID mz,TIANGAN_ID dg,DIZHI_ID dz,TIANGAN_ID sg,DIZHI_ID sz);
     
 public:

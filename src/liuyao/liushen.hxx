@@ -17,7 +17,8 @@ typedef enum {
     LSID_GOUCHEN     = 2,
     LSID_TENGSHE     = 3,
     LSID_BAIHU       = 4,
-    LSID_XUANWU      = 5
+    LSID_XUANWU      = 5,
+    LSID_MAX
 }LIUSHEN_ID;
 
 class Liushen{
@@ -27,6 +28,7 @@ private:
     Liushen(LIUSHEN_ID id);
 public:
     static Liushen * from(Lunar *lunar);
+    static Liushen * from(TIANGAN_ID gan);
     LIUSHEN_ID   id();
     const char * name();
     Liushen * next();

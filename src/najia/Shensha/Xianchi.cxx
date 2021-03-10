@@ -1,6 +1,7 @@
 #include "Xianchi.hxx"
 #include "../../base/Error.hxx"
-#define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
+#include "../../base/basic.hxx"
+// #define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
 
 namespace Zhouyi
 {
@@ -45,7 +46,7 @@ Xianchi& Xianchi::from(TianganDizhi * month,TianganDizhi * day)
 {
     init();
     DIZHI_ID chankao = day->get_dizhi().id();
-    for(int i=0;i<COUNTOF(XianchiTable);i++)
+    for(int i=0;i<countof(XianchiTable);i++)
     {
         if(XianchiTable[i].timezhi == chankao)
             return *_xianchis[i];
@@ -58,7 +59,7 @@ void Xianchi::init()
     if(_xianchi_init)
         return;
 
-    for(int i=0;i<COUNTOF(XianchiTable);i++)
+    for(int i=0;i<countof(XianchiTable);i++)
     {
         _xianchis[i] = new Xianchi(i);
     }

@@ -34,10 +34,10 @@ void Liushen::init()
     _init = true;
 }
 
-Liushen * Liushen::from(Lunar *lunar)
+Liushen * Liushen::from(TIANGAN_ID gan)
 {
-    init();
-    switch(lunar->day()->get_tiangan().id())
+    init();    
+    switch(gan)
     {
     case TGID_JIA:
     case TGID_YI:return LiushenTable[0];
@@ -52,6 +52,11 @@ Liushen * Liushen::from(Lunar *lunar)
     default:
         throw Error(ERROR_INVALID_ID);
     }
+}
+Liushen * Liushen::from(Lunar *lunar)
+{
+    TIANGAN_ID gan = lunar->day()->get_tiangan().id();
+    return Liushen::from(gan);
 }
 LIUSHEN_ID Liushen::id()
 {

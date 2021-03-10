@@ -1,6 +1,7 @@
 #include "Zaisha.hxx"
 #include "../../base/Error.hxx"
-#define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
+#include "../../base/basic.hxx"
+// #define COUNTOF(X) (sizeof(X)/sizeof((X)[0]))
 
 namespace Zhouyi
 {
@@ -45,7 +46,7 @@ Zaisha& Zaisha::from(TianganDizhi * month,TianganDizhi * day)
 {
     init();
     DIZHI_ID chankao = day->get_dizhi().id();
-    for(int i=0;i<COUNTOF(ZaishaTable);i++)
+    for(int i=0;i<countof(ZaishaTable);i++)
     {
         if(ZaishaTable[i].timezhi == chankao)
             return *_zaishas[i];
@@ -58,7 +59,7 @@ void Zaisha::init()
     if(_zaisha_init)
         return;
 
-    for(int i=0;i<COUNTOF(ZaishaTable);i++)
+    for(int i=0;i<countof(ZaishaTable);i++)
     {
         _zaishas[i] = new Zaisha(i);
     }
