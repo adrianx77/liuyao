@@ -26,6 +26,7 @@ public:
     Liuqin * liuqin(int pos);
     Liuqin * fushen(int pos);
     bool     hasFushen();
+
 };
 
 

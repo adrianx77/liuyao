@@ -5,6 +5,7 @@
 
 
 namespace Zhouyi{
+
 ZhuangguaJieguo::ZhuangguaJieguo(LiuqinChonggua * ben, LiuqinChonggua *bian,TianganDizhi * gz[GZI_MAX],Liushen * startLiushen)
 {
     _bengua = ben;
@@ -50,6 +51,56 @@ Liushen * ZhuangguaJieguo::liushen(int pos)
 {
     return _liushen[pos];
 }
+
+LiuqinChonggua * ZhuangguaJieguo::bengua()
+{
+    return _bengua;
+}
+
+LiuqinChonggua * ZhuangguaJieguo::zhigua()
+{
+    return _zhigua;
+}
+
+
+TianganDizhi * ZhuangguaJieguo::year()
+{
+    return _ganzhi[GZI_YEAR];
+}
+TianganDizhi * ZhuangguaJieguo::month()
+{
+    return _ganzhi[GZI_MONTH];
+}
+TianganDizhi * ZhuangguaJieguo::day()
+{
+    return _ganzhi[GZI_DAY];
+}
+
+TianganDizhi * ZhuangguaJieguo::hour()
+{
+    return _ganzhi[GZI_HOUR];
+}
+
+
+Dizhi * ZhuangguaJieguo::yao_zhi(int pos)
+{
+    return &_bengua->chonggua().yao(pos)->get_ganzhi().get_dizhi();
+}
+bool   ZhuangguaJieguo:: yao_bian(int pos)  //是否为变
+{
+    if(_zhigua == NULL)
+        return false;
+    Guayao* zgy = _zhigua->chonggua().yao(pos);
+    Guayao* bgy = _bengua->chonggua().yao(pos);
+    if(bgy->id() != zgy->id())
+        return true;
+    return false;
+}
+Dizhi * ZhuangguaJieguo::bian_zhi(int pos)
+{
+    return &_zhigua->chonggua().yao(pos)->get_ganzhi().get_dizhi();
+}
+
 
 void ZhuangguaJieguo::dum(std::string &str)
 {

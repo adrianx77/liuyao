@@ -30,8 +30,19 @@ typedef enum {
     DZID_SHEN,
     DZID_YOU,
     DZID_XU,
-    DZID_HAI
+    DZID_HAI,
+    DZID_MAX
 }DIZHI_ID;
+
+
+typedef enum{
+    JTSI_INVALID = -1,
+    JTSI_JIN = 0,
+    JTSI_TUI,
+    JTSI_MAX
+}JINTUISHENG_INDEX;
+
+
 
 //地支
 class Dizhi{
@@ -48,6 +59,15 @@ public:
     Dizhi& get_next();
     Dizhi& get_prev();    
     Wuxing& get_wuxing();
+
+    Dizhi&  get_zhangsheng();
+    Dizhi&  get_diwang();
+    Dizhi&  get_mu();
+    Dizhi&  get_jue();
+    Dizhi&  get_chong();
+    Dizhi&  get_liuhe();
+
+    static JINTUISHENG_INDEX jintui(Dizhi & z1,Dizhi & z2);
 };
 
 }

@@ -35,7 +35,8 @@ static TIANGAN_ZHI2 GuiRenTable [] = {
     {
         init();
         TIANGAN_ID chankao = day->get_tiangan().id();
-        for(int i=0;i<countof(GuiRenTable);i++)
+        size_t c = countof(GuiRenTable);
+        for(int i=0;i<c;i++)
         {
             if(GuiRenTable[i].gan == chankao)
                 return *_guirens[i];

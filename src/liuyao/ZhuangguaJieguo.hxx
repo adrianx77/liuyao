@@ -15,7 +15,7 @@ private:
     LiuqinChonggua * _zhigua;
     TianganDizhi   * _ganzhi[GZI_MAX];
     Liushen  *       _liushen[LSID_MAX];
-    ShenshaBase * _shengsha[SSID_MAX];
+    ShenshaBase *    _shengsha[SSID_MAX];
     ZhuangguaJieguo(LiuqinChonggua * ben, LiuqinChonggua *bian,TianganDizhi * gz[GZI_MAX],Liushen * startLiushen);
 public:
     static ZhuangguaJieguo * from(LiuqinChonggua * ben, LiuqinChonggua *bian,Lunar * lunar);
@@ -36,6 +36,11 @@ public:
     //本卦
     LiuqinChonggua * bengua();
     LiuqinChonggua * zhigua();
+
+    // 爻
+    Dizhi * yao_zhi(int pos);
+    bool    yao_bian(int pos);  //是否为变
+    Dizhi * bian_zhi(int pos);
 
     void dum(std::string & str);
 };

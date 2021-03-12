@@ -12,6 +12,7 @@
 #include "src/najia/Lunar.hxx"
 #include "src/base/Error.hxx"
 #include "src/liuyao/Zhuanggua.hxx"
+#include "src/liuyao/AnalystJixiong.hxx"
 
 using namespace Zhouyi;
 
@@ -105,6 +106,17 @@ void test_zhuanggua()
     std::string str;
     guo->dum(str);
     std::cout << str.c_str() << '\n';
+
+    AnalystJixiong * analyst = new AnalystJixiong();
+    analyst->init(guo);
+    for(int i=5;i>=0;i--)
+    {
+        YaoWangshuai* ws= analyst->get_YaoWangshuai(i);
+        std::string strReason;
+        ws->dum(strReason);
+        std::cout<<i+1<<"爻:"<< strReason <<"\n";
+    }
+
 }
 
 

@@ -4,8 +4,8 @@
 namespace Zhouyi
 {
     typedef enum {
-        ANLVL_JIXIONG,
-        ANLVL_XIJIE
+        ANLVL_JIXIONG,  //吉凶层面
+        ANLVL_XIJIE     //细节层面
     } ANALYSIS_LEVEL;
 
     typedef enum{
@@ -17,7 +17,8 @@ namespace Zhouyi
     protected:
         ZhuangguaJieguo * _jieguo;
     public:
-        virtual void init(ZhuangguaJieguo * jieguo);
+        virtual void init(ZhuangguaJieguo * jieguo){}
+        virtual ~AnalystBase(){}
     };
 
 

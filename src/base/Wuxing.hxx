@@ -14,7 +14,8 @@ typedef enum {
     WXID_SHUI,            //水
     WXID_MU,              //木
     WXID_HUO,             //火
-    WXID_TU               //土
+    WXID_TU,               //土
+    WXID_MAX
 }WUXING_ID;
 
 typedef enum{
