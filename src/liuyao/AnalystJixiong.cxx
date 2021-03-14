@@ -111,7 +111,17 @@ void  AnalystJixiong::analyse(int yaoPos)
             factor.score = -1;
             factor.reason = "日绝";
         }
-        _wangshuaiList[yaoPos]->factors.push_back(factor);  
+        else if(skgx == WXSK_GENERATE)
+        {
+            factor.score = 0;
+            factor.reason = "生日";
+        }
+        else if(skgx == WXSK_RESTRICT)
+        {
+            factor.score = 0;
+            factor.reason = "克日";
+        }
+        _wangshuaiList[yaoPos]->factors.push_back(factor);
     }
 
     //初步组合

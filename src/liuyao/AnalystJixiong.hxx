@@ -176,37 +176,39 @@ public:
                 reason +="D:";
             }
             reason += sz;
-            reason += " ";
+            reason += "\t";
         }
-        reason += " 总体:";
+        std::string h =" 总体:";
         if(dongscroe>0)
         {
-            reason += "旺相";
+            h += "旺相";
         }
         else if(dongscroe<0)
         {
-             reason += "衰败";
+             h += "衰败";
         }
         else if(hiscore>0)
         {
-            reason += "旺相";
+            h += "旺相";
         }
         else if(hiscore<0)
         {
-            reason += "衰败";
+            h += "衰败";
         }
         else if(lowscore>0)
         {
-            reason += "旺相";
+            h += "旺相";
         }
         else if(lowscore<0)
         {
-            reason += "衰败";
+            h += "衰败";
         }
         else
         {
-            reason += "平相";
+            h += "平相";
         }
+        h += "\t";
+        reason = h+reason;
     }
 };
 
