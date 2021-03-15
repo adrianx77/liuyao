@@ -14,6 +14,8 @@ private:
 public:
     static ZhuangguaJieguo * zhuanggua(YAO_ID yaos[6],Lunar * lunar);
     static ZhuangguaJieguo * zhuanggua(YAO_ID yaos[6]);
+    static ZhuangguaJieguo * zhuanggua(BAGUA_ID beng[2],BAGUA_ID bian[2],Lunar * lunar);
+    static ZhuangguaJieguo * zhuanggua(BAGUA_ID beng[2],BAGUA_ID bian[2]);
 };
 
 

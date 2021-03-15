@@ -188,7 +188,7 @@ JINTUISHENG_INDEX Dizhi::jintui(Dizhi & z1,Dizhi & z2)
     {
         for(int j =0;j<countof(JinTuishengInfo[JTSI_JIN]);j++)
         {
-            if(JinTuishengInfo[i]->beng == i1 && JinTuishengInfo[i]->jintui == i2)
+            if(JinTuishengInfo[i][j].beng == i1 && JinTuishengInfo[i][j].jintui == i2)
             {
                 return (JINTUISHENG_INDEX)i;
             }

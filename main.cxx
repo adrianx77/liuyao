@@ -118,7 +118,29 @@ void test_zhuanggua()
     }
 
 }
+void test_zhuanggua2()
+{
+    BAGUA_ID beng[2]={BGID_DUI,BGID_ZHEN};
+    BAGUA_ID bian[2]={BGID_KUN,BGID_LI};
+    DIZHI_ID mz = DZID_MAO;
+    TIANGAN_ID dg = TGID_JIA;
+    DIZHI_ID   dz = DZID_SHEN;
+    ZhuangguaJieguo * guo = Zhuanggua::zhuanggua(beng,bian);
 
+    std::string str;
+    guo->dum(str);
+    std::cout << str.c_str() << '\n';
+
+    AnalystJixiong * analyst = new AnalystJixiong();
+    analyst->init(guo);
+    for(int i=5;i>=0;i--)
+    {
+        YaoWangshuai* ws= analyst->get_YaoWangshuai(i);
+        std::string strReason;
+        ws->dum(strReason);
+        std::cout<<i+1<<"爻:"<< strReason <<"\n";
+    }    
+}
 
 int main(int argc, char *argv[])
 {

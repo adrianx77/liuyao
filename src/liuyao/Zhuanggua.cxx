@@ -54,6 +54,39 @@ ZhuangguaJieguo * Zhuanggua::zhuanggua(YAO_ID yaos[6],Lunar * lunar)
     return ZhuangguaJieguo::from(beng,bian,lunar);
 }
 
+ZhuangguaJieguo * Zhuanggua::zhuanggua(YAO_ID yaos[6])
+{
+    Lunar * now = Lunar::now();
+
+    ZhuangguaJieguo * jieguo = zhuanggua(yaos,now);
+    delete now;
+    return jieguo;
+}
+ZhuangguaJieguo * Zhuanggua::zhuanggua(BAGUA_ID beng[2],BAGUA_ID bian[2],Lunar * lunar)
+{
+    Gua & xg = Gua::from(beng[0]);
+    Gua & sg = Gua::from(beng[1]);
+    Chonggua & ben = Chonggua::from(sg,xg);
+    LiuqinChonggua * beng1= new LiuqinChonggua(ben);
+    LiuqinChonggua * bian1 = NULL;
+    if(bian[0] != BGID_INVALID || bian[1] !=BGID_INVALID)
+    {
+        Gua & bxg = Gua::from(bian[0]);
+        Gua & bsg = Gua::from(bian[1]);
+        Chonggua & biangua = Chonggua::from(bsg,bxg);
+        Chonggua & gonggua = Chonggua::from(ben.gonggua(),ben.gonggua());
+        bian1= new LiuqinChonggua(biangua,gonggua);
+    }
+    return ZhuangguaJieguo::from(beng1,bian1,lunar);
+}
+ZhuangguaJieguo * Zhuanggua::zhuanggua(BAGUA_ID beng[2],BAGUA_ID bian[2])
+{
+    Lunar * now = Lunar::now();
+
+    ZhuangguaJieguo * jieguo = zhuanggua(beng,bian,now);
+    delete now;
+    return jieguo;
+}
 
 
 }

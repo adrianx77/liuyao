@@ -509,5 +509,10 @@ Lunar * Lunar::create(int year,int month,int day)
 	return new Lunar(ygz.gan,ygz.zhi,mgz.gan,mgz.zhi,dgz.gan,dgz.zhi,TGID_INVALID,DZID_INVALIDE);
 }
 
+Lunar * Lunar::create(DIZHI_ID mz,TIANGAN_ID dg,DIZHI_ID dz)
+{
+	TIANGAN_ID mg = (DZID_ZI %2) ? TGID_JIA: TGID_YI ;
+	return new Lunar(TGID_INVALID,DZID_INVALIDE,mg,mz,dg,dz,TGID_INVALID,DZID_INVALIDE);	
+}
 
 }

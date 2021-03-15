@@ -14,6 +14,7 @@
 
 namespace Zhouyi{
 typedef enum{
+    BGID_INVALID= -1,
     BGID_QIAN   = 0,
 	BGID_DUI    = 1,
 	BGID_LI     = 2, 

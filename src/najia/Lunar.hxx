@@ -21,6 +21,7 @@ public:
     static Lunar * now();
     static Lunar * create(int year,int month,int day,int hour);
     static Lunar * create(int year,int month,int day);
+    static Lunar * create(DIZHI_ID mz,TIANGAN_ID dg,DIZHI_ID dz);
     TianganDizhi * year();
     TianganDizhi * month();
     TianganDizhi * day();
