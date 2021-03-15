@@ -69,7 +69,7 @@ public:
     YOUYONGDONGYAO      youyong;
     std::string         yyreason;
     std::vector<MonthDayFactor>  factors;
-    void push_factor(MonthDayFactor factor)
+    void push_factor(MonthDayFactor& factor)
     {
         factors.push_back(factor);
     }
@@ -84,7 +84,12 @@ public:
             char sz[200];
             sprintf(sz,"%d",(*it).score);
             reason += (*it).reason;
-            if((*it).level == FLVL_RY_HIGH)
+            if((*it).level == FLVL_ANDONG)
+            {
+                dongscroe +=  (*it).score;
+                reason +="A:";
+            }
+            else if((*it).level == FLVL_RY_HIGH)
             {
                 reason +="H:";
                 hiscore += (*it).score;

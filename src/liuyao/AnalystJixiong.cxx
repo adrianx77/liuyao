@@ -168,11 +168,82 @@ void AnalystJixiong::init(ZhuangguaJieguo * jieguo)
     }
 }
 
+bool MonthWang(Dizhi & yao, Dizhi & month)
+{
+    //月建
+    if(yao.id() == month.id())
+        return true;
+    //月合
+    if(yao.get_liuhe().id() == month.id())
+        return true;
+    //月生
+    WUXING_SHENGKE sk = WuxingShengkeGuanxi::get_shengke(yao.get_wuxing().id(),month.get_wuxing().id());
+    if(sk == WXSK_GENERATED)
+        return true;
+    //月扶
+    if(sk == WXSK_SAME)
+        return true;
+
+    return false;
+}
+
+bool MonthQi(Dizhi & yao, Dizhi & month)
+{
+    if(month.id() == DZID_CHOU && yao.id() == DZID_ZI)
+        return true;
+    if(month.id() == DZID_CHEN && yao.id() == DZID_MAO)
+        return true;
+    if(month.id() == DZID_WEI && yao.id() == DZID_WU)
+        return true;
+    if(month.id() == DZID_XU && yao.id() == DZID_YOU)
+        return true;
+    return false;
+}
+
+
 void AnalystJixiong::zhonghe_analyse(int yongPos) //配合用爻分析暗动
 {
+    Dizhi & mdz = _jieguo->month()->get_dizhi();
+    Dizhi & ddz = _jieguo->day()->get_dizhi();
+    XunKong &xk = _jieguo->day()->get_xun().get_xunkong();
     //暗动
-    //1、
-    
+    //1、静爻得月令，日冲
+    for(int i=0;i<6;i++)
+    {
+        if(!_jieguo->yao_bian(i))
+        {
+             Dizhi * yz = _jieguo->yao_zhi(i);
+             if(yz->id() == xk.kong_id1() || yz->id() == xk.kong_id2())
+             {
+                if(ddz.get_chong() == yz->id())
+                {
+                    YaoWangshuai * curWangshuai = _wangshuaiList[i];
+                    MonthDayFactor factor(FLVL_ANDONG,1,"旬空得冲暗动");
+                    curWangshuai->push_factor(factor);
+                }             
+            }
+             else if(MonthWang(*yz,mdz))
+             {
+                if(ddz.get_chong() == yz->id())
+                {
+                    YaoWangshuai * curWangshuai = _wangshuaiList[i];
+                    MonthDayFactor factor(FLVL_ANDONG,1,"得月令旺暗动");
+                    curWangshuai->push_factor(factor);
+                }
+             }
+             else if(MonthQi(*yz,mdz))
+             {
+                if(ddz.get_chong() == yz->id())
+                {
+                    YaoWangshuai * curWangshuai = _wangshuaiList[i];
+                    MonthDayFactor factor(FLVL_ANDONG,1,"得月气而暗动");
+                    curWangshuai->push_factor(factor);
+                }
+             }
+        }
+    }
+    //2、得
+
 }
 
 

@@ -109,6 +109,7 @@ void test_zhuanggua()
 
     AnalystJixiong * analyst = new AnalystJixiong();
     analyst->init(guo);
+    analyst->setYongyao(0);
     for(int i=5;i>=0;i--)
     {
         YaoWangshuai* ws= analyst->get_YaoWangshuai(i);
@@ -120,12 +121,19 @@ void test_zhuanggua()
 }
 void test_zhuanggua2()
 {
-    BAGUA_ID beng[2]={BGID_DUI,BGID_ZHEN};
-    BAGUA_ID bian[2]={BGID_KUN,BGID_LI};
-    DIZHI_ID mz = DZID_MAO;
-    TIANGAN_ID dg = TGID_JIA;
+    BAGUA_ID beng[2]={};
+    BAGUA_ID bian[2]={};
+
+    beng[1] = BGID_QIAN;
+    beng[0] = BGID_QIAN;
+
+    bian[1] = BGID_XUN;
+    bian[0] = BGID_QIAN;
+
+    DIZHI_ID mz = DZID_CHEN;
+    TIANGAN_ID dg = TGID_WU;
     DIZHI_ID   dz = DZID_SHEN;
-    ZhuangguaJieguo * guo = Zhuanggua::zhuanggua(beng,bian);
+    ZhuangguaJieguo * guo = Zhuanggua::zhuanggua(beng,bian,Lunar::create(mz,dg,dz));
 
     std::string str;
     guo->dum(str);
@@ -133,6 +141,7 @@ void test_zhuanggua2()
 
     AnalystJixiong * analyst = new AnalystJixiong();
     analyst->init(guo);
+    analyst->setYongyao(1);
     for(int i=5;i>=0;i--)
     {
         YaoWangshuai* ws= analyst->get_YaoWangshuai(i);
@@ -170,7 +179,7 @@ int main(int argc, char *argv[])
     // test_60jiazi();
     // test_xuntable();
     // test_gua();
-     test_zhuanggua();
+     test_zhuanggua2();
     }
     catch(Zhouyi::Error& e)
     {

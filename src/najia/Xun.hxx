@@ -17,6 +17,12 @@ class XunKong
 public:
     static void init();
     static XunKong& from(DIZHI_ID x);
+    DIZHI_ID kong_id1(){
+        return _dizhi1;
+    }
+    DIZHI_ID kong_id2(){
+        return _dizhi2;
+    }
     const char * name();
     static const char *  _names[];
     static XunKong* _xunkong[];
