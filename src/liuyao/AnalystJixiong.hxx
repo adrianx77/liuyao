@@ -97,11 +97,6 @@ namespace Zhouyi
 //     }guanxiInfo;
     
 // }YAOGUANXI_INFO;
-// typedef enum{
-//     WSID_WANG,
-//     WSID_PING,
-//     WSID_SHUAI
-// }WANGSHUAI_ID;
 
 
 
@@ -112,17 +107,18 @@ protected:
     void yaoyong(int yaoPos);
 
     //爻旺衰表
-    YaoWangshuai* _wangshuaiList[6];
+    YaoWangshuai* _wangshuaiList[2][6];
     void free();
     void yao_analyse(int yaoPos);
-    void zhonghe_analyse(int yongPos);
+    void zhonghe_analyse();
+    void RiyueFengxi(YaoWangshuai *curWangshuai,Dizhi * yaozhi);
 public:
     AnalystJixiong();
 
     YaoWangshuai* get_YaoWangshuai(int yaoPos);
     virtual void init(ZhuangguaJieguo * jieguo);
     virtual ~AnalystJixiong();
-    void setYongyao(int yongPos);
+    void setYongyao(int yongPos);// 本: 0-5 变: 6-11
 };
 
 

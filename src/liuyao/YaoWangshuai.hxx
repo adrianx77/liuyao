@@ -8,12 +8,6 @@ typedef enum {
     ANLVL_XIJIE     //细节层面
 } ANALYSIS_LEVEL;
 
-    // typedef enum{
-    //     WSF_DONGBIAN,
-    //     WSF_RIYUE
-    // }WANGSHUAI_FACTOR;
-
-
 typedef enum
 {
     FLVL_DONG,
@@ -60,6 +54,11 @@ typedef enum
     YYDY_YOUYONG,
     YYDY_WUYONG
 }YOUYONGDONGYAO;
+typedef enum{
+    WSID_WANG,
+    WSID_PING,
+    WSID_SHUAI
+}WANGSHUAI_ID;
 
 class YaoWangshuai
 {
@@ -73,10 +72,71 @@ public:
     {
         factors.push_back(factor);
     }
+
+    WANGSHUAI_ID wangshuai()
+    {
+        int andongscore = 0;
+        int dongscore = 0;
+        int hiscore = 0;
+        int lowscore = 0;
+        for(auto it = factors.begin();it!= factors.end();it++)
+        {
+            if((*it).level == FLVL_ANDONG)
+            {
+                andongscore +=  (*it).score;
+            }
+            else if((*it).level == FLVL_RY_HIGH)
+            {
+                hiscore += (*it).score;
+            }
+            else if((*it).level == FLVL_RY_NORMAL)
+            {
+                lowscore += (*it).score;
+            }
+            else
+            {
+                dongscore +=  (*it).score;
+            }
+        }
+        if(andongscore>0)
+        {
+            return WSID_WANG;
+        }
+        else if(dongscore>0)
+        {
+            return WSID_WANG;
+        }
+        else if(dongscore<0)
+        {
+                return WSID_SHUAI;
+        }
+        else if(hiscore>0)
+        {
+            return WSID_WANG;
+        }
+        else if(hiscore<0)
+        {
+            return WSID_SHUAI;
+        }
+        else if(lowscore>0)
+        {
+            return WSID_WANG;
+        }
+        else if(lowscore<0)
+        {
+            return WSID_SHUAI;
+        }
+        else
+        {
+            return WSID_PING;
+        }        
+    }
+
     void dum(std::string& reason)
     {
         //计算
-        int dongscroe = 0;
+        int andongscore = 0;
+        int dongscore = 0;
         int hiscore = 0;
         int lowscore = 0;
         for(auto it = factors.begin();it!= factors.end();it++)
@@ -86,7 +146,7 @@ public:
             reason += (*it).reason;
             if((*it).level == FLVL_ANDONG)
             {
-                dongscroe +=  (*it).score;
+                andongscore +=  (*it).score;
                 reason +="A:";
             }
             else if((*it).level == FLVL_RY_HIGH)
@@ -101,7 +161,7 @@ public:
             }
             else
             {
-                dongscroe +=  (*it).score;
+                dongscore +=  (*it).score;
                 reason +="D:";
             }
             reason += sz;
@@ -123,11 +183,15 @@ public:
         }
 
         std::string h =" 总体:";
-        if(dongscroe>0)
+        if(andongscore>0)
         {
             h += "旺相";
         }
-        else if(dongscroe<0)
+        else if(dongscore>0)
+        {
+            h += "旺相";
+        }
+        else if(dongscore<0)
         {
              h += "衰败";
         }

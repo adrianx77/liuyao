@@ -117,23 +117,33 @@ void test_zhuanggua()
         ws->dum(strReason);
         std::cout<<i+1<<"爻:"<< strReason <<"\n";
     }
-
+    for(int i=11;i>=6;i--)
+    {
+        YaoWangshuai* ws= analyst->get_YaoWangshuai(i);
+        if(ws)
+        {
+            std::string strReason;
+            ws->dum(strReason);
+            std::cout<<i-5<<"变爻:"<< strReason <<"\n";
+        }
+    }
 }
 void test_zhuanggua2()
 {
     BAGUA_ID beng[2]={};
     BAGUA_ID bian[2]={};
 
-    beng[1] = BGID_QIAN;
-    beng[0] = BGID_QIAN;
+    beng[1] = BGID_KAN;
+    beng[0] = BGID_DUI;
 
-    bian[1] = BGID_XUN;
-    bian[0] = BGID_QIAN;
+    bian[1] = BGID_KAN;
+    bian[0] = BGID_KUN;
 
-    DIZHI_ID mz = DZID_CHEN;
-    TIANGAN_ID dg = TGID_WU;
-    DIZHI_ID   dz = DZID_SHEN;
-    ZhuangguaJieguo * guo = Zhuanggua::zhuanggua(beng,bian,Lunar::create(mz,dg,dz));
+    DIZHI_ID mz = DZID_MAO;
+    TIANGAN_ID dg = TGID_GUI;
+    DIZHI_ID   dz = DZID_HAI;
+    Lunar * lunar = Lunar::create(mz,dg,dz);
+    ZhuangguaJieguo * guo = Zhuanggua::zhuanggua(beng,bian);
 
     std::string str;
     guo->dum(str);
@@ -141,14 +151,24 @@ void test_zhuanggua2()
 
     AnalystJixiong * analyst = new AnalystJixiong();
     analyst->init(guo);
-    analyst->setYongyao(1);
+    // analyst->setYongyao(8);
     for(int i=5;i>=0;i--)
     {
         YaoWangshuai* ws= analyst->get_YaoWangshuai(i);
         std::string strReason;
         ws->dum(strReason);
         std::cout<<i+1<<"爻:"<< strReason <<"\n";
-    }    
+    }
+    for(int i=11;i>=6;i--)
+    {
+        YaoWangshuai* ws= analyst->get_YaoWangshuai(i);
+        if(ws)
+        {
+            std::string strReason;
+            ws->dum(strReason);
+            std::cout<<i-5<<"变爻:"<< strReason <<"\n";
+        }
+    }
 }
 
 int main(int argc, char *argv[])
