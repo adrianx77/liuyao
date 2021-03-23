@@ -134,10 +134,10 @@ void test_zhuanggua2()
     BAGUA_ID bian[2]={};
 
     beng[1] = BGID_KAN;
-    beng[0] = BGID_DUI;
+    beng[0] = BGID_XUN;
 
-    bian[1] = BGID_KAN;
-    bian[0] = BGID_KUN;
+    bian[1] = BGID_LI;
+    bian[0] = BGID_QIAN;
 
     DIZHI_ID mz = DZID_MAO;
     TIANGAN_ID dg = TGID_GUI;
